@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \":*)",
+      "Bash(pip3 install pdfplumber --quiet)",
+      "Bash(brew install poppler)",
+      "Bash(pip3 install pdf2image pillow --quiet)",
+      "Bash(pip3 install pymupdf --quiet)",
+      "Bash(lsof -i :8765)",
+      "Bash(python3:*)"
+    ]
+  }
+}

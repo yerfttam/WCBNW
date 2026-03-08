@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Whiskey Creek Beach NW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
+      --navy-dark: #1e2c3a;
+      --text-body: #4a4a4a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 16px; background: var(--cream); color: var(--text-body); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.85; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links .dropdown { position: relative; }
+    .nav-links .dropdown-menu { display: none; position: absolute; top: calc(100% + 1rem); left: 50%; transform: translateX(-50%); background: var(--navy); min-width: 220px; border-top: 2px solid var(--brown); list-style: none; padding: 0.5rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .nav-links .dropdown:hover .dropdown-menu { display: block; }
+    .nav-links .dropdown-menu li a { display: block; padding: 0.5rem 1.25rem; font-size: 0.7rem; opacity: 0.8; }
+    .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+    .nav-book-btn { border: 1px solid rgba(246,239,229,0.7) !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s, border-color 0.2s !important; }
+    .nav-book-btn:hover { background: rgba(246,239,229,0.12) !important; border-color: var(--cream) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); z-index: 999; padding: 1.5rem 2rem; flex-direction: column; gap: 0.75rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); opacity: 0.85; }
+    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
+    .mobile-menu .mob-book { margin-top: 0.5rem; border: 1px solid rgba(246,239,229,0.6) !important; text-align: center; padding: 0.6rem !important; border-bottom: 1px solid rgba(246,239,229,0.6) !important; }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 55vh; min-height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('../Website/properties/DJI_0043-aerial.jpg') center/cover no-repeat; animation: slowZoom 25s ease-in-out infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1.0); } to { transform: scale(1.06); } }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(30,44,58,0.45) 0%, rgba(30,44,58,0.3) 100%); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--cream); letter-spacing: 0.05em; line-height: 1.2; }
+    .page-hero-sub { margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
+
+    /* CONTACT SECTION */
+    .contact-section {
+      background: url('../Website/1 HOME/bkgds/bkgd1-icon.jpg') center/cover no-repeat;
+      padding: 5rem 2rem;
+    }
+    .contact-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .contact-info-col {}
+    .contact-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.7rem; }
+    .contact-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--brown); line-height: 1.2; margin-bottom: 2rem; }
+    .contact-item { display: flex; gap: 1.1rem; align-items: flex-start; margin-bottom: 1.75rem; }
+    .contact-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: var(--navy); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-icon svg { width: 18px; height: 18px; fill: none; stroke: var(--cream); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-item-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.3rem; }
+    .contact-item-value { font-size: 0.9rem; line-height: 1.65; color: var(--text-body); }
+    .contact-item-value a { color: var(--brown); transition: color 0.2s; }
+    .contact-item-value a:hover { color: var(--navy); }
+
+    /* CONTACT FORM */
+    .contact-form-col {}
+    .form-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 1.3rem; color: var(--navy); margin-bottom: 1.75rem; }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.45rem; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; background: var(--white); border: 1px solid rgba(41,59,78,0.15);
+      padding: 0.7rem 0.9rem; font-family: 'Josefin Sans', sans-serif; font-size: 0.9rem;
+      color: var(--text-body); outline: none; transition: border-color 0.2s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--brown); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .btn-submit {
+      display: inline-block; background: var(--navy); color: var(--cream);
+      font-family: 'Josefin Sans', sans-serif; font-weight: 700;
+      font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 0.9rem 2.8rem; border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s; margin-top: 0.5rem;
+    }
+    .btn-submit:hover { background: var(--navy-dark); transform: translateY(-2px); }
+
+    /* AERIAL FEATURE */
+    .aerial-section {
+      position: relative; min-height: 420px; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .aerial-bg {
+      position: absolute; inset: 0;
+      background: url('../Website/properties/DJI_0043-aerial.jpg') center 35%/cover no-repeat;
+    }
+    .aerial-overlay { position: absolute; inset: 0; background: rgba(30,44,58,0.5); }
+    .aerial-content { position: relative; z-index: 2; padding: 3rem 4rem; max-width: 580px; }
+    .aerial-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--cream); line-height: 1.3; margin-bottom: 1rem; }
+    .aerial-body { font-size: 0.9rem; line-height: 1.75; color: rgba(246,239,229,0.8); margin-bottom: 1.5rem; }
+    .btn-outline-cream { display: inline-block; border: 1px solid rgba(246,239,229,0.65); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.7rem 2rem; transition: background 0.2s, border-color 0.2s; }
+    .btn-outline-cream:hover { background: rgba(246,239,229,0.12); border-color: var(--cream); }
+
+    /* NEWSLETTER */
+    .newsletter-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 200px; }
+    .newsletter-left { background: var(--sage); padding: 3rem 3rem 3rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .newsletter-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem; }
+    .newsletter-subtitle { font-size: 0.85rem; color: rgba(41,59,78,0.75); line-height: 1.6; font-style: italic; }
+    .newsletter-right { position: relative; background: url('../Website/1 HOME/images/wcb-4.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; }
+    .newsletter-right::before { content: ''; position: absolute; inset: 0; background: rgba(41,59,78,0.55); }
+    .deal-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+    .deal-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
+    .deal-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1rem, 2vw, 1.4rem); color: var(--cream); line-height: 1.3; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 4rem; align-items: start; margin-bottom: 3rem; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-brand-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.78rem; color: var(--cream); text-align: center; line-height: 1.5; letter-spacing: 0.05em; }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-contact { min-width: 180px; }
+    .footer-contact h4 { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(181,184,163,0.2); text-align: center; font-size: 0.75rem; color: rgba(246,239,229,0.35); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
+      .footer-contact { grid-column: 2; grid-row: 2; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .aerial-content { padding: 2rem 1.5rem; }
+      .newsletter-section { grid-template-columns: 1fr; }
+      .newsletter-right { min-height: 160px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-brand { align-items: flex-start; flex-direction: row; }
+      .footer-nav { gap: 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-nav-placeholder"></div>
+  <script src="js/nav-loader.js" defer></script>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title copperplate">Contact Us</h1>
+      <p class="page-hero-sub">We'd love to hear from you</p>
+    </div>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="contact-inner">
+
+      <div class="contact-info-col">
+        <p class="contact-label">Get in Touch</p>
+        <h2 class="contact-title copperplate">Reach Out<br>Anytime</h2>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-value">1385 Whiskey Creek Beach Rd<br>Port Angeles, WA 98363</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value"><a href="tel:8447692322">(844) 769-2322</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value"><a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Check-in</div>
+            <div class="contact-item-value">Cabins &amp; Cottages: 4:00 PM<br>Tent &amp; RV Sites: 2:00 PM<br>Check-out: 11:00 AM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-col">
+        <p class="form-title copperplate">Send Us a Message</p>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="first_name" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="last_name" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject">
+              <option value="">Select a subject...</option>
+              <option>Booking Inquiry</option>
+              <option>General Question</option>
+              <option>Pet Policy</option>
+              <option>Directions &amp; Arrival</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your trip, dates, or any questions you have..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AERIAL FEATURE -->
+  <div class="aerial-section">
+    <div class="aerial-bg"></div>
+    <div class="aerial-overlay"></div>
+    <div class="aerial-content">
+      <h2 class="aerial-title copperplate">Find Us on the<br>Olympic Peninsula</h2>
+      <p class="aerial-body">Located along the Strait of Juan de Fuca, just 15 miles west of Port Angeles and minutes from Olympic National Park. Self check-in instructions are sent after booking — be sure your email address is correct.</p>
+      <a href="https://www.reservenow.com" target="_blank" class="btn-outline-cream">Book Now</a>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="newsletter-left">
+      <p class="newsletter-label">Sign Up for Our Newsletter</p>
+      <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates and specials!</p>
+    </div>
+    <div class="newsletter-right">
+      <div class="deal-content">
+        <p class="deal-label">Latest Deal</p>
+        <h3 class="deal-title copperplate">20% Off Two-Night<br>Stays Thru April</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo-img" src="../Website/logo/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
+        <div class="footer-brand-name copperplate">Whiskey Creek<br>Beach NW</div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="accommodations.html">Accommodations</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="policies.html">Policies</a></li>
+            <li><a href="other-properties.html">Other Properties</a></li>
+            <li><a href="https://www.reservenow.com" target="_blank">Reservations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Info</h4>
+        <p>1385 Whiskey Creek Beach Rd<br>Port Angeles, WA 98363</p>
+        <p style="margin-top:0.5rem;"><a href="tel:8447692322">(844) 769-2322</a></p>
+        <p><a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">Copyright &copy; 2025. All Rights Reserved</div>
+  </footer>
+
+  <script>
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
+    });
+  </script>
+</body>
+</html>

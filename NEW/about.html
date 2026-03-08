@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Whiskey Creek Beach NW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── CSS Variables ─────────────────────────────── */
+    :root {
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
+      --navy-dark: #1e2c3a;
+      --text-body: #4a4a4a;
+      
+      position: absolute;
+      inset: 0;
+      background: url('../Photos/Outdoor beach front WCBNW/DSC_0318.JPG') center/cover no-repeat;
+    }
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 44, 58, 0.58);
+    }
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 1.5rem;
+    }
+    .page-hero-label {
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.9rem;
+    }
+    .page-hero-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: var(--cream);
+      line-height: 1.15;
+    }
+
+    /* ══════════════════════════════════════════════════
+       OUR STORY
+    ══════════════════════════════════════════════════ */
+    .story-section {
+      background: url('../Website/1 HOME/bkgds/bkgd1-icon.jpg') center/cover no-repeat;
+      padding: 5.5rem 2rem;
+    }
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .story-label {
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 0.75rem;
+    }
+    .story-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+    .story-body {
+      font-size: 0.95rem;
+      line-height: 1.82;
+      color: var(--text-body);
+      margin-bottom: 1.1rem;
+    }
+    .story-photo {
+      position: relative;
+    }
+    .story-photo img {
+      width: 100%;
+      height: 460px;
+      object-fit: cover;
+      object-position: center top;
+      box-shadow: 0 8px 32px rgba(41,59,78,0.18);
+    }
+
+    /* ══════════════════════════════════════════════════
+       FEATURE SECTIONS  (same pattern as home)
+    ══════════════════════════════════════════════════ */
+    .feature-section {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .feature-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+    .feature-box {
+      position: relative;
+      z-index: 2;
+      background: var(--cream);
+      padding: 3.5rem 3rem;
+      width: 44%;
+      min-width: 300px;
+    }
+    .feature-box--right { margin-left: auto; }
+    .feature-box--left  { margin-right: auto; }
+    .feature-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.9rem;
+    }
+    .feature-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      color: var(--brown);
+      line-height: 1.3;
+      margin-bottom: 1.1rem;
+    }
+    .feature-body {
+      font-size: 0.92rem;
+      line-height: 1.78;
+      color: var(--text-body);
+    }
+    .feature-body ul {
+      margin-top: 0.9rem;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .feature-body ul li::before {
+      content: '— ';
+      color: var(--sage);
+      font-weight: 700;
+    }
+
+    /* ══════════════════════════════════════════════════
+       PROPERTY MAP
+    ══════════════════════════════════════════════════ */
+    .map-section {
+      background: url('../Website/1 HOME/bkgds/bkgd1.jpg') center/cover no-repeat;
+      padding: 5rem 2rem;
+    }
+    .map-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .map-text .story-label { margin-bottom: 0.75rem; }
+    .map-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 2.8vw, 2rem);
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+    .map-body {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: var(--text-body);
+      margin-bottom: 0.9rem;
+    }
+    .map-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--sage);
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 2rem;
+      color: var(--brown);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-top: 0.35rem;
+    }
+    .map-image img {
+      width: 100%;
+      box-shadow: 0 6px 28px rgba(41,59,78,0.15);
+    }
+
+    /* ══════════════════════════════════════════════════
+       ACTIVITIES GRID
+    ══════════════════════════════════════════════════ */
+    .activities-section {
+      background: var(--navy);
+      padding: 5rem 2rem;
+    }
+    .activities-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+    .activities-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.75rem;
+    }
+    .activities-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--cream);
+      line-height: 1.25;
+    }
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .activity-card {
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(181,184,163,0.18);
+      transition: transform 0.25s, background 0.25s;
+    }
+    .activity-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.09);
+    }
+    .activity-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .activity-card-body { padding: 1.5rem; }
+    .activity-card-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 1rem;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+    .activity-card-desc {
+      font-size: 0.87rem;
+      line-height: 1.7;
+      color: rgba(246,239,229,0.65);
+    }
+
+    /* ══════════════════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════════════════ */
+    .testimonials-section {
+      background: url('../Website/1 HOME/bkgds/bkgd2-icon.jpg') center/cover no-repeat;
+      padding: 5.5rem 2rem;
+    }
+    .testimonials-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 3rem;
+    }
+    .testimonials-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--brown); margin-bottom: 0.75rem;
+    }
+    .testimonials-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy);
+      line-height: 1.25;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--white);
+      padding: 2rem 1.75rem;
+      position: relative;
+    }
+    .testimonial-quote {
+      font-size: 2.5rem;
+      line-height: 1;
+      color: var(--sage);
+      font-family: Georgia, serif;
+      margin-bottom: 0.5rem;
+    }
+    .testimonial-text {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text-body);
+      font-style: italic;
+      margin-bottom: 1.25rem;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    /* ══════════════════════════════════════════════════
+       CTA / COZY SECTION
+    ══════════════════════════════════════════════════ */
+    .cta-section {
+      background: var(--navy);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .cta-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.75rem;
+    }
+    .cta-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--cream);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(246,239,229,0.7);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+    .btn-primary-cream {
+      display: inline-block;
+      background: var(--cream);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.8rem;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary-cream:hover { background: var(--white); transform: translateY(-2px); }
+
+    /* ══════════════════════════════════════════════════
+       NEWSLETTER / DEAL  (same as home)
+    ══════════════════════════════════════════════════ */
+    .newsletter-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 200px;
+    }
+    .newsletter-left {
+      background: var(--sage);
+      padding: 3rem 3rem 3rem 3.5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .newsletter-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .newsletter-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem;
+    }
+    .newsletter-subtitle {
+      font-size: 0.85rem; color: rgba(41,59,78,0.75);
+      line-height: 1.6; font-style: italic;
+    }
+    .newsletter-right {
+      position: relative;
+      background: url('../Website/1 HOME/images/wcb-4.jpg') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .newsletter-right::before {
+      content: ''; position: absolute; inset: 0; background: rgba(41,59,78,0.55);
+    }
+    .deal-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+    .deal-label {
+      font-weight: 700; font-size: 0.65rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem;
+    }
+    .deal-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1rem, 2vw, 1.4rem); color: var(--cream); line-height: 1.3;
+    }
+
+    /* ══════════════════════════════════════════════════
+       FOOTER  (identical to home)
+    ══════════════════════════════════════════════════ */
+    footer {
+      background: var(--navy);
+      padding: 4rem 2.5rem 2rem;
+      color: rgba(246,239,229,0.65);
+    }
+    .footer-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 4rem; align-items: start; margin-bottom: 3rem;
+    }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-brand-name {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 0.78rem; color: var(--cream); text-align: center;
+      line-height: 1.5; letter-spacing: 0.05em;
+    }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+    .footer-col h4 {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 0.78rem; color: var(--cream); margin-bottom: 1rem; letter-spacing: 0.05em;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-contact { min-width: 180px; }
+    .footer-contact h4 {
+      font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--cream); margin-bottom: 1rem;
+    }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-bottom {
+      max-width: 1160px; margin: 0 auto; padding-top: 1.5rem;
+      border-top: 1px solid rgba(181,184,163,0.2); text-align: center;
+      font-size: 0.75rem; color: rgba(246,239,229,0.35);
+    }
+
+    /* ══════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .story-inner, .map-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-photo img { height: 340px; }
+      .activities-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
+      .footer-contact { grid-column: 2; grid-row: 2; }
+      .feature-box { width: 50%; padding: 2.5rem 2rem; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .page-hero { height: 45vh; }
+      .story-section, .map-section { padding: 3.5rem 1.25rem; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .feature-section { flex-direction: column; min-height: unset; }
+      .feature-bg { position: relative; height: 280px; }
+      .feature-box { width: 100%; min-width: unset; margin: 0 !important; padding: 2rem 1.5rem; }
+      .map-stats { gap: 1.25rem; }
+      .newsletter-section { grid-template-columns: 1fr; }
+      .newsletter-right { min-height: 160px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-brand { align-items: flex-start; flex-direction: row; }
+      .footer-nav { gap: 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+   <div id="site-nav-placeholder"></div>
+  <script src="js/nav-loader.js" defer></script>
+
+  <!-- ══ PAGE HERO ════════════════════════════════════ -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-label">Whiskey Creek Beach NW</p>
+      <h1 class="page-hero-title copperplate">About Us</h1>
+    </div>
+  </div>
+
+  <!-- ══ OUR STORY ════════════════════════════════════ -->
+  <section class="story-section">
+    <div class="story-inner">
+      <div class="story-text">
+        <p class="story-label">Our Story</p>
+        <h2 class="story-title copperplate">The Pinson Family &amp;<br>Whiskey Creek Beach NW</h2>
+        <p class="story-body">
+          The Whiskey Creek Beach NW property was purchased in 2017 by the Pinson family, and has since become a spectacular destination for peaceful getaways, family reunions, and even a few weddings.
+        </p>
+        <p class="story-body">
+          Located just 25 minutes outside Port Angeles, guests can enjoy the serenity and beauty of the Olympic Peninsula with easy access to town and some of the best hiking, hunting, fishing, and exploring you will ever find.
+        </p>
+        <p class="story-body">
+          There is so much to do in and around the Olympic National Forest — so take your time, breathe the salt air, and enjoy your stay.
+        </p>
+      </div>
+      <div class="story-photo">
+        <img src="../Website/about/family.jpg" alt="The Pinson family at Whiskey Creek Beach NW" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURE: OLYMPIC PENINSULA BASE CAMP ════════ -->
+  <div class="feature-section">
+    <div class="feature-bg" style="background-image: url('../Website/1 HOME/images/wcb-2.jpg');"></div>
+    <div class="feature-box feature-box--left">
+      <p class="feature-label">Location</p>
+      <h2 class="feature-title copperplate">Your Base Camp for the Olympic Peninsula</h2>
+      <p class="feature-body">
+        Nearby Olympic National Park entrances make this location an excellent launching point for exploring the Peninsula and beyond.
+        <ul>
+          <li>Sol Duc Hot Springs</li>
+          <li>Hurricane Ridge</li>
+          <li>Hoh Rain Forest</li>
+          <li>Cape Flattery &amp; Shi Shi Beach</li>
+          <li>Towns of Forks &amp; Neah Bay</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ PROPERTY MAP ══════════════════════════════════ -->
+  <section class="map-section">
+    <div class="map-inner">
+      <div class="map-text">
+        <p class="story-label">The Property</p>
+        <h2 class="map-title copperplate">One Stunning<br>Oceanfront Property</h2>
+        <p class="map-body">
+          Whiskey Creek Beach NW sits right on the Strait of Juan de Fuca, offering direct beach access from every accommodation. The property spans from the forested hillside down to the rocky shoreline.
+        </p>
+        <p class="map-body">
+          Walk the private beach, use the boat ramp for kayaking or fishing on the Strait, gather around a beachfront fire pit in the evening, and wake up to bald eagles soaring overhead.
+        </p>
+        <div class="map-stats">
+          <div class="stat-item">
+            <div class="stat-number copperplate">4</div>
+            <div class="stat-label">Cabins</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number copperplate">14</div>
+            <div class="stat-label">Tent Sites</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number copperplate">10</div>
+            <div class="stat-label">RV Sites</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number copperplate">1</div>
+            <div class="stat-label">Boat Ramp</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-image">
+        <img src="../Website/about/map.jpg" alt="Whiskey Creek Beach NW property map" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURE: PRIVATE BEACH ══════════════════════ -->
+  <div class="feature-section">
+    <div class="feature-bg" style="background-image: url('../Photos/Outdoor beach front WCBNW/DSC_0560.JPG');"></div>
+    <div class="feature-box feature-box--right">
+      <p class="feature-label">The Setting</p>
+      <h2 class="feature-title copperplate">A Private Beach<br>All Your Own</h2>
+      <p class="feature-body">
+        Few places offer this level of shoreline access. At Whiskey Creek, the beach is part of your stay — not a destination you drive to. Explore the tide flats, spot seals and otters, and watch for migrating whales along the Strait.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ ACTIVITIES ════════════════════════════════════ -->
+  <section class="activities-section">
+    <div class="activities-header">
+      <p class="activities-label">Things To Do</p>
+      <h2 class="activities-title copperplate">What Awaits You Here</h2>
+    </div>
+    <div class="activities-grid">
+
+      <div class="activity-card">
+        <img class="activity-card-img" src="../Website/about/bonfire.jpg" alt="Beachfront bonfire" loading="lazy" />
+        <div class="activity-card-body">
+          <h3 class="activity-card-title copperplate">Beachfront Bonfires</h3>
+          <p class="activity-card-desc">Gather around a fire with family and friends as the tide comes in. Bonfire evenings on the Strait are something you'll remember for years.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <img class="activity-card-img" src="../Website/about/hiking.jpg" alt="Hiking the Olympic Peninsula" loading="lazy" />
+        <div class="activity-card-body">
+          <h3 class="activity-card-title copperplate">Explore &amp; Hike</h3>
+          <p class="activity-card-desc">From ancient rainforests to alpine ridgelines, Olympic National Park offers world-class trails just minutes from the property. Day trips for every ability level.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <img class="activity-card-img" src="../Photos/Outdoor beach front WCBNW/DSC_0030.JPG" alt="Wildlife and ocean" loading="lazy" />
+        <div class="activity-card-body">
+          <h3 class="activity-card-title copperplate">Wildlife &amp; Water</h3>
+          <p class="activity-card-desc">Launch a kayak from the private boat ramp, fish the Strait, or simply watch bald eagles, seals, and the occasional whale pass by from your own stretch of beach.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ══════════════════════════════════ -->
+  <section class="testimonials-section">
+    <div class="testimonials-header">
+      <p class="testimonials-label">Guest Reviews</p>
+      <h2 class="testimonials-title copperplate">What Guests Say</h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">From the warm hospitality to the stunning surroundings, every moment at Whiskey Creek felt truly magical. The perfect place to recharge and reconnect with nature.</p>
+        <p class="testimonial-author">— Sophia M.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">Our stay was unforgettable. The beachfront cabin, the sound of the waves, and waking up to eagles flying overhead — we can't wait to come back!</p>
+        <p class="testimonial-author">— Emma J.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">Waking up to the sound of waves and sipping coffee on the deck while watching the sun rise over the Strait... pure bliss. A must-visit for any nature lover.</p>
+        <p class="testimonial-author">— Liam R.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CTA ══════════════════════════════════════════ -->
+  <section class="cta-section">
+    <p class="cta-label">Ready to Begin Your Adventure?</p>
+    <h2 class="cta-title copperplate">Embrace the Peace of Whiskey Creek</h2>
+    <p class="cta-body">Discover a serene retreat on the Pacific shore. Book your stay and experience relaxation, adventure, and unforgettable memories.</p>
+    <a href="https://www.reservenow.com" target="_blank" class="btn-primary-cream">Book Now</a>
+  </section>
+
+  <!-- ══ NEWSLETTER / DEAL ═══════════════════════════ -->
+  <section class="newsletter-section" id="specials">
+    <div class="newsletter-left">
+      <p class="newsletter-label">Sign Up for Our Newsletter</p>
+      <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates and specials!</p>
+    </div>
+    <div class="newsletter-right">
+      <div class="deal-content">
+        <p class="deal-label">Latest Deal</p>
+        <h3 class="deal-title copperplate">20% Off Two-Night<br>Stays Thru April</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════ -->
+  <footer id="contact">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <img class="footer-logo-img" src="../Website/logo/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
+        <div class="footer-brand-name copperplate">Whiskey Creek<br>Beach NW</div>
+      </div>
+
+      <div class="footer-nav">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="accommodations.html">Accommodations</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="policies.html">Policies</a></li>
+            <li><a href="other-properties.html">Other Properties</a></li>
+            <li><a href="https://www.reservenow.com" target="_blank">Reservations</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contact Info</h4>
+        <p>
+          1385 Whiskey Creek Beach Rd<br>
+          Port Angeles, WA 98363
+        </p>
+        <p style="margin-top:0.5rem;">
+          <a href="tel:8447692322">(844) 769-2322</a>
+        </p>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      Copyright &copy; 2025. All Rights Reserved
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Policies — Whiskey Creek Beach NW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
+      --navy-dark: #1e2c3a;
+      --text-body: #4a4a4a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 16px; background: var(--cream); color: var(--text-body); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.85; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links .dropdown { position: relative; }
+    .nav-links .dropdown-menu { display: none; position: absolute; top: calc(100% + 1rem); left: 50%; transform: translateX(-50%); background: var(--navy); min-width: 220px; border-top: 2px solid var(--brown); list-style: none; padding: 0.5rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .nav-links .dropdown:hover .dropdown-menu { display: block; }
+    .nav-links .dropdown-menu li a { display: block; padding: 0.5rem 1.25rem; font-size: 0.7rem; opacity: 0.8; }
+    .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+    .nav-book-btn { border: 1px solid rgba(246,239,229,0.7) !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s, border-color 0.2s !important; }
+    .nav-book-btn:hover { background: rgba(246,239,229,0.12) !important; border-color: var(--cream) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); z-index: 999; padding: 1.5rem 2rem; flex-direction: column; gap: 0.75rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); opacity: 0.85; }
+    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
+    .mobile-menu .mob-book { margin-top: 0.5rem; border: 1px solid rgba(246,239,229,0.6) !important; text-align: center; padding: 0.6rem !important; border-bottom: 1px solid rgba(246,239,229,0.6) !important; }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 45vh; min-height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('../Photos/Outdoor beach front WCBNW/DSC_0318.JPG') center/cover no-repeat; }
+    .page-hero-overlay { position: absolute; inset: 0; background: rgba(30,44,58,0.52); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--cream); letter-spacing: 0.05em; line-height: 1.2; }
+    .page-hero-sub { margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
+
+    /* POLICIES CONTENT */
+    .policies-wrap {
+      background: url('../Website/1 HOME/bkgds/bkgd1-icon.jpg') center/cover no-repeat;
+      padding: 5rem 2rem;
+    }
+    .policies-inner { max-width: 860px; margin: 0 auto; }
+    .policies-intro {
+      <div id="site-nav-placeholder"></div>
+      <script src="js/nav-loader.js" defer></script>
+    }
+
+    /* WAVE STRIP */
+    .wave-strip { background: var(--navy); padding: 1.5rem 0; display: flex; align-items: center; justify-content: flex-end; overflow: hidden; }
+    .wave-strip img { height: 28px; width: auto; opacity: 0.35; margin-right: 4rem; filter: brightness(0) invert(1); }
+
+    /* BOOK CTA */
+    .book-cta { background: var(--navy); padding: 5rem 2rem; text-align: center; }
+    .book-cta-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--cream); margin-bottom: 1rem; line-height: 1.3; }
+    .book-cta-sub { font-size: 0.9rem; color: rgba(246,239,229,0.65); margin-bottom: 2.5rem; line-height: 1.7; }
+    .btn-outline-cream { display: inline-block; border: 1px solid rgba(246,239,229,0.65); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.8rem 2.4rem; transition: background 0.2s, border-color 0.2s; }
+    .btn-outline-cream:hover { background: rgba(246,239,229,0.12); border-color: var(--cream); }
+
+    /* NEWSLETTER */
+    .newsletter-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 200px; }
+    .newsletter-left { background: var(--sage); padding: 3rem 3rem 3rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .newsletter-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem; }
+    .newsletter-subtitle { font-size: 0.85rem; color: rgba(41,59,78,0.75); line-height: 1.6; font-style: italic; }
+    .newsletter-right { position: relative; background: url('../Website/1 HOME/images/wcb-4.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; }
+    .newsletter-right::before { content: ''; position: absolute; inset: 0; background: rgba(41,59,78,0.55); }
+    .deal-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+    .deal-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
+    .deal-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1rem, 2vw, 1.4rem); color: var(--cream); line-height: 1.3; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 4rem; align-items: start; margin-bottom: 3rem; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-brand-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.78rem; color: var(--cream); text-align: center; line-height: 1.5; letter-spacing: 0.05em; }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-contact { min-width: 180px; }
+    .footer-contact h4 { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(181,184,163,0.2); text-align: center; font-size: 0.75rem; color: rgba(246,239,229,0.35); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
+      .footer-contact { grid-column: 2; grid-row: 2; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .newsletter-section { grid-template-columns: 1fr; }
+      .newsletter-right { min-height: 160px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-brand { align-items: flex-start; flex-direction: row; }
+      .footer-nav { gap: 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <img class="nav-logo-img" src="../Website/logo/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="dropdown">
+        <a href="accommodations.html">Accommodations ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="accommodations.html#codfish">Codfish Cabin</a></li>
+          <li><a href="accommodations.html#captain">Captain Quarters</a></li>
+          <li><a href="accommodations.html#halibut">Halibut Hole</a></li>
+          <li><a href="accommodations.html#jasper">Jasper Inn</a></li>
+          <li><a href="accommodations.html#cottages">Cottages</a></li>
+          <li><a href="accommodations.html#aframes">A-Frames</a></li>
+          <li><a href="accommodations.html#tent">Tent Sites</a></li>
+          <li><a href="accommodations.html#rv">RV Sites</a></li>
+        </ul>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="policies.html" class="active">Policies</a></li>
+      <li><a href="other-properties.html">Other Properties</a></li>
+      <li><a href="https://www.reservenow.com" target="_blank" class="nav-book-btn">Book Now</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="accommodations.html">Accommodations</a>
+    <div class="sub-links">
+      <a href="accommodations.html#codfish">Codfish Cabin</a>
+      <a href="accommodations.html#captain">Captain Quarters</a>
+      <a href="accommodations.html#halibut">Halibut Hole</a>
+      <a href="accommodations.html#jasper">Jasper Inn</a>
+      <a href="accommodations.html#tent">Tent Sites</a>
+      <a href="accommodations.html#rv">RV Sites</a>
+    </div>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="policies.html">Policies</a>
+    <a href="other-properties.html">Other Properties</a>
+    <a href="https://www.reservenow.com" target="_blank" class="mob-book">Book Now</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title copperplate">Our Policies</h1>
+      <p class="page-hero-sub">Booking, Cancellation &amp; Pet Policies</p>
+    </div>
+  </div>
+
+  <!-- POLICIES CONTENT -->
+  <div class="policies-wrap">
+    <div class="policies-inner">
+
+      <div class="policies-intro">
+        <p class="policies-intro-label">Good to Know</p>
+        <h2 class="policies-intro-title copperplate">Booking Policies</h2>
+        <p class="policies-intro-body">Please review our policies before booking. If you have any questions, don't hesitate to contact us directly at (844) 769-2322 or whiskeycreekbeachnw@gmail.com.</p>
+      </div>
+
+      <!-- NOTICE -->
+      <div class="notice-box">
+        <p><strong>Important:</strong> When booking, be sure your email address is correct as you will receive your booking confirmation and detailed self check-in instructions. Please check your spam or junk mail folder if you don't see it.</p>
+      </div>
+
+      <!-- DAMAGE DEPOSIT -->
+      <div class="policy-card">
+        <div class="policy-card-header">
+          <div class="policy-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3 class="policy-card-title copperplate">Damage Deposit</h3>
+        </div>
+        <div class="policy-card-body">
+          <p>A <strong>$150 damage deposit</strong> is charged to your credit card 24 hours prior to your booking for all cabin and RV rentals.</p>
+          <p>The deposit is automatically refunded after your visit if no damage is reported. If damage occurs, you will be contacted directly.</p>
+        </div>
+      </div>
+
+      <!-- CANCELLATION -->
+      <div class="policy-card">
+        <div class="policy-card-header">
+          <div class="policy-card-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3 class="policy-card-title copperplate">Cancellation Policies</h3>
+        </div>
+        <div class="policy-card-body">
+          <p class="policy-sub-title">Cabins &amp; RV Rentals</p>
+          <ul>
+            <li>Full refund for cancellations made 60 or more days prior to arrival.</li>
+            <li>50% refund for cancellations made up to 30 days prior to arrival (service fees excluded).</li>
+            <li>Same policy applies to re-scheduling requests.</li>
+          </ul>
+
+          <p class="policy-sub-title">Tent Sites &amp; RV Sites</p>
+          <ul>
+            <li>Full refund if you cancel within 48 hours of booking, provided check-in is at least 14 days away.</li>
+            <li>50% refund for cancellations made at least 7 days before check-in.</li>
+            <li>No refunds for cancellations or re-schedules within 7 days of check-in.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PET POLICY -->
+      <div class="policy-card">
+        <div class="policy-card-header">
+          <div class="policy-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M4.5 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0C3 11 2 12 2 13.5V16h5v-2.5C7 12 6 11 4.5 11zm15 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0C18 11 17 12 17 13.5V16h5v-2.5C22 12 21 11 19.5 11zM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 0c-2.2 0-4 1.8-4 4v3h8v-3c0-2.2-1.8-4-4-4z"/></svg>
+          </div>
+          <h3 class="policy-card-title copperplate">Pet Policy</h3>
+        </div>
+        <div class="policy-card-body">
+          <p>We love pets! Five pet-friendly cabins and one pet-friendly RV rental are available.</p>
+
+          <p class="policy-sub-title">Larger Pets Welcome (max 2)</p>
+          <ul>
+            <li>Halibut Hole and Captains Quarters accept larger pets, maximum 2.</li>
+            <li>Whiskey Creek Beach RV and Eagles Nest RV also accept larger pets.</li>
+          </ul>
+
+          <p class="policy-sub-title">Small Pets (under 25 lbs, max 1)</p>
+          <ul>
+            <li>Jasper Inn, Barnacle Hill, and Codfish Cottage accept 1 pet under 25 lbs.</li>
+            <li>Exceptions may be made for guests not using couch beds for sleeping.</li>
+          </ul>
+
+          <p class="policy-sub-title">Bedding &amp; Pet Fees</p>
+          <ul>
+            <li>$25 flat fee when bringing your own bedding (only sheets are provided).</li>
+            <li>Additional charges may apply for larger, heavy-shedding animals.</li>
+          </ul>
+
+          <p class="policy-sub-title">Properties That Do Not Allow Pets</p>
+          <ul class="no-pets-list">
+            <li>Beachcomber Cottage</li>
+            <li>Prevost Luxury Coach</li>
+            <li>Hillcrest Cabin</li>
+            <li>Cedar Heights</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CHECK-IN / CHECK-OUT -->
+      <div class="policy-card">
+        <div class="policy-card-header">
+          <div class="policy-card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="policy-card-title copperplate">Check-In &amp; Check-Out</h3>
+        </div>
+        <div class="policy-card-body">
+          <ul>
+            <li>Cabin &amp; Cottage check-in: 4:00 PM. Check-out: 11:00 AM.</li>
+            <li>Tent &amp; RV site check-in: 2:00 PM. Check-out: 11:00 AM.</li>
+            <li>Self check-in instructions are emailed after booking — verify your email address is correct.</li>
+            <li>Early check-in or late check-out may be available upon request, subject to availability.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="wave-strip">
+    <img src="../Website/1 HOME/icons/Group 138.png" alt="" aria-hidden="true" />
+  </div>
+
+  <!-- BOOK CTA -->
+  <div class="book-cta">
+    <h2 class="book-cta-title copperplate">Questions? We're Here to Help.</h2>
+    <p class="book-cta-sub">Contact us at (844) 769-2322 or whiskeycreekbeachnw@gmail.com<br>Book directly for the best available rate &mdash; no booking fees.</p>
+    <a href="https://www.reservenow.com" target="_blank" class="btn-outline-cream">Book Now</a>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="newsletter-left">
+      <p class="newsletter-label">Sign Up for Our Newsletter</p>
+      <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates and specials!</p>
+    </div>
+    <div class="newsletter-right">
+      <div class="deal-content">
+        <p class="deal-label">Latest Deal</p>
+        <h3 class="deal-title copperplate">20% Off Two-Night<br>Stays Thru April</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo-img" src="../Website/logo/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
+        <div class="footer-brand-name copperplate">Whiskey Creek<br>Beach NW</div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="accommodations.html">Accommodations</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="policies.html">Policies</a></li>
+            <li><a href="other-properties.html">Other Properties</a></li>
+            <li><a href="https://www.reservenow.com" target="_blank">Reservations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Info</h4>
+        <p>1385 Whiskey Creek Beach Rd<br>Port Angeles, WA 98363</p>
+        <p style="margin-top:0.5rem;"><a href="tel:8447692322">(844) 769-2322</a></p>
+        <p><a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">Copyright &copy; 2025. All Rights Reserved</div>
+  </footer>
+
+  <script>
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Other Properties — Whiskey Creek Beach NW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
+      --navy-dark: #1e2c3a;
+      --text-body: #4a4a4a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 16px; background: var(--cream); color: var(--text-body); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.85; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links .dropdown { position: relative; }
+    .nav-links .dropdown-menu { display: none; position: absolute; top: calc(100% + 1rem); left: 50%; transform: translateX(-50%); background: var(--navy); min-width: 220px; border-top: 2px solid var(--brown); list-style: none; padding: 0.5rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .nav-links .dropdown:hover .dropdown-menu { display: block; }
+    .nav-links .dropdown-menu li a { display: block; padding: 0.5rem 1.25rem; font-size: 0.7rem; opacity: 0.8; }
+    .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+    .nav-book-btn { border: 1px solid rgba(246,239,229,0.7) !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s, border-color 0.2s !important; }
+    .nav-book-btn:hover { background: rgba(246,239,229,0.12) !important; border-color: var(--cream) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); z-index: 999; padding: 1.5rem 2rem; flex-direction: column; gap: 0.75rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); opacity: 0.85; }
+    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
+    .mobile-menu .mob-book { margin-top: 0.5rem; border: 1px solid rgba(246,239,229,0.6) !important; text-align: center; padding: 0.6rem !important; border-bottom: 1px solid rgba(246,239,229,0.6) !important; }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 55vh; min-height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('../Website/properties/Other_Properties_main_photo.jpg') center/cover no-repeat; animation: slowZoom 25s ease-in-out infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1.0); } to { transform: scale(1.06); } }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(30,44,58,0.5) 0%, rgba(30,44,58,0.4) 100%); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--cream); letter-spacing: 0.05em; line-height: 1.2; }
+    .page-hero-sub { margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
+
+    /* INTRO */
+    .intro-section { background: url('../Website/1 HOME/bkgds/bkgd1-icon.jpg') center/cover no-repeat; padding: 5rem 2rem; text-align: center; }
+    .intro-inner { max-width: 700px; margin: 0 auto; }
+    .intro-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.7rem; }
+    .intro-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.8rem, 3.5vw, 2.4rem); color: var(--brown); line-height: 1.2; margin-bottom: 1.25rem; }
+    .intro-body { font-size: 0.95rem; line-height: 1.8; color: var(--text-body); }
+
+    /* PROPERTY LISTINGS */
+    .listing-section { background: url('../Website/1 HOME/bkgds/bkgd1.jpg') center/cover no-repeat; padding: 2rem 2rem 5rem; }
+
+    /* LISTING CARD - horizontal */
+    .listing-card {
+      max-width: 1100px; margin: 0 auto 2.5rem;
+      background: var(--white); display: grid;
+      grid-template-columns: 1fr 1fr; overflow: hidden;
+      transition: box-shadow 0.25s;
+    }
+    .listing-card:hover { box-shadow: 0 10px 40px rgba(41,59,78,0.15); }
+    .listing-card--reverse { direction: rtl; }
+    .listing-card--reverse > * { direction: ltr; }
+    .listing-card-photo { position: relative; overflow: hidden; }
+    .listing-card-photo img { width: 100%; height: 100%; object-fit: cover; min-height: 340px; display: block; transition: transform 0.5s; }
+    .listing-card:hover .listing-card-photo img { transform: scale(1.04); }
+    .listing-card-info { padding: 3rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .listing-card-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.6rem; }
+    .listing-card-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.2rem, 2vw, 1.65rem); color: var(--navy); line-height: 1.3; margin-bottom: 0.6rem; }
+    .listing-card-price { font-family: 'Josefin Sans', sans-serif; font-size: 0.9rem; color: var(--brown); margin-bottom: 1.25rem; }
+    .listing-card-desc { font-size: 0.92rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1.75rem; }
+    .listing-card-features { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
+    .listing-card-features li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: var(--text-body); }
+    .listing-card-features li::before { content: ''; display: block; width: 18px; height: 18px; flex-shrink: 0; border-radius: 50%; border: 1.5px solid var(--sage); background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6 L5 9 L10 3' stroke='%23b5b8a3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/60% no-repeat; }
+    .btn-book { display: inline-block; background: var(--navy); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.8rem 2rem; transition: background 0.25s, transform 0.2s; }
+    .btn-book:hover { background: var(--navy-dark); transform: translateY(-2px); }
+
+    /* PHOTO ROW */
+    .photos-row { max-width: 1100px; margin: 0 auto 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .photos-row img { width: 100%; height: 260px; object-fit: cover; display: block; }
+
+    /* WAVE STRIP */
+    .wave-strip { background: var(--navy); padding: 1.5rem 0; display: flex; align-items: center; justify-content: flex-end; overflow: hidden; }
+    .wave-strip img { height: 28px; width: auto; opacity: 0.35; margin-right: 4rem; filter: brightness(0) invert(1); }
+
+    /* BOOK CTA */
+    .book-cta { background: var(--navy); padding: 5rem 2rem; text-align: center; }
+    .book-cta-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--cream); margin-bottom: 1rem; line-height: 1.3; }
+    .book-cta-sub { font-size: 0.9rem; color: rgba(246,239,229,0.65); margin-bottom: 2.5rem; line-height: 1.7; }
+    .btn-outline-cream { display: inline-block; border: 1px solid rgba(246,239,229,0.65); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.8rem 2.4rem; transition: background 0.2s, border-color 0.2s; }
+    .btn-outline-cream:hover { background: rgba(246,239,229,0.12); border-color: var(--cream); }
+
+    /* NEWSLETTER */
+    .newsletter-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 200px; }
+    .newsletter-left { background: var(--sage); padding: 3rem 3rem 3rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .newsletter-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem; }
+    .newsletter-subtitle { font-size: 0.85rem; color: rgba(41,59,78,0.75); line-height: 1.6; font-style: italic; }
+    .newsletter-right { position: relative; background: url('../Website/1 HOME/images/wcb-4.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; }
+    .newsletter-right::before { content: ''; position: absolute; inset: 0; background: rgba(41,59,78,0.55); }
+    .deal-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+    .deal-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
+    .deal-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1rem, 2vw, 1.4rem); color: var(--cream); line-height: 1.3; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 4rem; align-items: start; margin-bottom: 3rem; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-brand-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.78rem; color: var(--cream); text-align: center; line-height: 1.5; letter-spacing: 0.05em; }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-contact { min-width: 180px; }
+    .footer-contact h4 { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(181,184,163,0.2); text-align: center; font-size: 0.75rem; color: rgba(246,239,229,0.35); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
+      .footer-contact { grid-column: 2; grid-row: 2; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .listing-card, .listing-card--reverse { grid-template-columns: 1fr; direction: ltr; }
+      .listing-card-photo img { min-height: 260px; }
+      .listing-card-info { padding: 2rem 1.75rem; }
+      .photos-row { grid-template-columns: 1fr; }
+      .photos-row img { height: 220px; }
+      .newsletter-section { grid-template-columns: 1fr; }
+      .newsletter-right { min-height: 160px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-brand { align-items: flex-start; flex-direction: row; }
+      .footer-nav { gap: 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-nav-placeholder"></div>
+  <script src="js/nav-loader.js" defer></script>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title copperplate">Other Properties</h1>
+      <p class="page-hero-sub">Near Olympic National Park &middot; Port Angeles, WA</p>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro-section">
+    <div class="intro-inner">
+      <p class="intro-label">Beyond the Beach</p>
+      <h2 class="intro-title copperplate">Off-Site Retreats<br>Near Olympic Park</h2>
+      <p class="intro-body">In addition to our beachfront property, we offer two off-site retreats in the broader Port Angeles area — nestled in forest and riverside settings near Olympic National Park. These properties offer a different kind of escape with the same quality and character.</p>
+    </div>
+  </section>
+
+  <!-- LISTINGS -->
+  <div class="listing-section">
+
+    <!-- Property 1 -->
+    <div class="listing-card">
+      <div class="listing-card-photo">
+        <img src="../Website/properties/Other_Properties_main_photo.jpg" alt="Hilltop Home on Lyre River" loading="lazy" />
+      </div>
+      <div class="listing-card-info">
+        <p class="listing-card-label">Lyre River Retreat</p>
+        <h2 class="listing-card-name copperplate">Hilltop Home in<br>the Woods on Lyre River</h2>
+        <p class="listing-card-price">From $350/night</p>
+        <p class="listing-card-desc">A secluded hilltop home surrounded by old-growth forest along the Lyre River, near the entrance to Olympic National Park. Enjoy privacy, nature, and easy access to hiking and wildlife viewing.</p>
+        <ul class="listing-card-features">
+          <li>Private forested setting</li>
+          <li>Minutes from Olympic National Park</li>
+          <li>Near Lyre River fishing access</li>
+          <li>Full home with kitchen &amp; amenities</li>
+        </ul>
+        <a href="https://www.reservenow.com" target="_blank" class="btn-book">Book This Property</a>
+      </div>
+    </div>
+
+    <!-- Property 2 -->
+    <div class="listing-card listing-card--reverse">
+      <div class="listing-card-photo">
+        <img src="../Website/properties/Other_Properties_photo_01.jpg" alt="Forested Cottage in the Woods" loading="lazy" />
+      </div>
+      <div class="listing-card-info">
+        <p class="listing-card-label">Forest Cottage</p>
+        <h2 class="listing-card-name copperplate">Forested Cottage<br>in the Woods</h2>
+        <p class="listing-card-price">From $240/night</p>
+        <p class="listing-card-desc">A charming woodland cottage surrounded by towering trees near Olympic National Park. The perfect base camp for hikers, nature lovers, and anyone seeking a quiet forest retreat on the Olympic Peninsula.</p>
+        <ul class="listing-card-features">
+          <li>Surrounded by old-growth forest</li>
+          <li>Close to Olympic National Park trails</li>
+          <li>Quiet, secluded setting</li>
+          <li>Cozy cottage with full amenities</li>
+        </ul>
+        <a href="https://www.reservenow.com" target="_blank" class="btn-book">Book This Property</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="wave-strip">
+    <img src="../Website/1 HOME/icons/Group 138.png" alt="" aria-hidden="true" />
+  </div>
+
+  <!-- BOOK CTA -->
+  <div class="book-cta">
+    <h2 class="book-cta-title copperplate">Explore All Our Properties</h2>
+    <p class="book-cta-sub">From beachfront cabins to forest retreats &mdash; find the perfect Olympic Peninsula getaway.<br>Book directly for the best available rate, no booking fees.</p>
+    <a href="accommodations.html" class="btn-outline-cream" style="margin-right:1rem;">View Beach Properties</a>
+    <a href="https://www.reservenow.com" target="_blank" class="btn-outline-cream">Book Now</a>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="newsletter-left">
+      <p class="newsletter-label">Sign Up for Our Newsletter</p>
+      <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates and specials!</p>
+    </div>
+    <div class="newsletter-right">
+      <div class="deal-content">
+        <p class="deal-label">Latest Deal</p>
+        <h3 class="deal-title copperplate">20% Off Two-Night<br>Stays Thru April</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-logo-img" src="../Website/logo/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
+        <div class="footer-brand-name copperplate">Whiskey Creek<br>Beach NW</div>
+      </div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="accommodations.html">Accommodations</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li><a href="policies.html">Policies</a></li>
+            <li><a href="other-properties.html">Other Properties</a></li>
+            <li><a href="https://www.reservenow.com" target="_blank">Reservations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Info</h4>
+        <p>1385 Whiskey Creek Beach Rd<br>Port Angeles, WA 98363</p>
+        <p style="margin-top:0.5rem;"><a href="tel:8447692322">(844) 769-2322</a></p>
+        <p><a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">Copyright &copy; 2025. All Rights Reserved</div>
+  </footer>
+
+  <script>
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
+    });
+  </script>
+</body>
+</html>
