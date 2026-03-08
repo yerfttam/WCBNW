@@ -17,35 +17,140 @@
       --white:     #ffffff;
       --navy-dark: #1e2c3a;
       --text-body: #4a4a4a;
-      
-      position: absolute;
-      inset: 0;
-      background: url('../Photos/Outdoor beach front WCBNW/DSC_0318.JPG') center/cover no-repeat;
     }
-    .page-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(30, 44, 58, 0.58);
+
+    /* ── Reset & Base ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      background: var(--cream);
+      color: var(--text-body);
+      overflow-x: hidden;
     }
-    .page-hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 2rem 1.5rem;
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .copperplate {
+      font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy;
     }
-    .page-hero-label {
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--navy);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Josefin Sans', sans-serif;
       font-weight: 700;
-      font-size: 0.68rem;
-      letter-spacing: 0.3em;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 0.9rem;
-    }
-    .page-hero-title {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
       color: var(--cream);
-      line-height: 1.15;
+      opacity: 0.85;
+      transition: opacity 0.2s;
     }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links .dropdown { position: relative; }
+    .nav-links .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 1rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--navy);
+      min-width: 220px;
+      border-top: 2px solid var(--brown);
+      list-style: none;
+      padding: 0.5rem 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .nav-links .dropdown:hover .dropdown-menu { display: block; }
+    .nav-links .dropdown-menu li a {
+      display: block;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+    .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+    .nav-book-btn {
+      border: 1px solid rgba(246,239,229,0.7) !important;
+      padding: 0.45rem 1.1rem !important;
+      opacity: 1 !important;
+      transition: background 0.2s, border-color 0.2s !important;
+    }
+    .nav-book-btn:hover {
+      background: rgba(246,239,229,0.12) !important;
+      border-color: var(--cream) !important;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--cream);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--navy-dark);
+      z-index: 999;
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      opacity: 0.85;
+    }
+    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
+    .mobile-menu .mob-book {
+      margin-top: 0.5rem;
+      border: 1px solid rgba(246,239,229,0.6) !important;
+      text-align: center;
+      padding: 0.6rem !important;
+      border-bottom: 1px solid rgba(246,239,229,0.6) !important;
+    }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 55vh; min-height: 360px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('../Photos/Outdoor beach front WCBNW/DSC_0318.JPG') center/cover no-repeat; animation: slowZoom 25s ease-in-out infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1.0); } to { transform: scale(1.06); } }
+    .page-hero-overlay { position: absolute; inset: 0; background: rgba(30, 44, 58, 0.58); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--cream); line-height: 1.15; }
+    .page-hero-sub { margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
 
     /* ══════════════════════════════════════════════════
        OUR STORY
