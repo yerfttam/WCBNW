@@ -73,7 +73,7 @@ Every page footer displays a version string (e.g. `v1.0.4`) below the copyright 
 
 **Update this with every push.** It is the primary way to confirm a Render deployment completed successfully. Bump the patch number (third digit) for routine changes, minor for larger changes.
 
-Current version: **v1.0.4**
+Current version: **v1.0.5**
 
 To update: find `site-version">v1.0.x` across all 7 HTML files and increment.
 
