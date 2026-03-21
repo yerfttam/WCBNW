@@ -169,10 +169,13 @@
       inset: 0;
       background: url('photos/outdoor/DSC_0328.JPG') center/cover no-repeat;
       animation: slowZoom 25s ease-in-out infinite alternate;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     @keyframes slowZoom {
-      from { transform: scale(1.0); }
-      to   { transform: scale(1.06); }
+      from { transform: scale(1.02) translateZ(0); }
+      to   { transform: scale(1.08) translateZ(0); }
     }
     .hero-overlay {
       position: absolute;
