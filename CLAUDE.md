@@ -67,13 +67,25 @@ The nav is a shared partial at `partials/nav.html`, injected at runtime by `js/n
 
 All images must live inside `NEW/` to be served by Render. Do **not** reference `../Website/` or `../Photos/` — those paths only exist locally and will 404 in production. When adding new images, copy them into `NEW/images/` or `NEW/photos/` first.
 
+## Responsive / Mobile
+
+Mobile traffic is a priority. After every push, check all pages at 375px width (iPhone). Key things to verify:
+- Nav collapses to hamburger, no overflow
+- Tab bars wrap rather than clip (accommodations page)
+- Images fill width, not overflow
+- Text is readable, not too small
+- Footer stacks cleanly
+- Forms are full-width and usable
+
+Use the Claude Preview tool with `preset: mobile` to check before committing.
+
 ## Version Number
 
 Every page footer displays a version string (e.g. `v1.0.4`) below the copyright line via `<span class="site-version">`.
 
 **Update this with every push.** It is the primary way to confirm a Render deployment completed successfully. Bump the patch number (third digit) for routine changes, minor for larger changes.
 
-Current version: **v1.0.5**
+Current version: **v1.0.6**
 
 To update: find `site-version">v1.0.x` across all 7 HTML files and increment.
 
