@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: wcbnw
+    runtime: static
+    staticPublishPath: NEW
+    pullRequestPreviewsEnabled: true

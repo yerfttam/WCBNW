@@ -10,3 +10,13 @@ __pycache__/
 
 # Editor
 .vscode/
+
+# Large assets / old source
+Photos/
+OLD/
+Website/
+WCBNW/
+
+# Stray keys
+id_ed25519.pub
+id_ed25519.pub.pub
