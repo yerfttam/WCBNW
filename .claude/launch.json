@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "wcbnw",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "NEW", "-p", "3456", "--no-clipboard"],
+      "port": 3456
+    }
+  ]
+}

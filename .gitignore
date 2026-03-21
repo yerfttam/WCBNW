@@ -17,6 +17,9 @@ __pycache__/
 /Website/
 /WCBNW/
 
+# Secrets
+.env
+
 # Stray keys
 id_ed25519.pub
 id_ed25519.pub.pub

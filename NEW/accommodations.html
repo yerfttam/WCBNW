@@ -76,16 +76,27 @@
     .prop-grid--4 { grid-template-columns: repeat(4, 1fr); }
     .prop-card { background: var(--white); overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
     .prop-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(41,59,78,0.18); }
-    .prop-card-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .prop-card-img { width: 100%; height: 220px; object-fit: cover; display: block; transition: opacity 0.2s; }
     .prop-card--site .prop-card-img { height: 180px; }
     .prop-card-body { padding: 1.25rem 1.4rem 1.5rem; }
     .prop-card-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.92rem; color: var(--navy); margin-bottom: 0.3rem; line-height: 1.3; }
     .prop-card-price { font-family: 'Josefin Sans', sans-serif; font-size: 0.82rem; color: var(--brown); margin-bottom: 1rem; }
     .prop-card-book { display: inline-block; font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); border-bottom: 1px solid var(--sage); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
     .prop-card-book:hover { color: var(--brown); border-color: var(--brown); }
+    .prop-card-desc { font-size: 0.8rem; color: var(--text-body); line-height: 1.55; margin-bottom: 0.6rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .prop-card-meta { font-size: 0.75rem; color: var(--sage); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
     .prop-card-dots { display: flex; gap: 5px; margin-bottom: 0.85rem; }
-    .prop-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); opacity: 0.5; }
+    .prop-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); opacity: 0.5; transition: opacity 0.2s, background 0.2s; }
     .prop-dot.active { opacity: 1; background: var(--brown); }
+
+    /* CAROUSEL */
+    .prop-card-carousel { position: relative; overflow: hidden; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(41,59,78,0.55); color: #fff; border: none; cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; line-height: 1; opacity: 0; transition: opacity 0.2s, background 0.2s; z-index: 2; }
+    .carousel-btn--prev { left: 8px; }
+    .carousel-btn--next { right: 8px; }
+    .prop-card-carousel:hover .carousel-btn { opacity: 1; }
+    .carousel-btn:hover { background: rgba(41,59,78,0.85); }
+    .carousel-btn:disabled { opacity: 0 !important; cursor: default; }
 
     /* FEATURE STRIP */
     .feature-strip { position: relative; min-height: 300px; overflow: hidden; display: flex; align-items: center; }
@@ -178,369 +189,14 @@
 
   <!-- CATEGORY NAV -->
   <nav class="cat-nav" aria-label="Accommodation categories">
-    <div class="cat-nav-inner">
-      <a href="#cabins">Beach Front Cabins</a>
-      <a href="#cottages">Cottages</a>
-      <a href="#aframes">A-Frames</a>
-      <a href="#tent">Tent Sites</a>
-      <a href="#rv">RV Sites</a>
+    <div class="cat-nav-inner" id="listings-cat-nav">
+      <!-- populated by listings-loader.js -->
     </div>
   </nav>
 
-  <!-- ══ BEACH FRONT CABINS ═══════════════════════════ -->
-  <section class="accom-section" id="cabins">
-    <div class="section-header">
-      <p class="section-header-label">Waterfront Accommodations</p>
-      <h2 class="section-header-title copperplate">Beach Front Cabins</h2>
-      <p class="section-header-desc">Five individual cabins set directly on the shoreline of the Strait of Juan de Fuca. Each cabin offers a private beachfront experience with stunning ocean views and the sound of waves steps from your door.</p>
-    </div>
-    <div class="prop-grid-wrap">
-      <div class="prop-grid">
+  <!-- DYNAMIC PROPERTY SECTIONS (populated by listings-loader.js) -->
+  <div id="listings-sections"></div>
 
-        <div class="prop-card" id="codfish">
-          <img class="prop-card-img" src="photos/codfish/DSC_6006-HDR.jpg" alt="Codfish Cottage Cabin" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Codfish Cottage Cabin</div>
-            <div class="prop-card-price">From $261/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card" id="halibut">
-          <img class="prop-card-img" src="photos/halibut-hole/DSC_6065-HDR.jpg" alt="Halibut Hole Cabin" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Halibut Hole</div>
-            <div class="prop-card-price">From $247/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card" id="jasper">
-          <img class="prop-card-img" src="photos/jasper/DSC_6201-HDR.jpg" alt="Jasper Inn Cabin" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Jasper Inn</div>
-            <div class="prop-card-price">From $247/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card" id="captain">
-          <img class="prop-card-img" src="images/properties/Beach_Front_Cabins_photo_02.jpg" alt="Captains Quarters Cabin" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Captains Quarters</div>
-            <div class="prop-card-price">From $247/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card" id="barnacle">
-          <img class="prop-card-img" src="images/properties/Beach_Front_Cabins_photo_03.jpg" alt="Barnacle Hill Cabin" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Barnacle Hill</div>
-            <div class="prop-card-price">From $247/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="feature-strip">
-    <div class="feature-strip-bg" style="background-image: url('photos/outdoor/DSC_0560.JPG');"></div>
-    <div class="feature-strip-overlay"></div>
-    <div class="feature-strip-content">
-      <h3 class="feature-strip-title copperplate">Private Beach,<br>Unobstructed Views</h3>
-      <p class="feature-strip-body">Wake up to the sound of waves on the Strait of Juan de Fuca. Each beachfront cabin sits directly on the shoreline of one of the most scenic stretches of the Olympic Peninsula.</p>
-    </div>
-  </div>
-
-  <!-- ══ COTTAGES ═══════════════════════════════════════ -->
-  <section class="accom-section" id="cottages">
-    <div class="section-header">
-      <p class="section-header-label">Cozy &amp; Unique Stays</p>
-      <h2 class="section-header-title copperplate">Cottages</h2>
-      <p class="section-header-desc">Six distinct cottages ranging from ocean-view hideaways to charming tiny homes and a luxury converted tour bus. Every cottage offers unique character and the same breathtaking coastal setting.</p>
-    </div>
-    <div class="prop-grid-wrap">
-      <div class="prop-grid">
-
-        <div class="prop-card">
-          <img class="prop-card-img" src="images/properties/Cottages_photo_01.jpg" alt="Beachcomber Cottage" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Beachcomber Cottage</div>
-            <div class="prop-card-price">From $281/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card">
-          <img class="prop-card-img" src="images/properties/Cottages_photo_02.jpg" alt="Cedar Heights Cabin" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Cedar Heights Cabin</div>
-            <div class="prop-card-price">From $281/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card">
-          <img class="prop-card-img" src="images/properties/Cottages_photo_03.jpg" alt="The Driftwood Cottage" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">The Driftwood Cottage</div>
-            <div class="prop-card-price">From $218/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card">
-          <img class="prop-card-img" src="images/properties/Cottages_photo_04.jpg" alt="Moonlight Ridge" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Moonlight Ridge</div>
-            <div class="prop-card-price">From $145/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card">
-          <img class="prop-card-img" src="images/properties/Cottages_photo_05.jpg" alt="Prevost Tour Bus" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Prevost Tour Bus</div>
-            <div class="prop-card-price">From $150/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card">
-          <img class="prop-card-img" src="images/properties/Cottages_photo_06.jpg" alt="Hillcrest Cabin" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-dots"><span class="prop-dot active"></span><span class="prop-dot"></span><span class="prop-dot"></span></div>
-            <div class="prop-card-name copperplate">Hillcrest Cabin</div>
-            <div class="prop-card-price">From $250/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Book Now &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="wave-strip">
-    <img src="images/Group 138.png" alt="" aria-hidden="true" />
-  </div>
-
-  <!-- ══ A-FRAMES ════════════════════════════════════════ -->
-  <section class="accom-section" id="aframes">
-    <div class="section-header">
-      <p class="section-header-label">Open Air Shelters</p>
-      <h2 class="section-header-title copperplate">A-Frame Shelters</h2>
-      <p class="section-header-desc">Eight A-frame shelters positioned along the oceanfront with incredible views of the Strait. A step above tent camping &mdash; bring your sleeping gear and wake up to the sound of the Pacific.</p>
-    </div>
-    <div class="prop-grid-wrap">
-      <div class="prop-grid prop-grid--4">
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_01.jpg" alt="A-Frame Site 10" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame Site 10</div>
-            <div class="prop-card-price">From $55/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_02.jpg" alt="A-Frame Site 9" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame Site 9</div>
-            <div class="prop-card-price">From $55/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_03.jpg" alt="A-Frame Site 7" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame Site 7</div>
-            <div class="prop-card-price">From $57/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_04.jpg" alt="A-Frame Site 5" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame Site 5</div>
-            <div class="prop-card-price">From $46/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_05.jpg" alt="A-Frame Site 11" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame Site 11</div>
-            <div class="prop-card-price">From $54/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_06.jpg" alt="A-Frame T15" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame T15</div>
-            <div class="prop-card-price">From $108/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_07.jpg" alt="A-Frame Site 6" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame Site 6</div>
-            <div class="prop-card-price">From $45/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/A_Frames_photo_08.jpg" alt="A-Frame T16" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">A-Frame T16</div>
-            <div class="prop-card-price">From $110/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="feature-strip">
-    <div class="feature-strip-bg" style="background-image: url('photos/outdoor/DSC_0397.jpg'); background-position: center 40%;"></div>
-    <div class="feature-strip-overlay"></div>
-    <div class="feature-strip-content">
-      <h3 class="feature-strip-title copperplate">Camp Under<br>the Open Sky</h3>
-      <p class="feature-strip-body">Tent sites and A-frame shelters offer the most immersive coastal camping experience on the Olympic Peninsula &mdash; with direct beach access and unobstructed views of the Strait.</p>
-    </div>
-  </div>
-
-  <!-- ══ TENT SITES ══════════════════════════════════════ -->
-  <section class="accom-section" id="tent">
-    <div class="section-header">
-      <p class="section-header-label">Beachfront Camping</p>
-      <h2 class="section-header-title copperplate">Tent Sites</h2>
-      <p class="section-header-desc">Six ocean-view tent sites set along the beach. Bring your own tent and gear and fall asleep to the sound of waves. Sites T1&ndash;T4 and T12 offer open views; T14 is a premier beachfront campsite.</p>
-    </div>
-    <div class="prop-grid-wrap">
-      <div class="prop-grid">
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/Tent_Sites_photo_01.jpg" alt="Tent Site T4" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View Tent Site T4</div>
-            <div class="prop-card-price">From $50/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/Tent_Sites_photo_02.jpg" alt="Tent Site T3" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View Tent Site T3</div>
-            <div class="prop-card-price">From $35/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/Tent_Sites_photo_03.jpg" alt="Tent Site T12" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View Tent Site T12</div>
-            <div class="prop-card-price">From $51/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/Tent_Sites_photo_04.jpg" alt="Tent Site T1" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View Tent Site T1</div>
-            <div class="prop-card-price">From $35/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/Tent_Sites_photo_05.jpg" alt="Tent Site T2" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View Tent Site T2</div>
-            <div class="prop-card-price">From $47/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/Tent_Sites_photo_06.jpg" alt="Beachfront Campsite T14" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Beachfront Campsite T14</div>
-            <div class="prop-card-price">From $55/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ RV SITES ════════════════════════════════════════ -->
-  <section class="accom-section" id="rv">
-    <div class="section-header">
-      <p class="section-header-label">Full Hookup RV Camping</p>
-      <h2 class="section-header-title copperplate">RV Sites</h2>
-      <p class="section-header-desc">Three ocean-view RV sites with full hookups. Bring your rig and enjoy the same stunning coastal setting as the cabins &mdash; with the convenience of your home on wheels. Sites B1, B2, and C1 available.</p>
-    </div>
-    <div class="prop-grid-wrap">
-      <div class="prop-grid" style="max-width:780px; margin: 0 auto; grid-template-columns: repeat(2,1fr);">
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/RV_Sites_photo_01.jpg" alt="Ocean View RV Site B1" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View RV Site B1</div>
-            <div class="prop-card-price">$81/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site">
-          <img class="prop-card-img" src="images/properties/RV_Sites_photo_02.jpg" alt="Ocean View RV Site B2" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View RV Site B2</div>
-            <div class="prop-card-price">$81/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-        <div class="prop-card prop-card--site" style="grid-column: 1 / -1; max-width: 375px; margin: 0 auto; width: 100%;">
-          <img class="prop-card-img" src="images/properties/RV_Sites_photo_01.jpg" alt="Ocean View RV Site C1" loading="lazy" />
-          <div class="prop-card-body">
-            <div class="prop-card-name copperplate">Ocean View RV Site C1</div>
-            <div class="prop-card-price">$81/night</div>
-            <a href="https://www.reservenow.com" target="_blank" class="prop-card-book">Reserve &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- BOOK CTA -->
   <div class="book-cta">
@@ -593,9 +249,10 @@
         <p><a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a></p>
       </div>
     </div>
-    <div class="footer-bottom">Copyright &copy; 2025. All Rights Reserved<br><span class="site-version">v1.0.8</span></div>
+    <div class="footer-bottom">Copyright &copy; 2025. All Rights Reserved<br><span class="site-version">v1.1.1</span></div>
   </footer>
 
+  <script src="js/listings-loader.js" defer></script>
   <script>
     function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
     document.querySelectorAll('.mobile-menu a').forEach(a => {

@@ -1,0 +1,69 @@
+# Whiskey Creek Beach NW — Property Map
+# Format: Short Name | Guesty ID | Guesty Booking URL
+# Total: 32 publicly listed properties
+# Last updated: 2026-03-21
+# Source: Guesty Open API /v1/listings (nickname field)
+#
+# Internal Guesty nickname shown in brackets for reference.
+
+# ─────────────────────────────────────────────
+# BEACH FRONT CABINS (5)
+# ─────────────────────────────────────────────
+
+Codfish Cottage       | 678ff9a9af15e70011ba3785 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ff9a9af15e70011ba3785
+Captains Quarters     | 678ff9db337d5e0011a0aca7 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ff9db337d5e0011a0aca7
+Halibut Hole          | 678ff9c736e504001164fa51 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ff9c736e504001164fa51
+Jasper Inn            | 678ff9d0ff72d700105c2066 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ff9d0ff72d700105c2066
+Barnacle Hill         | 678ffa138bff840011744666 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffa138bff840011744666
+
+# ─────────────────────────────────────────────
+# COTTAGES (6)  [Guesty: Cottage 01–08]
+# ─────────────────────────────────────────────
+
+Driftwood Cottage     | 678ffe5edde8b9001246479a | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffe5edde8b9001246479a
+Hillcrest             | 678ffb95fbd7d100126ef5f3 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffb95fbd7d100126ef5f3
+Beachcomber           | 678ff9959af81b00109349f8 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ff9959af81b00109349f8
+Cedar Heights         | 678ffad65355f900111b7fa3 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffad65355f900111b7fa3
+Moonlight Ridge       | 678ffe6b34219b00204bd389 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffe6b34219b00204bd389
+Prevost Tour Bus      | 678ffba2ff72d700105c2a20 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffba2ff72d700105c2a20
+
+# ─────────────────────────────────────────────
+# A-FRAMES (9)  [Guesty type: Hut]
+# ─────────────────────────────────────────────
+
+A-Frame T05           | 678ffb5b5f0aac0013ffe503 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffb5b5f0aac0013ffe503
+A-Frame T06           | 678ffb645355f900111b8379 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffb645355f900111b8379
+A-Frame T07           | 678ffb50fbd7d100126ef32e | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffb50fbd7d100126ef32e
+A-Frame T09           | 678ffa55d8a16e00105a5634 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffa55d8a16e00105a5634
+A-Frame T10           | 678ffa30337d5e0011a0aec9 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffa30337d5e0011a0aec9
+A-Frame T11           | 678ffeeaa31a2b00104045c6 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffeeaa31a2b00104045c6
+A-Frame T13           | 683895eb2f14ed0010987905 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/683895eb2f14ed0010987905
+A-Frame T15           | 678ffe75d8ebd40013dad094 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffe75d8ebd40013dad094
+A-Frame T16           | 678ffe7f5355f900111b9fe0 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffe7f5355f900111b9fe0
+
+# ─────────────────────────────────────────────
+# TENT SITES (6)
+# ─────────────────────────────────────────────
+
+Tent Site T1          | 678ffb750460ab0012c1f5cd | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffb750460ab0012c1f5cd
+Tent Site T2          | 678ffb8c58af260012559bb0 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffb8c58af260012559bb0
+Tent Site T3          | 678ffa96329ea700121051b3 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffa96329ea700121051b3
+Tent Site T4          | 678ffa72a31a2b001040277f | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffa72a31a2b001040277f
+Tent Site T12         | 678ffb3f77144800138b5e44 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffb3f77144800138b5e44
+Tent Site T14         | 678ffac69af81b0010935039 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffac69af81b0010935039
+
+# ─────────────────────────────────────────────
+# RV SITES (3)
+# ─────────────────────────────────────────────
+
+RV Site B1            | 67bf7ee512d12d0028f5f48a | https://whiskeycreekbeachnw.guestybookings.com/en/properties/67bf7ee512d12d0028f5f48a
+RV Site B2            | 678ffaa552d5b90012aaaebd | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffaa552d5b90012aaaebd
+RV Site C1            | 678ffab0337d5e0011a0b21c | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffab0337d5e0011a0b21c
+
+# ─────────────────────────────────────────────
+# OTHER PROPERTIES (3)
+# ─────────────────────────────────────────────
+
+Forested Cottage      | 678ffed7db78c80023b0d3da | https://whiskeycreekbeachnw.guestybookings.com/en/properties/678ffed7db78c80023b0d3da
+Cottage Lyre River    | 687bbcf13d81fc000eed5033 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/687bbcf13d81fc000eed5033
+Cottage Tiny Lyre     | 68dd63cc3a1c7f0012372371 | https://whiskeycreekbeachnw.guestybookings.com/en/properties/68dd63cc3a1c7f0012372371

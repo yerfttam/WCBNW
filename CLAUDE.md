@@ -35,7 +35,7 @@ Photos/               ← full photo library (local only, gitignored)
 | File | Page |
 |------|------|
 | `index.html` | Home |
-| `accommodations.html` | Accommodations (manual property cards) |
+| `accommodations.html` | Accommodations (dynamic cards from listings.json) |
 | `accommodations_guesty.html` | Accommodations (Guesty widget version) |
 | `about.html` | About Us |
 | `contact.html` | Contact |
@@ -85,9 +85,9 @@ Every page footer displays a version string (e.g. `v1.0.4`) below the copyright 
 
 **Update this with every push.** It is the primary way to confirm a Render deployment completed successfully. Bump the patch number (third digit) for routine changes, minor for larger changes.
 
-Current version: **v1.0.8**
+Current version: **v1.1.1**
 
-To update: find `site-version">v1.0.x` across all 7 HTML files and increment.
+To update: find `site-version">v1.1.x` across all 7 HTML files and increment.
 
 ## Key Business Info
 
