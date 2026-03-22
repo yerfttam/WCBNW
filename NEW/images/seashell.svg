@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210" fill="none">
+  <g stroke="#b5b8a3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Outer whorl — nearly full circle, open at bottom-left (the mouth) -->
+    <path stroke-width="7"
+      d="M 48,168 A 88,88 0 1,1 185,100"/>
+
+    <!-- Mouth taper lines -->
+    <path stroke-width="5" d="M 48,168 C 36,152 28,133 26,112"/>
+    <path stroke-width="5" d="M 185,100 C 185,78 177,58 163,44"/>
+
+    <!-- Second whorl -->
+    <path stroke-width="5.5"
+      d="M 68,152 A 64,64 0 1,1 163,97"/>
+    <path stroke-width="3.5" d="M 68,152 C 58,138 52,122 52,105"/>
+    <path stroke-width="3.5" d="M 163,97 C 163,81 156,67 145,57"/>
+
+    <!-- Third whorl -->
+    <path stroke-width="4.5"
+      d="M 88,134 A 42,42 0 1,1 141,95"/>
+    <path stroke-width="2.5" d="M 88,134 C 81,124 78,113 78,102"/>
+    <path stroke-width="2.5" d="M 141,95 C 141,83 136,72 128,65"/>
+
+    <!-- Fourth whorl -->
+    <path stroke-width="3.5"
+      d="M 103,118 A 22,22 0 1,1 120,93"/>
+    <path stroke-width="2" d="M 103,118 C 98,112 96,106 96,100"/>
+    <path stroke-width="2" d="M 120,93 C 120,87 118,82 114,78"/>
+
+    <!-- Center spiral -->
+    <path stroke-width="2.5"
+      d="M 107,108 A 8,8 0 1,1 108,92"/>
+    <circle cx="100" cy="100" r="3.5" fill="#b5b8a3" stroke="none"/>
+
+  </g>
+</svg>

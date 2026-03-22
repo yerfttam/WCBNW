@@ -102,7 +102,7 @@
       opacity: 0.8;
     }
     .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
-    .nav-book-btn { background: var(--white) !important; color: var(--navy) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+    .nav-book-btn { background: var(--white) !important; color: var(--brown) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
     .nav-book-btn:hover { background: rgba(255,255,255,0.85) !important; }
 
     /* Hamburger */
@@ -187,7 +187,7 @@
        INTRO / TAGLINE
     ══════════════════════════════════════════════════ */
     .intro-section {
-      background: url('images/bkgds/bkgd1-icon.jpg') center/cover no-repeat;
+      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
       padding: 5rem 1.5rem;
       text-align: center;
     }
@@ -385,24 +385,51 @@
       line-height: 1.78;
       color: var(--text-body);
     }
-    /* Wave decoration strip under feature 1 */
-    .feature-wave-strip {
-      background: var(--navy);
-      padding: 0.75rem 0 1.5rem;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-end;
-      overflow: visible;
-      position: relative;
-      z-index: 1;
+    /* Feature 1 split layout: photo left, cream box center-right, navy accent far right */
+    .feature-section--split {
+      background: var(--navy); /* navy shows in the right band uncovered by the photo */
     }
-    .feature-wave-strip img {
-      height: 48px;
+    .feature-section--split .feature-bg {
+      right: 18%; /* photo covers left 82%, leaving an 18% navy band on the right */
+    }
+    .feature-section--split .feature-box--right {
+      margin-left: auto;
+      margin-right: 8%; /* box straddles the photo/navy boundary */
+      width: 34%;
+    }
+    /* Feature section: navy band on LEFT, photo on right */
+    .feature-section--split-left {
+      background: var(--navy);
+    }
+    .feature-section--split-left .feature-bg {
+      left: 18%; /* photo covers right 82%, leaving an 18% navy band on the left */
+    }
+    .feature-section--split-left .feature-box--left {
+      margin-right: auto;
+      margin-left: 8%; /* box straddles the navy/photo boundary */
+      width: 34%;
+    }
+    /* Sailboat icon in the navy band of feature 3 */
+    .feature-sailboat-img {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      height: 160px;
       width: auto;
       opacity: 0.35;
-      margin-right: 4rem;
-      margin-top: -28px;
       filter: brightness(0) invert(1);
+      z-index: 3;
+    }
+    /* Wave lives at bottom of the navy band */
+    .feature-wave-img {
+      position: absolute;
+      bottom: 1.25rem;
+      right: 1.5rem;
+      height: 48px;
+      width: auto;
+      opacity: 0.4;
+      filter: brightness(0) invert(1);
+      z-index: 3;
     }
 
     /* ══════════════════════════════════════════════════
@@ -414,11 +441,17 @@
     }
     .cozy-inner {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 4rem;
-      max-width: 1100px;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      gap: 3.5rem;
+      max-width: 1200px;
       margin: 0 auto;
       align-items: center;
+    }
+    .cozy-crab {
+      width: 140px;
+      height: auto;
+      opacity: 0.18;
+      margin-top: 2rem;
     }
     .cozy-heading {
       font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
@@ -439,14 +472,14 @@
       font-size: 0.72rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 1rem;
+      color: var(--brown);
+      margin-bottom: 1.5rem;
     }
     .direct-booking-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
+      gap: 1.4rem;
     }
     .direct-booking-list li {
       display: flex;
@@ -471,7 +504,7 @@
     }
     .btn-primary-brown {
       display: inline-block;
-      background: var(--navy);
+      background: var(--brown);
       color: var(--cream);
       font-family: 'Josefin Sans', sans-serif;
       font-weight: 700;
@@ -481,7 +514,7 @@
       padding: 0.9rem 2.8rem;
       transition: background 0.25s, transform 0.2s;
     }
-    .btn-primary-brown:hover { background: var(--navy-dark); transform: translateY(-2px); }
+    .btn-primary-brown:hover { background: #7a4f35; transform: translateY(-2px); }
 
     /* ══════════════════════════════════════════════════
        NEWSLETTER / DEAL BANNER
@@ -489,7 +522,7 @@
     .newsletter-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 200px;
+      min-height: 100px;
     }
     .newsletter-left {
       background: var(--sage);
@@ -521,16 +554,13 @@
     }
     .newsletter-right {
       position: relative;
-      background: url('images/wcb-4.jpg') center/cover no-repeat;
+      background: url('images/wcb-4.jpg') center 60%/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .newsletter-right::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(41,59,78,0.55);
+      content: none;
     }
     .deal-content {
       position: relative;
@@ -662,14 +692,44 @@
       .spaces-left { width: 100%; padding: 2.5rem 1.5rem; }
       .spaces-grid { grid-template-columns: repeat(3, 1fr); height: 220px; }
       .cabins-grid { grid-template-columns: repeat(2, 1fr); }
-      .feature-section { min-height: 320px; align-items: flex-end; }
-      .feature-box { width: 75%; min-width: unset; padding: 1.75rem 1.5rem; }
+      /* Feature sections: stack photo on top, text below */
+      .feature-section {
+        flex-direction: column;
+        min-height: unset;
+        align-items: stretch;
+        background: transparent;
+      }
+      .feature-bg {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: 260px;
+      }
+      .feature-box,
+      .feature-box--right,
+      .feature-box--left {
+        width: 100%;
+        min-width: unset;
+        margin: 0 !important;
+        padding: 2rem 1.5rem;
+      }
+      /* Remove navy band on mobile, reset split widths/margins */
+      .feature-section--split,
+      .feature-section--split-left { background: transparent; }
+      .feature-section--split .feature-bg,
+      .feature-section--split-left .feature-bg { left: 0; right: 0; }
+      .feature-section--split .feature-box--right,
+      .feature-section--split-left .feature-box--left { width: 100%; margin: 0; }
+      /* Hide decorative icons on mobile */
+      .feature-sailboat-img,
+      .feature-wave-img,
+      .cozy-crab { display: none; }
       .cozy-inner { grid-template-columns: 1fr; gap: 2rem; }
       .newsletter-section { grid-template-columns: 1fr; }
       .newsletter-right { min-height: 160px; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
       .footer-contact { grid-column: 1; grid-row: auto; }
-      .footer-brand { flex-direction: column; align-items: flex-start; }
+      .footer-brand { display: none; }
       .footer-nav { gap: 1rem 2rem; }
     }
     @media (max-width: 480px) {
@@ -721,21 +781,17 @@
   </section>
 
   <!-- ══ FEATURE 1: UNMATCHED BEACHFRONT ════════════ -->
-  <div class="feature-section">
+  <div class="feature-section feature-section--split">
     <div class="feature-bg" style="background-image: url('images/wcb-1.jpg');"></div>
     <div class="feature-box feature-box--right">
       <h2 class="feature-title copperplate">Unmatched<br>Beachfront<br>Setting</h2>
       <p class="feature-body">Few places offer this level of shoreline access, where the beach is part of your stay, not a destination you drive to.</p>
     </div>
-  </div>
-
-  <!-- Wave strip -->
-  <div class="feature-wave-strip">
-    <img src="images/Group 138.png" alt="" aria-hidden="true" />
+    <img class="feature-wave-img" src="images/Group 138.png" alt="" aria-hidden="true" />
   </div>
 
   <!-- ══ FEATURE 2: CLOSE TO NATURE ═════════════════ -->
-  <div class="feature-section">
+  <div class="feature-section feature-section--split-left">
     <div class="feature-bg" style="background-image: url('images/wcb-2.jpg'); background-position: center center;"></div>
     <div class="feature-box feature-box--left">
       <h2 class="feature-title copperplate">Close to<br>Nature, Away<br>from Crowds</h2>
@@ -744,12 +800,13 @@
   </div>
 
   <!-- ══ FEATURE 3: FLEXIBLE STAY ════════════════════ -->
-  <div class="feature-section">
-    <div class="feature-bg" style="background-image: url('photos/outdoor/DSC_0335.jpg');"></div>
+  <div class="feature-section feature-section--split">
+    <div class="feature-bg" style="background-image: url('photos/outdoor/A_Frames_photo_01.jpg');"></div>
     <div class="feature-box feature-box--right">
       <h2 class="feature-title copperplate">Flexible Stay<br>Options for<br>Every Traveler</h2>
       <p class="feature-body">Choose from cozy cabins, tent sites, or RV hookups, all sharing the same stunning coastal setting.</p>
     </div>
+    <img class="feature-sailboat-img" src="images/Group 140.png" alt="" aria-hidden="true" />
   </div>
 
   <!-- ══ COZY STAYS / DIRECT BOOKING ════════════════ -->
@@ -757,6 +814,7 @@
     <div class="cozy-inner">
       <div class="cozy-left">
         <h2 class="cozy-heading copperplate">cozy stays<br>on the Coast</h2>
+        <img class="cozy-crab" src="images/Group 145.png" alt="" aria-hidden="true" />
       </div>
       <div class="cozy-right">
         <p class="cozy-body">
@@ -768,6 +826,9 @@
           Guests can choose from cozy coastal cabins, beachfront tent sites, or RV hookups, all set
           within one stunning oceanfront property designed for exploration by day and rest by night.
         </p>
+        <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-primary-brown">Book Now</a>
+      </div>
+      <div class="cozy-benefits">
         <p class="direct-booking-title">Direct Booking Benefits</p>
         <ul class="direct-booking-list">
           <li>Best rate available</li>
@@ -776,26 +837,13 @@
         </ul>
       </div>
     </div>
-    <div class="cozy-cta-wrap">
-      <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-primary-brown">Book Now</a>
-    </div>
   </section>
 
-  <div hidden>
-  <!-- ══ NEWSLETTER / DEAL ═══════════════════════════ -->
+    <!-- ══ NEWSLETTER / DEAL ═══════════════════════════ -->
   <section class="newsletter-section" id="specials">
-    <div class="newsletter-left">
-      <p class="newsletter-label">Sign Up for Our Newsletter</p>
-      <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates and specials!</p>
-    </div>
-    <div class="newsletter-right">
-      <div class="deal-content">
-        <p class="deal-label">Latest Deal</p>
-        <h3 class="deal-title copperplate">20% Off Two-Night<br>Stays Thru April</h3>
-      </div>
-    </div>
+    <div class="newsletter-left"></div>
+    <div class="newsletter-right"></div>
   </section>
-  </div>
 
   <div id="site-footer-placeholder"></div>
   <script src="js/footer-loader.js" defer></script>

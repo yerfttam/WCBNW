@@ -36,7 +36,7 @@
     .nav-links .dropdown:hover .dropdown-menu { display: block; }
     .nav-links .dropdown-menu li a { display: block; padding: 0.5rem 1.25rem; font-size: 0.7rem; opacity: 0.8; }
     .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
-    .nav-book-btn { background: var(--white) !important; color: var(--navy) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+    .nav-book-btn { background: var(--white) !important; color: var(--brown) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
     .nav-book-btn:hover { background: rgba(255,255,255,0.85) !important; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
@@ -165,7 +165,7 @@
       .newsletter-right { min-height: 160px; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
       .footer-contact { grid-column: 1; grid-row: auto; }
-      .footer-brand { flex-direction: column; align-items: flex-start; }
+      .footer-brand { display: none; }
       .footer-nav { gap: 1rem 2rem; }
     }
     @media (max-width: 480px) {
@@ -206,8 +206,11 @@
     <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-outline-cream">Book Now</a>
   </div>
 
-  <div hidden>
-</div>
+    <!-- ══ NEWSLETTER / DEAL ═══════════════════════════ -->
+  <section class="newsletter-section" id="specials">
+    <div class="newsletter-left"></div>
+    <div class="newsletter-right"></div>
+  </section>
 
   <div id="site-footer-placeholder"></div>
   <script src="js/footer-loader.js" defer></script>
