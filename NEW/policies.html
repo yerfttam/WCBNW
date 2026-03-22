@@ -3,125 +3,650 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Policies — Whiskey Creek Beach NW</title>
+  <title>Whiskey Creek Beach NW — Cozy Beachfront Cabins in the PNW</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* ── CSS Variables ─────────────────────────────── */
     :root {
-      --navy:      #293b4e;
-      --cream:     #f6efe5;
-      --sage:      #b5b8a3;
-      --brown:     #6b452e;
-      --white:     #ffffff;
+      --navy:   #293b4e;
+      --cream:  #f6efe5;
+      --sage:   #b5b8a3;
+      --brown:  #6b452e;
+      --white:  #ffffff;
       --navy-dark: #1e2c3a;
       --text-body: #4a4a4a;
     }
+
+    /* ── Reset & Base ──────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 16px; background: var(--cream); color: var(--text-body); overflow-x: hidden; }
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      background: var(--cream);
+      color: var(--text-body);
+      overflow-x: hidden;
+    }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
-    .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
+    .copperplate {
+      font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy;
+    }
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
-    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
-    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
-    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
-    .nav-links a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.85; transition: opacity 0.2s; }
-    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    /* ══════════════════════════════════════════════════
+       NAVIGATION
+    ══════════════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--navy);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+    .nav-logo-img {
+      height: 44px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
     .nav-links .dropdown { position: relative; }
-    .nav-links .dropdown-menu { display: none; position: absolute; top: calc(100%); left: 50%; transform: translateX(-50%); background: var(--navy); min-width: 220px; border-top: 2px solid var(--brown); list-style: none; padding: 0.5rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .nav-links .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100%);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--navy);
+      min-width: 180px;
+      border-top: 2px solid var(--brown);
+      list-style: none;
+      padding: 0.5rem 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
     .nav-links .dropdown:hover .dropdown-menu { display: block; }
-    .nav-links .dropdown-menu li a { display: block; padding: 0.5rem 1.25rem; font-size: 0.7rem; opacity: 0.8; }
+    .nav-links .dropdown-menu li a {
+      display: block;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
     .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
     .nav-book-btn { background: var(--white) !important; color: var(--navy) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
     .nav-book-btn:hover { background: rgba(255,255,255,0.85) !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
-    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); z-index: 999; padding: 1.5rem 2rem; flex-direction: column; gap: 0.75rem; }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); opacity: 0.85; }
-    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
-    .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
-    .mobile-menu .mob-book { margin-top: 0.5rem; border: 1px solid rgba(246,239,229,0.6) !important; text-align: center; padding: 0.6rem !important; border-bottom: 1px solid rgba(246,239,229,0.6) !important; }
 
-    /* PAGE HERO */
-    .page-hero { position: relative; height: 45vh; min-height: 320px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
-    .page-hero-bg { position: absolute; inset: 0; background: url('photos/outdoor/DSC_0318.JPG') center/cover no-repeat; }
-    .page-hero-overlay { position: absolute; inset: 0; background: rgba(30,44,58,0.52); }
-    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
-    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--cream); letter-spacing: 0.05em; line-height: 1.2; }
-    .page-hero-sub { margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
-
-    /* POLICIES CONTENT */
-    .policies-wrap {
-      background: var(--cream);
-      padding: 5rem 2rem;
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
     }
-    .policies-inner { max-width: 860px; margin: 0 auto; }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--cream);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--navy-dark);
+      z-index: 999;
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      opacity: 0.85;
+    }
+    .mobile-menu .sub-links {
+      padding-left: 1rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
+    .mobile-menu .mob-book {
+      margin-top: 0.5rem;
+      border: 1px solid rgba(246,239,229,0.6) !important;
+      text-align: center;
+      padding: 0.6rem !important;
+      border-bottom: 1px solid rgba(246,239,229,0.6) !important;
+    }
 
-    .policies-intro { margin-bottom: 2.5rem; }
-    .policies-intro-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brown); margin-bottom: 0.5rem; }
-    .policies-intro-title { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--navy); margin-bottom: 1rem; }
-    .policies-intro-body { font-size: 0.92rem; color: var(--text-body); line-height: 1.75; }
+    /* ══════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 90vh;
+      min-height: 540px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('photos/outdoor/DSC_0328.JPG') center/cover no-repeat;
+      animation: slowZoom 25s ease-in-out infinite alternate;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    @keyframes slowZoom {
+      from { transform: scale(1.02) translateZ(0); }
+      to   { transform: scale(1.08) translateZ(0); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(41,59,78,0.25) 0%, rgba(41,59,78,0.1) 60%, rgba(41,59,78,0.3) 100%);
+    }
 
-    .notice-box { background: #fff8f0; border-left: 3px solid var(--brown); padding: 1rem 1.25rem; margin-bottom: 2rem; font-size: 0.88rem; line-height: 1.7; color: var(--text-body); }
+    /* ══════════════════════════════════════════════════
+       INTRO / TAGLINE
+    ══════════════════════════════════════════════════ */
+    .intro-section {
+      background: url('images/bkgds/bkgd1-icon.jpg') center/cover no-repeat;
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+    .intro-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .intro-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      color: var(--brown);
+      line-height: 1.25;
+      margin-bottom: 1.75rem;
+    }
+    .intro-body {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-body);
+      max-width: 580px;
+      margin: 0 auto;
+    }
 
-    .policy-card { background: #fff; border: 1px solid rgba(41,59,78,0.1); margin-bottom: 1.5rem; }
-    .policy-card-header { display: flex; align-items: center; gap: 1rem; background: var(--navy); padding: 1rem 1.5rem; }
-    .policy-card-icon { width: 28px; height: 28px; flex-shrink: 0; }
-    .policy-card-icon svg { width: 100%; height: 100%; stroke: var(--cream); stroke-width: 1.5; fill: none; }
-    .policy-card-title { color: var(--cream); font-size: 1rem; letter-spacing: 0.04em; }
-    .policy-card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; line-height: 1.75; color: var(--text-body); }
-    .policy-card-body ul { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.35rem; }
-    .policy-sub-title { font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); margin-top: 0.5rem; }
-    .no-pets-list { list-style: none; padding-left: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 1rem; }
-    .no-pets-list li::before { content: '✕  '; color: var(--brown); font-size: 0.75rem; }
+    /* ══════════════════════════════════════════════════
+       OUR SPACES
+    ══════════════════════════════════════════════════ */
+    .spaces-section {
+      background: var(--navy);
+    }
+    .spaces-inner {
+      display: flex;
+      min-height: 400px;
+    }
+    .spaces-left {
+      width: 30%;
+      flex-shrink: 0;
+      background: var(--navy);
+      padding: 3.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .spaces-heading {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .spaces-subtitle {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(246,239,229,0.7);
+      margin-bottom: 2rem;
+    }
+    .btn-outline-cream {
+      display: inline-block;
+      border: 1px solid rgba(246,239,229,0.65);
+      color: var(--cream);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      transition: background 0.2s, border-color 0.2s;
+      width: fit-content;
+    }
+    .btn-outline-cream:hover {
+      background: rgba(246,239,229,0.12);
+      border-color: var(--cream);
+    }
+    .spaces-right {
+      flex: 1;
+      overflow: hidden;
+    }
+    .spaces-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 100%;
+    }
+    .spaces-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-    /* WAVE STRIP */
-    .wave-strip { background: var(--navy); padding: 1.5rem 0; display: flex; align-items: center; justify-content: flex-end; overflow: hidden; }
-    .wave-strip img { height: 28px; width: auto; opacity: 0.35; margin-right: 4rem; filter: brightness(0) invert(1); }
+    /* ══════════════════════════════════════════════════
+       CABIN CARDS
+    ══════════════════════════════════════════════════ */
+    .cabins-section {
+      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
+      padding: 3rem 2rem;
+    }
+    .cabins-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .cabin-card {
+      background: var(--white);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .cabin-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(41,59,78,0.18);
+    }
+    .cabin-card-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+    }
+    .cabin-card-body {
+      padding: 1rem 1.1rem 1.25rem;
+    }
+    .cabin-card-name {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 0.88rem;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+    .cabin-card-price {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--brown);
+      font-weight: 400;
+    }
+    .cabin-dots {
+      display: flex;
+      gap: 5px;
+      margin-top: 0.75rem;
+    }
+    .cabin-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+      opacity: 0.5;
+    }
+    .cabin-dot.active { opacity: 1; background: var(--brown); }
 
-    /* BOOK CTA */
-    .book-cta { background: var(--navy); padding: 5rem 2rem; text-align: center; }
-    .book-cta-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--cream); margin-bottom: 1rem; line-height: 1.3; }
-    .book-cta-sub { font-size: 0.9rem; color: rgba(246,239,229,0.65); margin-bottom: 2.5rem; line-height: 1.7; }
-    .btn-outline-cream { display: inline-block; border: 1px solid rgba(246,239,229,0.65); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.8rem 2.4rem; transition: background 0.2s, border-color 0.2s; }
-    .btn-outline-cream:hover { background: rgba(246,239,229,0.12); border-color: var(--cream); }
+    /* ══════════════════════════════════════════════════
+       FEATURE SECTIONS
+    ══════════════════════════════════════════════════ */
+    .feature-section {
+      position: relative;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .feature-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .feature-box {
+      position: relative;
+      z-index: 2;
+      background: var(--cream);
+      padding: 3.5rem 3rem;
+      width: 42%;
+      min-width: 300px;
+    }
+    .feature-box--right { margin-left: auto; }
+    .feature-box--left  { margin-right: auto; }
+    .feature-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.9rem;
+    }
+    .feature-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      color: var(--brown);
+      line-height: 1.3;
+      margin-bottom: 1.1rem;
+    }
+    .feature-body {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.78;
+      color: var(--text-body);
+    }
+    /* Wave decoration strip under feature 1 */
+    .feature-wave-strip {
+      background: var(--navy);
+      padding: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .feature-wave-strip img {
+      height: 28px;
+      width: auto;
+      opacity: 0.35;
+      margin-right: 4rem;
+      filter: brightness(0) invert(1);
+    }
 
-    /* NEWSLETTER */
-    .newsletter-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 200px; }
-    .newsletter-left { background: var(--sage); padding: 3rem 3rem 3rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
-    .newsletter-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem; }
-    .newsletter-subtitle { font-size: 0.85rem; color: rgba(41,59,78,0.75); line-height: 1.6; font-style: italic; }
-    .newsletter-right { position: relative; background: var(--navy-dark); display: flex; align-items: center; justify-content: center; }
-    .newsletter-right::before { content: ''; position: absolute; inset: 0; background: rgba(41,59,78,0.55); }
-    .deal-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
-    .deal-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
-    .deal-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1rem, 2vw, 1.4rem); color: var(--cream); line-height: 1.3; }
+    /* ══════════════════════════════════════════════════
+       COZY STAYS / DIRECT BOOKING
+    ══════════════════════════════════════════════════ */
+    .cozy-section {
+      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
+      padding: 5rem 2rem 4rem;
+    }
+    .cozy-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .cozy-heading {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--brown);
+      line-height: 1.25;
+    }
+    .cozy-body {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-body);
+      margin-bottom: 2rem;
+    }
+    .direct-booking-title {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .direct-booking-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .direct-booking-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-body);
+    }
+    .direct-booking-list li::before {
+      content: '';
+      display: block;
+      width: 22px; height: 22px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1.5px solid var(--sage);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6 L5 9 L10 3' stroke='%23b5b8a3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/60% no-repeat;
+    }
+    .cozy-cta-wrap {
+      text-align: center;
+      margin-top: 3.5rem;
+    }
+    .btn-primary-brown {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.8rem;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary-brown:hover { background: var(--navy-dark); transform: translateY(-2px); }
 
-    /* FOOTER */
-    footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
-    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 4rem; align-items: start; margin-bottom: 3rem; }
-    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
-    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
-    .footer-brand-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.78rem; color: var(--cream); text-align: center; line-height: 1.5; letter-spacing: 0.05em; }
-    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+    /* ══════════════════════════════════════════════════
+       NEWSLETTER / DEAL BANNER
+    ══════════════════════════════════════════════════ */
+    .newsletter-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 200px;
+    }
+    .newsletter-left {
+      background: var(--sage);
+      padding: 3rem 3rem 3rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .newsletter-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .newsletter-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .newsletter-subtitle {
+      font-size: 0.85rem;
+      color: rgba(41,59,78,0.75);
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .newsletter-right {
+      position: relative;
+      background: url('images/wcb-4.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .newsletter-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(41,59,78,0.55);
+    }
+    .deal-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+    .deal-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.5rem;
+    }
+    .deal-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    /* ══════════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════════ */
+    footer {
+      background: var(--navy);
+      padding: 4rem 2.5rem 2rem;
+      color: rgba(246,239,229,0.65);
+    }
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .footer-logo-img {
+      height: 80px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+    .footer-brand-name {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 0.78rem;
+      color: var(--cream);
+      text-align: center;
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+    }
+    .footer-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 3rem;
+    }
+    .footer-col h4 {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 0.78rem;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 0.55rem; }
-    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
+    .footer-col ul li a {
+      font-size: 0.8rem;
+      color: rgba(246,239,229,0.55);
+      transition: color 0.2s;
+    }
     .footer-col ul li a:hover { color: var(--cream); }
     .footer-contact { min-width: 180px; }
-    .footer-contact h4 { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
-    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
-    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
+    .footer-contact h4 {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .footer-contact p {
+      font-size: 0.82rem;
+      color: rgba(246,239,229,0.6);
+      line-height: 1.7;
+    }
+    .footer-contact a {
+      color: rgba(246,239,229,0.6);
+      transition: color 0.2s;
+    }
     .footer-contact a:hover { color: var(--cream); }
-    .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(181,184,163,0.2); text-align: center; font-size: 0.75rem; color: rgba(246,239,229,0.35); }
+    .footer-bottom {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(181,184,163,0.2);
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(246,239,229,0.35);
+    }
+    .site-version { font-size: 0.55rem; opacity: 0.4; margin-top: 0.3rem; display: block; 
+    }
 
-    /* RESPONSIVE */
+    /* ══════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════ */
     @media (max-width: 1024px) {
+      .cabins-grid { grid-template-columns: repeat(2, 1fr); }
+      .spaces-left { width: 35%; padding: 2.5rem 1.75rem; }
+      .feature-box { width: 50%; padding: 2.5rem 2rem; }
       .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
       .footer-contact { grid-column: 2; grid-row: 2; }
     }
@@ -129,6 +654,16 @@
       nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
+      .hero { height: 70vh; }
+      .spaces-inner { flex-direction: column; }
+      .spaces-left { width: 100%; padding: 2.5rem 1.5rem; }
+      .spaces-grid { grid-template-columns: repeat(3, 1fr); height: 220px; }
+      .cabins-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-section { min-height: 420px; align-items: flex-end; }
+      .feature-box { width: 100%; min-width: unset; margin: 0 !important; padding: 2rem 1.5rem; }
+      .feature-bg { height: 260px; position: relative; }
+      .feature-section { flex-direction: column; }
+      .cozy-inner { grid-template-columns: 1fr; gap: 2rem; }
       .newsletter-section { grid-template-columns: 1fr; }
       .newsletter-right { min-height: 160px; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -136,186 +671,118 @@
       .footer-brand { flex-direction: column; align-items: flex-start; }
       .footer-nav { gap: 1rem 2rem; }
     }
+    @media (max-width: 480px) {
+      .cabins-grid { grid-template-columns: 1fr; }
+      .spaces-grid { grid-template-columns: 1fr 1fr; }
+      .spaces-grid img:last-child { display: none; }
+    }
   </style>
 </head>
 <body>
+  <div id="site-nav-placeholder"></div>
+  <script src="js/nav-loader.js" defer></script>
 
-  <nav>
-    <a class="nav-logo" href="index.html">
-      <img class="nav-logo-img" src="images/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li class="dropdown">
-        <a href="accommodations.html">Accommodations ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="accommodations.html#cottages">Cottages</a></li>
-          <li><a href="accommodations.html#aframes">A-Frames</a></li>
-          <li><a href="accommodations.html#tent">Tent Sites</a></li>
-          <li><a href="accommodations.html#rv">RV Sites</a></li>
+  <!-- ══ HERO ════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- ══ INTRO / TAGLINE ═════════════════════════════ -->
+  <section class="intro-section">
+    <div class="intro-inner">
+      <h1 class="intro-title copperplate">Coastal Stays for<br>Every Kind of Escape</h1>
+      <p class="intro-body">
+        Whiskey Creek Beach NW features cozy beachfront cabins and a collection of unique coastal
+        accommodations set along the shores of the Strait of Juan de Fuca on the Olympic Peninsula.
+        Offering simple comforts, ocean air, and quiet surroundings for a truly one of a kind,
+        restorative getaway.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ OUR SPACES ══════════════════════════════════ -->
+  <section class="spaces-section" id="about">
+    <div class="spaces-inner">
+      <div class="spaces-left">
+        <h2 class="spaces-heading copperplate">Our<br>Spaces</h2>
+        <p class="spaces-subtitle">Explore our spaces to find the perfect<br>fit for your getaway</p>
+        <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-outline-cream">Book Now</a>
+      </div>
+      <div class="spaces-right">
+        <div class="spaces-grid">
+          <img src="images/wcb-1.jpg" alt="Beachfront cabin interior" loading="lazy" />
+          <img src="photos/codfish/DSC_6011-HDR.jpg" alt="Codfish Cabin" loading="lazy" />
+          <img src="photos/halibut-hole/DSC_6049-HDR.jpg" alt="Halibut Hole cabin" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURE 1: UNMATCHED BEACHFRONT ════════════ -->
+  <div class="feature-section">
+    <div class="feature-bg" style="background-image: url('images/wcb-1.jpg');"></div>
+    <div class="feature-box feature-box--right">
+      <h2 class="feature-title copperplate">Unmatched<br>Beachfront<br>Setting</h2>
+      <p class="feature-body">Few places offer this level of shoreline access, where the beach is part of your stay, not a destination you drive to.</p>
+    </div>
+  </div>
+
+  <!-- Wave strip -->
+  <div class="feature-wave-strip">
+    <img src="images/Group 138.png" alt="" aria-hidden="true" />
+  </div>
+
+  <!-- ══ FEATURE 2: CLOSE TO NATURE ═════════════════ -->
+  <div class="feature-section">
+    <div class="feature-bg" style="background-image: url('images/wcb-2.jpg'); background-position: center center;"></div>
+    <div class="feature-box feature-box--left">
+      <h2 class="feature-title copperplate">Close to<br>Nature, Away<br>from Crowds</h2>
+      <p class="feature-body">Enjoy the feeling of a remote escape while staying just minutes from Olympic National Park and nearby county parks.</p>
+    </div>
+  </div>
+
+  <!-- ══ FEATURE 3: FLEXIBLE STAY ════════════════════ -->
+  <div class="feature-section">
+    <div class="feature-bg" style="background-image: url('photos/outdoor/DSC_0335.jpg');"></div>
+    <div class="feature-box feature-box--right">
+      <h2 class="feature-title copperplate">Flexible Stay<br>Options for<br>Every Traveler</h2>
+      <p class="feature-body">Choose from cozy cabins, tent sites, or RV hookups, all sharing the same stunning coastal setting.</p>
+    </div>
+  </div>
+
+  <!-- ══ COZY STAYS / DIRECT BOOKING ════════════════ -->
+  <section class="cozy-section">
+    <div class="cozy-inner">
+      <div class="cozy-left">
+        <h2 class="cozy-heading copperplate">cozy stays<br>on the Coast</h2>
+      </div>
+      <div class="cozy-right">
+        <p class="cozy-body">
+          Tucked away along a quiet stretch of coastline, Whiskey Creek Beach NW feels remote and
+          unrushed while remaining just minutes from Olympic National Park and several scenic
+          Clallam County parks.
+        </p>
+        <p class="cozy-body">
+          Guests can choose from cozy coastal cabins, beachfront tent sites, or RV hookups, all set
+          within one stunning oceanfront property designed for exploration by day and rest by night.
+        </p>
+        <p class="direct-booking-title">Direct Booking Benefits</p>
+        <ul class="direct-booking-list">
+          <li>Best rate available</li>
+          <li>Reserve 24/7</li>
+          <li>No booking fees</li>
         </ul>
-      </li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-      <li><a href="policies.html" class="active">Policies</a></li>
-      <li><a href="other-properties.html">Other Properties</a></li>
-      <li><a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="nav-book-btn">Book Now</a></li>
-    </ul>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="accommodations.html">Accommodations</a>
-    <div class="sub-links">
-      <a href="accommodations.html#tent">Tent Sites</a>
-      <a href="accommodations.html#rv">RV Sites</a>
+      </div>
     </div>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact Us</a>
-    <a href="policies.html">Policies</a>
-    <a href="other-properties.html">Other Properties</a>
-    <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="mob-book">Book Now</a>
-  </div>
-
-  <!-- HERO -->
-  <div class="page-hero">
-    <div class="page-hero-bg"></div>
-    <div class="page-hero-overlay"></div>
-    <div class="page-hero-content">
-      <h1 class="page-hero-title copperplate">Our Policies</h1>
-      <p class="page-hero-sub">Booking, Cancellation &amp; Pet Policies</p>
+    <div class="cozy-cta-wrap">
+      <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-primary-brown">Book Now</a>
     </div>
-  </div>
+  </section>
 
-  <!-- POLICIES CONTENT -->
-  <div class="policies-wrap">
-    <div class="policies-inner">
-
-      <div class="policies-intro">
-        <p class="policies-intro-label">Good to Know</p>
-        <h2 class="policies-intro-title copperplate">Booking Policies</h2>
-        <p class="policies-intro-body">Please review our policies before booking. If you have any questions, don't hesitate to contact us directly at (844) 769-2322 or whiskeycreekbeachnw@gmail.com.</p>
-      </div>
-
-      <!-- NOTICE -->
-      <div class="notice-box">
-        <p><strong>Important:</strong> When booking, be sure your email address is correct as you will receive your booking confirmation and detailed self check-in instructions. Please check your spam or junk mail folder if you don't see it.</p>
-      </div>
-
-      <!-- DAMAGE DEPOSIT -->
-      <div class="policy-card">
-        <div class="policy-card-header">
-          <div class="policy-card-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <h3 class="policy-card-title copperplate">Damage Deposit</h3>
-        </div>
-        <div class="policy-card-body">
-          <p>A <strong>$150 damage deposit</strong> is charged to your credit card 24 hours prior to your booking for all cabin and RV rentals.</p>
-          <p>The deposit is automatically refunded after your visit if no damage is reported. If damage occurs, you will be contacted directly.</p>
-        </div>
-      </div>
-
-      <!-- CANCELLATION -->
-      <div class="policy-card">
-        <div class="policy-card-header">
-          <div class="policy-card-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <h3 class="policy-card-title copperplate">Cancellation Policies</h3>
-        </div>
-        <div class="policy-card-body">
-          <p class="policy-sub-title">Cabins &amp; RV Rentals</p>
-          <ul>
-            <li>Full refund for cancellations made 60 or more days prior to arrival.</li>
-            <li>50% refund for cancellations made up to 30 days prior to arrival (service fees excluded).</li>
-            <li>Same policy applies to re-scheduling requests.</li>
-          </ul>
-
-          <p class="policy-sub-title">Tent Sites &amp; RV Sites</p>
-          <ul>
-            <li>Full refund if you cancel within 48 hours of booking, provided check-in is at least 14 days away.</li>
-            <li>50% refund for cancellations made at least 7 days before check-in.</li>
-            <li>No refunds for cancellations or re-schedules within 7 days of check-in.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- PET POLICY -->
-      <div class="policy-card">
-        <div class="policy-card-header">
-          <div class="policy-card-icon">
-            <svg viewBox="0 0 24 24"><path d="M4.5 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0C3 11 2 12 2 13.5V16h5v-2.5C7 12 6 11 4.5 11zm15 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0C18 11 17 12 17 13.5V16h5v-2.5C22 12 21 11 19.5 11zM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 0c-2.2 0-4 1.8-4 4v3h8v-3c0-2.2-1.8-4-4-4z"/></svg>
-          </div>
-          <h3 class="policy-card-title copperplate">Pet Policy</h3>
-        </div>
-        <div class="policy-card-body">
-          <p>We love pets! Five pet-friendly cabins and one pet-friendly RV rental are available.</p>
-
-          <p class="policy-sub-title">Larger Pets Welcome (max 2)</p>
-          <ul>
-            <li>Halibut Hole and Captains Quarters accept larger pets, maximum 2.</li>
-            <li>Whiskey Creek Beach RV and Eagles Nest RV also accept larger pets.</li>
-          </ul>
-
-          <p class="policy-sub-title">Small Pets (under 25 lbs, max 1)</p>
-          <ul>
-            <li>Jasper Inn, Barnacle Hill, and Codfish Cottage accept 1 pet under 25 lbs.</li>
-            <li>Exceptions may be made for guests not using couch beds for sleeping.</li>
-          </ul>
-
-          <p class="policy-sub-title">Bedding &amp; Pet Fees</p>
-          <ul>
-            <li>$25 flat fee when bringing your own bedding (only sheets are provided).</li>
-            <li>Additional charges may apply for larger, heavy-shedding animals.</li>
-          </ul>
-
-          <p class="policy-sub-title">Properties That Do Not Allow Pets</p>
-          <ul class="no-pets-list">
-            <li>Beachcomber Cottage</li>
-            <li>Prevost Luxury Coach</li>
-            <li>Hillcrest Cabin</li>
-            <li>Cedar Heights</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- CHECK-IN / CHECK-OUT -->
-      <div class="policy-card">
-        <div class="policy-card-header">
-          <div class="policy-card-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3 class="policy-card-title copperplate">Check-In &amp; Check-Out</h3>
-        </div>
-        <div class="policy-card-body">
-          <ul>
-            <li>Cabin &amp; Cottage check-in: 4:00 PM. Check-out: 11:00 AM.</li>
-            <li>Tent &amp; RV site check-in: 2:00 PM. Check-out: 11:00 AM.</li>
-            <li>Self check-in instructions are emailed after booking — verify your email address is correct.</li>
-            <li>Early check-in or late check-out may be available upon request, subject to availability.</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="wave-strip"></div>
-
-  <!-- BOOK CTA -->
-  <div class="book-cta">
-    <h2 class="book-cta-title copperplate">Questions? We're Here to Help.</h2>
-    <p class="book-cta-sub">Contact us at (844) 769-2322 or whiskeycreekbeachnw@gmail.com<br>Book directly for the best available rate &mdash; no booking fees.</p>
-    <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-outline-cream">Book Now</a>
-  </div>
-
-  <!--NEWSLETTER-HIDDEN
-  <!-- NEWSLETTER -->
-  <section class="newsletter-section">
+  <div hidden>
+  <!-- ══ NEWSLETTER / DEAL ═══════════════════════════ -->
+  <section class="newsletter-section" id="specials">
     <div class="newsletter-left">
       <p class="newsletter-label">Sign Up for Our Newsletter</p>
       <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates and specials!</p>
@@ -327,14 +794,16 @@
       </div>
     </div>
   </section>
-  NEWSLETTER-HIDDEN-->
+  </div>
 
-  <!-- FOOTER -->
-  <footer>
+  <!-- ══ FOOTER ══════════════════════════════════════ -->
+  <footer id="contact">
     <div class="footer-inner">
+
       <div class="footer-brand">
         <img class="footer-logo-img" src="images/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
       </div>
+
       <div class="footer-nav">
         <div class="footer-col">
           <ul>
@@ -352,20 +821,32 @@
           </ul>
         </div>
       </div>
+
       <div class="footer-contact">
         <h4>Contact Info</h4>
-        <p>1385 Whiskey Creek Beach Rd<br>Port Angeles, WA 98363</p>
-        <p style="margin-top:0.5rem;"><a href="tel:8447692322">(844) 769-2322</a></p>
-        <p><a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a></p>
+        <p>
+          1385 Whiskey Creek Beach Rd<br>
+          Port Angeles, WA 98363
+        </p>
+        <p style="margin-top:0.5rem;">
+          <a href="tel:8447692322">(844) 769-2322</a>
+        </p>
       </div>
+
     </div>
-    <div class="footer-bottom">Copyright &copy; 2025. All Rights Reserved<br><span class="site-version">v1.1.2</span></div>
+    <div class="footer-bottom">
+      Copyright &copy; 2025. All Rights Reserved<br><span class="site-version">v1.1.4</span>
+    </div>
   </footer>
 
   <script>
-    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
     document.querySelectorAll('.mobile-menu a').forEach(a => {
-      a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
+      a.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.remove('open');
+      });
     });
   </script>
 </body>
