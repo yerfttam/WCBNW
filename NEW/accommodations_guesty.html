@@ -3,650 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whiskey Creek Beach NW — Cozy Beachfront Cabins in the PNW</title>
+  <title>Accommodations — Whiskey Creek Beach NW</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ── CSS Variables ─────────────────────────────── */
     :root {
-      --navy:   #293b4e;
-      --cream:  #f6efe5;
-      --sage:   #b5b8a3;
-      --brown:  #6b452e;
-      --white:  #ffffff;
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
       --navy-dark: #1e2c3a;
       --text-body: #4a4a4a;
     }
-
-    /* ── Reset & Base ──────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      background: var(--cream);
-      color: var(--text-body);
-      overflow-x: hidden;
-    }
+    body { font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 16px; background: var(--cream); color: var(--text-body); overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
-    .copperplate {
-      font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy;
-    }
+    .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
 
-    /* ══════════════════════════════════════════════════
-       NAVIGATION
-    ══════════════════════════════════════════════════ */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: var(--navy);
-      padding: 0 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-shrink: 0;
-    }
-    .nav-logo-img {
-      height: 44px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      opacity: 0.95;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cream);
-      opacity: 0.85;
-      transition: opacity 0.2s;
-    }
-    .nav-links a:hover { opacity: 1; }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.85; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
     .nav-links .dropdown { position: relative; }
-    .nav-links .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: calc(100%);
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--navy);
-      min-width: 180px;
-      border-top: 2px solid var(--brown);
-      list-style: none;
-      padding: 0.5rem 0;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-    }
+    .nav-links .dropdown-menu { display: none; position: absolute; top: calc(100%); left: 50%; transform: translateX(-50%); background: var(--navy); min-width: 220px; border-top: 2px solid var(--brown); list-style: none; padding: 0.5rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
     .nav-links .dropdown:hover .dropdown-menu { display: block; }
-    .nav-links .dropdown-menu li a {
-      display: block;
-      padding: 0.5rem 1.25rem;
-      font-size: 0.7rem;
-      opacity: 0.8;
-    }
+    .nav-links .dropdown-menu li a { display: block; padding: 0.5rem 1.25rem; font-size: 0.7rem; opacity: 0.8; }
     .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
     .nav-book-btn { background: var(--white) !important; color: var(--navy) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
     .nav-book-btn:hover { background: rgba(255,255,255,0.85) !important; }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--cream);
-      transition: all 0.3s;
-    }
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 68px; left: 0; right: 0;
-      background: var(--navy-dark);
-      z-index: 999;
-      padding: 1.5rem 2rem;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); z-index: 999; padding: 1.5rem 2rem; flex-direction: column; gap: 0.75rem; }
     .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cream);
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      opacity: 0.85;
-    }
-    .mobile-menu .sub-links {
-      padding-left: 1rem;
-      display: flex; flex-direction: column; gap: 0.4rem;
-    }
+    .mobile-menu a { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); opacity: 0.85; }
+    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
     .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
-    .mobile-menu .mob-book {
-      margin-top: 0.5rem;
-      border: 1px solid rgba(246,239,229,0.6) !important;
-      text-align: center;
-      padding: 0.6rem !important;
-      border-bottom: 1px solid rgba(246,239,229,0.6) !important;
-    }
+    .mobile-menu .mob-book { margin-top: 0.5rem; border: 1px solid rgba(246,239,229,0.6) !important; text-align: center; padding: 0.6rem !important; border-bottom: 1px solid rgba(246,239,229,0.6) !important; }
 
-    /* ══════════════════════════════════════════════════
-       HERO
-    ══════════════════════════════════════════════════ */
-    .hero {
-      position: relative;
-      height: 90vh;
-      min-height: 540px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('photos/outdoor/DSC_0328.JPG') center/cover no-repeat;
-      animation: slowZoom 25s ease-in-out infinite alternate;
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-    @keyframes slowZoom {
-      from { transform: scale(1.02) translateZ(0); }
-      to   { transform: scale(1.08) translateZ(0); }
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(41,59,78,0.25) 0%, rgba(41,59,78,0.1) 60%, rgba(41,59,78,0.3) 100%);
-    }
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 55vh; min-height: 380px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('images/properties/Beach_Front_Cabins_photo_01.jpg') center/cover no-repeat; animation: slowZoom 25s ease-in-out infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1.0); } to { transform: scale(1.06); } }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(30,44,58,0.5) 0%, rgba(30,44,58,0.35) 100%); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--cream); letter-spacing: 0.05em; line-height: 1.2; }
+    .page-hero-sub { margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
 
-    /* ══════════════════════════════════════════════════
-       INTRO / TAGLINE
-    ══════════════════════════════════════════════════ */
-    .intro-section {
-      background: url('images/bkgds/bkgd1-icon.jpg') center/cover no-repeat;
-      padding: 5rem 1.5rem;
-      text-align: center;
-    }
-    .intro-inner {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .intro-title {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      color: var(--brown);
-      line-height: 1.25;
-      margin-bottom: 1.75rem;
-    }
-    .intro-body {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 400;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--text-body);
-      max-width: 580px;
-      margin: 0 auto;
-    }
+    /* CATEGORY NAV BAR */
+    .cat-nav { background: var(--navy-dark); position: sticky; top: 68px; z-index: 900; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .cat-nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: center; overflow-x: auto; }
+    .cat-nav-inner a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.65); padding: 1.1rem 1.6rem; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+    .cat-nav-inner a:hover { color: var(--cream); border-bottom-color: var(--sage); }
 
-    /* ══════════════════════════════════════════════════
-       OUR SPACES
-    ══════════════════════════════════════════════════ */
-    .spaces-section {
-      background: var(--navy);
-    }
-    .spaces-inner {
-      display: flex;
-      min-height: 400px;
-    }
-    .spaces-left {
-      width: 30%;
-      flex-shrink: 0;
-      background: var(--navy);
-      padding: 3.5rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .spaces-heading {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      color: var(--cream);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-    .spaces-subtitle {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: rgba(246,239,229,0.7);
-      margin-bottom: 2rem;
-    }
-    .btn-outline-cream {
-      display: inline-block;
-      border: 1px solid rgba(246,239,229,0.65);
-      color: var(--cream);
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 0.6rem 1.4rem;
-      transition: background 0.2s, border-color 0.2s;
-      width: fit-content;
-    }
-    .btn-outline-cream:hover {
-      background: rgba(246,239,229,0.12);
-      border-color: var(--cream);
-    }
-    .spaces-right {
-      flex: 1;
-      overflow: hidden;
-    }
-    .spaces-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      height: 100%;
-    }
-    .spaces-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    /* SECTION HEADERS */
+    .accom-section { scroll-margin-top: 120px; }
+    .section-header { background: url('images/bkgds/bkgd1-icon.jpg') center/cover no-repeat; padding: 4rem 2rem 3rem; text-align: center; }
+    .section-header-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.7rem; }
+    .section-header-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--brown); line-height: 1.2; margin-bottom: 1rem; }
+    .section-header-desc { font-size: 0.95rem; line-height: 1.8; color: var(--text-body); max-width: 600px; margin: 0 auto; }
 
-    /* ══════════════════════════════════════════════════
-       CABIN CARDS
-    ══════════════════════════════════════════════════ */
-    .cabins-section {
-      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
-      padding: 3rem 2rem;
-    }
-    .cabins-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cabin-card {
-      background: var(--white);
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-      cursor: pointer;
-    }
-    .cabin-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(41,59,78,0.18);
-    }
-    .cabin-card-img {
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      display: block;
-    }
-    .cabin-card-body {
-      padding: 1rem 1.1rem 1.25rem;
-    }
-    .cabin-card-name {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 0.88rem;
-      color: var(--navy);
-      margin-bottom: 0.3rem;
-    }
-    .cabin-card-price {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.8rem;
-      color: var(--brown);
-      font-weight: 400;
-    }
-    .cabin-dots {
-      display: flex;
-      gap: 5px;
-      margin-top: 0.75rem;
-    }
-    .cabin-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--sage);
-      opacity: 0.5;
-    }
-    .cabin-dot.active { opacity: 1; background: var(--brown); }
+    /* PROPERTY GRID */
+    .prop-grid-wrap { background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat; padding: 2rem 2rem 4rem; }
+    .prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1160px; margin: 0 auto; }
+    .prop-grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 780px; margin: 0 auto; }
+    .prop-grid--4 { grid-template-columns: repeat(4, 1fr); }
+    .prop-card { background: var(--white); overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .prop-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(41,59,78,0.18); }
+    .prop-card-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .prop-card--site .prop-card-img { height: 180px; }
+    .prop-card-body { padding: 1.25rem 1.4rem 1.5rem; }
+    .prop-card-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.92rem; color: var(--navy); margin-bottom: 0.3rem; line-height: 1.3; }
+    .prop-card-price { font-family: 'Josefin Sans', sans-serif; font-size: 0.82rem; color: var(--brown); margin-bottom: 1rem; }
+    .prop-card-book { display: inline-block; font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); border-bottom: 1px solid var(--sage); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+    .prop-card-book:hover { color: var(--brown); border-color: var(--brown); }
+    .prop-card-dots { display: flex; gap: 5px; margin-bottom: 0.85rem; }
+    .prop-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); opacity: 0.5; }
+    .prop-dot.active { opacity: 1; background: var(--brown); }
 
-    /* ══════════════════════════════════════════════════
-       FEATURE SECTIONS
-    ══════════════════════════════════════════════════ */
-    .feature-section {
-      position: relative;
-      min-height: 560px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .feature-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-    .feature-box {
-      position: relative;
-      z-index: 2;
-      background: var(--cream);
-      padding: 3.5rem 3rem;
-      width: 42%;
-      min-width: 300px;
-    }
-    .feature-box--right { margin-left: auto; }
-    .feature-box--left  { margin-right: auto; }
-    .feature-label {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 0.9rem;
-    }
-    .feature-title {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      color: var(--brown);
-      line-height: 1.3;
-      margin-bottom: 1.1rem;
-    }
-    .feature-body {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.92rem;
-      line-height: 1.78;
-      color: var(--text-body);
-    }
-    /* Wave decoration strip under feature 1 */
-    .feature-wave-strip {
-      background: var(--navy);
-      padding: 1.5rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      overflow: hidden;
-    }
-    .feature-wave-strip img {
-      height: 28px;
-      width: auto;
-      opacity: 0.35;
-      margin-right: 4rem;
-      filter: brightness(0) invert(1);
-    }
+    /* FEATURE STRIP */
+    .feature-strip { position: relative; min-height: 300px; overflow: hidden; display: flex; align-items: center; }
+    .feature-strip-bg { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }
+    .feature-strip-overlay { position: absolute; inset: 0; background: rgba(30,44,58,0.55); }
+    .feature-strip-content { position: relative; z-index: 2; padding: 3rem 4rem; max-width: 560px; }
+    .feature-strip-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.4rem, 2.5vw, 1.9rem); color: var(--cream); line-height: 1.3; margin-bottom: 0.8rem; }
+    .feature-strip-body { font-size: 0.9rem; line-height: 1.75; color: rgba(246,239,229,0.8); }
 
-    /* ══════════════════════════════════════════════════
-       COZY STAYS / DIRECT BOOKING
-    ══════════════════════════════════════════════════ */
-    .cozy-section {
-      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
-      padding: 5rem 2rem 4rem;
-    }
-    .cozy-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      align-items: center;
-    }
-    .cozy-heading {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      color: var(--brown);
-      line-height: 1.25;
-    }
-    .cozy-body {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--text-body);
-      margin-bottom: 2rem;
-    }
-    .direct-booking-title {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 1rem;
-    }
-    .direct-booking-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
-    .direct-booking-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.9rem;
-      color: var(--text-body);
-    }
-    .direct-booking-list li::before {
-      content: '';
-      display: block;
-      width: 22px; height: 22px;
-      flex-shrink: 0;
-      border-radius: 50%;
-      border: 1.5px solid var(--sage);
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6 L5 9 L10 3' stroke='%23b5b8a3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/60% no-repeat;
-    }
-    .cozy-cta-wrap {
-      text-align: center;
-      margin-top: 3.5rem;
-    }
-    .btn-primary-brown {
-      display: inline-block;
-      background: var(--navy);
-      color: var(--cream);
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      padding: 0.9rem 2.8rem;
-      transition: background 0.25s, transform 0.2s;
-    }
-    .btn-primary-brown:hover { background: var(--navy-dark); transform: translateY(-2px); }
+    /* WAVE STRIP */
+    .wave-strip { background: var(--navy); padding: 1.5rem 0; display: flex; align-items: center; justify-content: flex-end; overflow: hidden; }
+    .wave-strip img { height: 28px; width: auto; opacity: 0.35; margin-right: 4rem; filter: brightness(0) invert(1); }
 
-    /* ══════════════════════════════════════════════════
-       NEWSLETTER / DEAL BANNER
-    ══════════════════════════════════════════════════ */
-    .newsletter-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 200px;
-    }
-    .newsletter-left {
-      background: var(--sage);
-      padding: 3rem 3rem 3rem 3.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .newsletter-label {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 0.5rem;
-    }
-    .newsletter-title {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 1rem;
-      color: var(--navy);
-      margin-bottom: 0.4rem;
-    }
-    .newsletter-subtitle {
-      font-size: 0.85rem;
-      color: rgba(41,59,78,0.75);
-      line-height: 1.6;
-      font-style: italic;
-    }
-    .newsletter-right {
-      position: relative;
-      background: url('images/wcb-4.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .newsletter-right::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(41,59,78,0.55);
-    }
-    .deal-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2rem;
-    }
-    .deal-label {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 0.5rem;
-    }
-    .deal-title {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(1rem, 2vw, 1.4rem);
-      color: var(--cream);
-      line-height: 1.3;
-    }
+    /* BOOK CTA */
+    .book-cta { background: var(--navy); padding: 5rem 2rem; text-align: center; }
+    .book-cta-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--cream); margin-bottom: 1rem; line-height: 1.3; }
+    .book-cta-sub { font-size: 0.9rem; color: rgba(246,239,229,0.65); margin-bottom: 2.5rem; line-height: 1.7; }
+    .btn-outline-cream { display: inline-block; border: 1px solid rgba(246,239,229,0.65); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.8rem 2.4rem; transition: background 0.2s, border-color 0.2s; }
+    .btn-outline-cream:hover { background: rgba(246,239,229,0.12); border-color: var(--cream); }
 
-    /* ══════════════════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════════════════ */
-    footer {
-      background: var(--navy);
-      padding: 4rem 2.5rem 2rem;
-      color: rgba(246,239,229,0.65);
-    }
-    .footer-inner {
-      max-width: 1160px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 4rem;
-      align-items: start;
-      margin-bottom: 3rem;
-    }
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .footer-logo-img {
-      height: 80px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      opacity: 0.9;
-    }
-    .footer-brand-name {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 0.78rem;
-      color: var(--cream);
-      text-align: center;
-      line-height: 1.5;
-      letter-spacing: 0.05em;
-    }
-    .footer-nav {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem 3rem;
-    }
-    .footer-col h4 {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 0.78rem;
-      color: var(--cream);
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-    }
+    /* NEWSLETTER */
+    .newsletter-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 200px; }
+    .newsletter-left { background: var(--sage); padding: 3rem 3rem 3rem 3.5rem; display: flex; flex-direction: column; justify-content: center; }
+    .newsletter-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem; }
+    .newsletter-subtitle { font-size: 0.85rem; color: rgba(41,59,78,0.75); line-height: 1.6; font-style: italic; }
+    .newsletter-right { position: relative; background: url('images/wcb-4.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; }
+    .newsletter-right::before { content: ''; position: absolute; inset: 0; background: rgba(41,59,78,0.55); }
+    .deal-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
+    .deal-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem; }
+    .deal-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1rem, 2vw, 1.4rem); color: var(--cream); line-height: 1.3; }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 4rem; align-items: start; margin-bottom: 3rem; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-brand-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.78rem; color: var(--cream); text-align: center; line-height: 1.5; letter-spacing: 0.05em; }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 0.55rem; }
-    .footer-col ul li a {
-      font-size: 0.8rem;
-      color: rgba(246,239,229,0.55);
-      transition: color 0.2s;
-    }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
     .footer-col ul li a:hover { color: var(--cream); }
     .footer-contact { min-width: 180px; }
-    .footer-contact h4 {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--cream);
-      margin-bottom: 1rem;
-    }
-    .footer-contact p {
-      font-size: 0.82rem;
-      color: rgba(246,239,229,0.6);
-      line-height: 1.7;
-    }
-    .footer-contact a {
-      color: rgba(246,239,229,0.6);
-      transition: color 0.2s;
-    }
+    .footer-contact h4 { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
     .footer-contact a:hover { color: var(--cream); }
-    .footer-bottom {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(181,184,163,0.2);
-      text-align: center;
-      font-size: 0.75rem;
-      color: rgba(246,239,229,0.35);
-    }
-    .site-version { font-size: 0.55rem; opacity: 0.4; margin-top: 0.3rem; display: block; 
-    }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(181,184,163,0.2); text-align: center; font-size: 0.75rem; color: rgba(246,239,229,0.35); }
 
-    /* ══════════════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════════════ */
+    /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .cabins-grid { grid-template-columns: repeat(2, 1fr); }
-      .spaces-left { width: 35%; padding: 2.5rem 1.75rem; }
-      .feature-box { width: 50%; padding: 2.5rem 2rem; }
+      .prop-grid--4 { grid-template-columns: repeat(3, 1fr); }
       .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
       .footer-contact { grid-column: 2; grid-row: 2; }
     }
@@ -654,16 +145,11 @@
       nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .hero { height: 70vh; }
-      .spaces-inner { flex-direction: column; }
-      .spaces-left { width: 100%; padding: 2.5rem 1.5rem; }
-      .spaces-grid { grid-template-columns: repeat(3, 1fr); height: 220px; }
-      .cabins-grid { grid-template-columns: repeat(2, 1fr); }
-      .feature-section { min-height: 420px; align-items: flex-end; }
-      .feature-box { width: 100%; min-width: unset; margin: 0 !important; padding: 2rem 1.5rem; }
-      .feature-bg { height: 260px; position: relative; }
-      .feature-section { flex-direction: column; }
-      .cozy-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .prop-grid, .prop-grid--4 { grid-template-columns: repeat(2, 1fr); }
+      .prop-grid--2 { grid-template-columns: 1fr; max-width: 400px; }
+      .cat-nav-inner { justify-content: flex-start; flex-wrap: wrap; }
+      .cat-nav-inner a { padding: 0.75rem 1rem; font-size: 0.62rem; flex: 1 1 auto; text-align: center; }
+      .feature-strip-content { padding: 2rem 1.5rem; }
       .newsletter-section { grid-template-columns: 1fr; }
       .newsletter-right { min-height: 160px; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -672,9 +158,7 @@
       .footer-nav { gap: 1rem 2rem; }
     }
     @media (max-width: 480px) {
-      .cabins-grid { grid-template-columns: 1fr; }
-      .spaces-grid { grid-template-columns: 1fr 1fr; }
-      .spaces-grid img:last-child { display: none; }
+      .prop-grid, .prop-grid--4 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -682,128 +166,134 @@
   <div id="site-nav-placeholder"></div>
   <script src="js/nav-loader.js" defer></script>
 
-  <!-- ══ HERO ════════════════════════════════════════ -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-  </section>
-
-  <!-- ══ INTRO / TAGLINE ═════════════════════════════ -->
-  <section class="intro-section">
-    <div class="intro-inner">
-      <h1 class="intro-title copperplate">Coastal Stays for<br>Every Kind of Escape</h1>
-      <p class="intro-body">
-        Whiskey Creek Beach NW features cozy beachfront cabins and a collection of unique coastal
-        accommodations set along the shores of the Strait of Juan de Fuca on the Olympic Peninsula.
-        Offering simple comforts, ocean air, and quiet surroundings for a truly one of a kind,
-        restorative getaway.
-      </p>
-    </div>
-  </section>
-
-  <!-- ══ OUR SPACES ══════════════════════════════════ -->
-  <section class="spaces-section" id="about">
-    <div class="spaces-inner">
-      <div class="spaces-left">
-        <h2 class="spaces-heading copperplate">Our<br>Spaces</h2>
-        <p class="spaces-subtitle">Explore our spaces to find the perfect<br>fit for your getaway</p>
-        <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-outline-cream">Book Now</a>
-      </div>
-      <div class="spaces-right">
-        <div class="spaces-grid">
-          <img src="images/wcb-1.jpg" alt="Beachfront cabin interior" loading="lazy" />
-          <img src="photos/codfish/DSC_6011-HDR.jpg" alt="Codfish Cabin" loading="lazy" />
-          <img src="photos/halibut-hole/DSC_6049-HDR.jpg" alt="Halibut Hole cabin" loading="lazy" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FEATURE 1: UNMATCHED BEACHFRONT ════════════ -->
-  <div class="feature-section">
-    <div class="feature-bg" style="background-image: url('images/wcb-1.jpg');"></div>
-    <div class="feature-box feature-box--right">
-      <h2 class="feature-title copperplate">Unmatched<br>Beachfront<br>Setting</h2>
-      <p class="feature-body">Few places offer this level of shoreline access, where the beach is part of your stay, not a destination you drive to.</p>
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title copperplate">Accommodations</h1>
+      <p class="page-hero-sub">Cabins &middot; Cottages &middot; A-Frames &middot; Tent &amp; RV Sites</p>
     </div>
   </div>
 
-  <!-- Wave strip -->
-  <div class="feature-wave-strip">
+  <!-- CATEGORY NAV -->
+  <nav class="cat-nav" aria-label="Accommodation categories">
+    <div class="cat-nav-inner">
+      <a href="#cabins">Beach Front Cabins</a>
+      <a href="#cottages">Cottages</a>
+      <a href="#aframes">A-Frames</a>
+      <a href="#tent">Tent Sites</a>
+      <a href="#rv">RV Sites</a>
+    </div>
+  </nav>
+
+  <!-- ══ BEACH FRONT CABINS ═══════════════════════════ -->
+  <section class="accom-section" id="cabins">
+    <div class="section-header">
+      <p class="section-header-label">Waterfront Accommodations</p>
+      <h2 class="section-header-title copperplate">Beach Front Cabins</h2>
+      <p class="section-header-desc">Five individual cabins set directly on the shoreline of the Strait of Juan de Fuca. Each cabin offers a private beachfront experience with stunning ocean views and the sound of waves steps from your door.</p>
+    </div>
+    <div class="prop-grid-wrap">
+      <div id="guesty-cabins-widget" class="guesty-widget-root" data-widget-id="cb7b74f624f445fe92b2ad832b3daa89" data-website-id="5fb7822486be4c4c8923f0ba89395b02" data-lang="en" data-col-count="4" style="min-height: 460px;">
+        <!-- Guesty widget will render here -->
+      </div>
+    </div>
+  </section>
+
+  <div class="feature-strip">
+    <div class="feature-strip-bg" style="background-image: url('photos/outdoor/DSC_0560.JPG');"></div>
+    <div class="feature-strip-overlay"></div>
+    <div class="feature-strip-content">
+      <h3 class="feature-strip-title copperplate">Private Beach,<br>Unobstructed Views</h3>
+      <p class="feature-strip-body">Wake up to the sound of waves on the Strait of Juan de Fuca. Each beachfront cabin sits directly on the shoreline of one of the most scenic stretches of the Olympic Peninsula.</p>
+    </div>
+  </div>
+
+  <!-- ══ COTTAGES ═══════════════════════════════════════ -->
+  <section class="accom-section" id="cottages">
+    <div class="section-header">
+      <p class="section-header-label">Cozy &amp; Unique Stays</p>
+      <h2 class="section-header-title copperplate">Cottages</h2>
+      <p class="section-header-desc">Six distinct cottages ranging from ocean-view hideaways to charming tiny homes and a luxury converted tour bus. Every cottage offers unique character and the same breathtaking coastal setting.</p>
+    </div>
+    <div class="prop-grid-wrap">
+      <div id="guesty-cottages-widget" class="guesty-widget-root" data-widget-id="cb7b74f624f445fe92b2ad832b3daa89" data-website-id="5fb7822486be4c4c8923f0ba89395b02" data-lang="en" data-col-count="4" style="min-height: 460px;">
+        <!-- Guesty widget will render here -->
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-strip">
     <img src="images/Group 138.png" alt="" aria-hidden="true" />
   </div>
 
-  <!-- ══ FEATURE 2: CLOSE TO NATURE ═════════════════ -->
-  <div class="feature-section">
-    <div class="feature-bg" style="background-image: url('images/wcb-2.jpg'); background-position: center center;"></div>
-    <div class="feature-box feature-box--left">
-      <h2 class="feature-title copperplate">Close to<br>Nature, Away<br>from Crowds</h2>
-      <p class="feature-body">Enjoy the feeling of a remote escape while staying just minutes from Olympic National Park and nearby county parks.</p>
+  <!-- ══ A-FRAMES ════════════════════════════════════════ -->
+  <section class="accom-section" id="aframes">
+    <div class="section-header">
+      <p class="section-header-label">Open Air Shelters</p>
+      <h2 class="section-header-title copperplate">A-Frame Shelters</h2>
+      <p class="section-header-desc">Eight A-frame shelters positioned along the oceanfront with incredible views of the Strait. A step above tent camping &mdash; bring your sleeping gear and wake up to the sound of the Pacific.</p>
     </div>
-  </div>
-
-  <!-- ══ FEATURE 3: FLEXIBLE STAY ════════════════════ -->
-  <div class="feature-section">
-    <div class="feature-bg" style="background-image: url('photos/outdoor/DSC_0335.jpg');"></div>
-    <div class="feature-box feature-box--right">
-      <h2 class="feature-title copperplate">Flexible Stay<br>Options for<br>Every Traveler</h2>
-      <p class="feature-body">Choose from cozy cabins, tent sites, or RV hookups, all sharing the same stunning coastal setting.</p>
-    </div>
-  </div>
-
-  <!-- ══ COZY STAYS / DIRECT BOOKING ════════════════ -->
-  <section class="cozy-section">
-    <div class="cozy-inner">
-      <div class="cozy-left">
-        <h2 class="cozy-heading copperplate">cozy stays<br>on the Coast</h2>
+    <div class="prop-grid-wrap">
+      <div id="guesty-aframes-widget" class="guesty-widget-root" data-widget-id="cb7b74f624f445fe92b2ad832b3daa89" data-website-id="5fb7822486be4c4c8923f0ba89395b02" data-lang="en" data-col-count="4" style="min-height: 460px;">
+        <!-- Guesty widget will render here -->
       </div>
-      <div class="cozy-right">
-        <p class="cozy-body">
-          Tucked away along a quiet stretch of coastline, Whiskey Creek Beach NW feels remote and
-          unrushed while remaining just minutes from Olympic National Park and several scenic
-          Clallam County parks.
-        </p>
-        <p class="cozy-body">
-          Guests can choose from cozy coastal cabins, beachfront tent sites, or RV hookups, all set
-          within one stunning oceanfront property designed for exploration by day and rest by night.
-        </p>
-        <p class="direct-booking-title">Direct Booking Benefits</p>
-        <ul class="direct-booking-list">
-          <li>Best rate available</li>
-          <li>Reserve 24/7</li>
-          <li>No booking fees</li>
-        </ul>
-      </div>
-    </div>
-    <div class="cozy-cta-wrap">
-      <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-primary-brown">Book Now</a>
     </div>
   </section>
+
+  <div class="feature-strip">
+    <div class="feature-strip-bg" style="background-image: url('photos/outdoor/DSC_0397.jpg'); background-position: center 40%;"></div>
+    <div class="feature-strip-overlay"></div>
+    <div class="feature-strip-content">
+      <h3 class="feature-strip-title copperplate">Camp Under<br>the Open Sky</h3>
+      <p class="feature-strip-body">Tent sites and A-frame shelters offer the most immersive coastal camping experience on the Olympic Peninsula &mdash; with direct beach access and unobstructed views of the Strait.</p>
+    </div>
+  </div>
+
+  <!-- ══ TENT SITES ══════════════════════════════════════ -->
+  <section class="accom-section" id="tent">
+    <div class="section-header">
+      <p class="section-header-label">Beachfront Camping</p>
+      <h2 class="section-header-title copperplate">Tent Sites</h2>
+      <p class="section-header-desc">Six ocean-view tent sites set along the beach. Bring your own tent and gear and fall asleep to the sound of waves. Sites T1&ndash;T4 and T12 offer open views; T14 is a premier beachfront campsite.</p>
+    </div>
+    <div class="prop-grid-wrap">
+      <div id="guesty-tent-widget" class="guesty-widget-root" data-widget-id="cb7b74f624f445fe92b2ad832b3daa89" data-website-id="5fb7822486be4c4c8923f0ba89395b02" data-lang="en" data-col-count="4" style="min-height: 460px;">
+        <!-- Guesty widget will render here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RV SITES ════════════════════════════════════════ -->
+  <section class="accom-section" id="rv">
+    <div class="section-header">
+      <p class="section-header-label">Full Hookup RV Camping</p>
+      <h2 class="section-header-title copperplate">RV Sites</h2>
+      <p class="section-header-desc">Three ocean-view RV sites with full hookups. Bring your rig and enjoy the same stunning coastal setting as the cabins &mdash; with the convenience of your home on wheels. Sites B1, B2, and C1 available.</p>
+    </div>
+    <div class="prop-grid-wrap">
+      <div id="guesty-rv-widget" class="guesty-widget-root" data-widget-id="cb7b74f624f445fe92b2ad832b3daa89" data-website-id="5fb7822486be4c4c8923f0ba89395b02" data-lang="en" data-col-count="4" style="min-height: 460px;">
+        <!-- Guesty widget will render here -->
+      </div>
+    </div>
+  </section>
+
+  <div class="book-cta">
+    <h2 class="book-cta-title copperplate">Ready to Book Your Stay?</h2>
+    <p class="book-cta-sub">Book directly for the best available rate &mdash; no booking fees, no middlemen.<br>Reserve online 24/7 or call us at (844) 769-2322.</p>
+    <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-outline-cream">Book Now</a>
+  </div>
 
   <div hidden>
-  <!-- ══ NEWSLETTER / DEAL ═══════════════════════════ -->
-  <section class="newsletter-section" id="specials">
-    <div class="newsletter-left">
-      <p class="newsletter-label">Sign Up for Our Newsletter</p>
-      <p class="newsletter-subtitle">Subscribe to our newsletter for the latest updates and specials!</p>
-    </div>
-    <div class="newsletter-right">
-      <div class="deal-content">
-        <p class="deal-label">Latest Deal</p>
-        <h3 class="deal-title copperplate">20% Off Two-Night<br>Stays Thru April</h3>
-      </div>
-    </div>
-  </section>
-  </div>
+</div>
 
-  <!-- ══ FOOTER ══════════════════════════════════════ -->
-  <footer id="contact">
+  <!-- FOOTER -->
+  <footer>
     <div class="footer-inner">
-
       <div class="footer-brand">
         <img class="footer-logo-img" src="images/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
       </div>
-
       <div class="footer-nav">
         <div class="footer-col">
           <ul>
@@ -821,32 +311,142 @@
           </ul>
         </div>
       </div>
-
       <div class="footer-contact">
         <h4>Contact Info</h4>
-        <p>
-          1385 Whiskey Creek Beach Rd<br>
-          Port Angeles, WA 98363
-        </p>
-        <p style="margin-top:0.5rem;">
-          <a href="tel:8447692322">(844) 769-2322</a>
-        </p>
+        <p>1385 Whiskey Creek Beach Rd<br>Port Angeles, WA 98363</p>
+        <p style="margin-top:0.5rem;"><a href="tel:8447692322">(844) 769-2322</a></p>
+        <p><a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a></p>
       </div>
-
     </div>
-    <div class="footer-bottom">
-      Copyright &copy; 2025. All Rights Reserved<br><span class="site-version">v1.1.4</span>
-    </div>
+    <div class="footer-bottom">Copyright &copy; 2025. All Rights Reserved<br><span class="site-version">v1.1.5</span></div>
   </footer>
 
   <script>
-    function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('open');
-    }
+    (function() {
+      const STYLES_HREF = 'https://guesty-frontend.s3.amazonaws.com/widgets/online-booking-solutions-listings-widget/v4/static/online-booking-solutions-listings-widget.css?v2';
+      const SCRIPTS_SRC = 'https://guesty-frontend.s3.amazonaws.com/widgets/online-booking-solutions-listings-widget/v4/static/online-booking-solutions-listings-widget.js?v2';
+      const WIDGET_NAME = 'OnlineBookingSolutionsListingsWidget';
+      const DEFAULT_WIDGET_ID = 'cb7b74f624f445fe92b2ad832b3daa89';
+      const DEFAULT_WEBSITE_ID = '5fb7822486be4c4c8923f0ba89395b02';
+      const DEFAULT_LANG = 'en';
+
+      function loadStyles(href) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = href;
+        document.head.appendChild(link);
+      }
+
+      function loadScript(src, cb) {
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.src = src;
+        s.async = true;
+        s.onload = cb;
+        document.head.appendChild(s);
+      }
+
+      function buildTestUrl(config) {
+        const params = new URLSearchParams({
+          siteId: config.siteId || config.websiteId,
+          elementId: config.elementId,
+          widgetId: config.widgetId,
+          locale: config.locale || config.lang,
+        });
+        return `${config.baseUrl}/widget/featured-listings/listings?${params}`;
+      }
+
+      function createWidget(root) {
+        if (!root || !root.id) return;
+
+        const widgetId = root.dataset.widgetId || DEFAULT_WIDGET_ID;
+        const websiteId = root.dataset.websiteId || DEFAULT_WEBSITE_ID;
+        const lang = root.dataset.lang || DEFAULT_LANG;
+        const colsCount = parseInt(root.dataset.colCount, 10) || 4;
+
+        const config = {
+          baseUrl: 'https://app.guesty.com/api/booking-engine-widget',
+          siteId: websiteId,
+          websiteId,
+          widgetId,
+          elementId: root.id,
+          locale: lang,
+          lang,
+          rootElementID: root.id,
+          colsCount,
+          autoplay: false,
+          autoplayHoverPause: false,
+          speed: 300,
+          loop: false,
+          isViewMoreOn: true,
+          xLayout: 'grid'
+        };
+
+        console.debug('[Guesty] createWidget:', { elementId: root.id, widgetId, websiteId, lang, colsCount, config });
+
+        const testUrl = buildTestUrl(config);
+        console.debug('[Guesty] test URL:', testUrl);
+
+        // Debug: fetch the listing endpoint so we can see errors / payload from Guesty
+        fetch(testUrl, { cache: 'no-store' })
+          .then(r => r.text())
+          .then(txt => console.debug('[Guesty] listing response (truncated):', txt.substring(0, 1200)))
+          .catch(err => console.error('[Guesty] listing fetch error:', err));
+
+        if (!window[WIDGET_NAME] || typeof window[WIDGET_NAME].create !== 'function') {
+          console.error('[Guesty] widget create() not available:', window[WIDGET_NAME]);
+          return;
+        }
+
+        try {
+          window[WIDGET_NAME].create(config)
+            .then(() => {
+              const rootEl = document.getElementById(root.id);
+              if (!rootEl) {
+                console.warn('[Guesty] widget init complete but root not found.');
+                return;
+              }
+              const html = rootEl.innerHTML || '';
+              const style = getComputedStyle(rootEl);
+              console.debug('[Guesty] widget init complete; elementId:', root.id, 'html length:', html.length, 'children:', rootEl.childElementCount, 'display:', style.display, 'visibility:', style.visibility);
+              console.debug('[Guesty] root innerHTML (truncated):', html.slice(0, 600));
+            })
+            .catch(e => {
+              console.error('[Guesty] widget create() rejected:', e);
+            });
+        } catch (e) {
+          console.error('[Guesty] widget create() threw:', e);
+        }
+      }
+
+      function initWidgets() {
+        const roots = Array.from(document.querySelectorAll('.guesty-widget-root'));
+        if (!roots.length) return;
+
+        loadStyles(STYLES_HREF);
+        loadScript(SCRIPTS_SRC, function() {
+          if (!window[WIDGET_NAME]) {
+            console.error('[Guesty] widget constructor not found:', WIDGET_NAME);
+            return;
+          }
+
+          roots.forEach(createWidget);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWidgets);
+      } else {
+        initWidgets();
+      }
+    })();
+  </script>
+
+  <script>
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
     document.querySelectorAll('.mobile-menu a').forEach(a => {
-      a.addEventListener('click', () => {
-        document.getElementById('mobileMenu').classList.remove('open');
-      });
+      a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
     });
   </script>
 </body>
