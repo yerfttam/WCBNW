@@ -3,7 +3,7 @@
 This document describes the architecture for keeping a static HTML website
 in sync with Guesty property listings. Written for WCBNW; reusable for other sites.
 
-**Status:** In progress
+**Status:** Complete ✓ — nightly sync running in GitHub Actions as of 2026-03-22
 
 ---
 
@@ -186,8 +186,8 @@ To set this up for a new Guesty account:
 - [x] Set up GitHub Actions workflow (.github/workflows/sync-guesty.yml)
 - [x] Write listings-loader.js frontend renderer
 - [x] Update accommodations.html to use loader (hardcoded cards removed)
-- [ ] Add GUESTY_CLIENT_ID / SECRET to GitHub Secrets
+- [x] Add GUESTY_CLIENT_ID / SECRET to GitHub Secrets
 - [x] Commit listings.json + all new files → push to trigger Render deploy
 - [x] Write other-properties-loader.js → other-properties.html now pulls from Guesty
-- [ ] Verify live on Render
-- [ ] Test end-to-end: GitHub Action runs sync → Render redeploys
+- [x] Verify live on Render
+- [x] Test end-to-end: GitHub Action runs sync → Render redeploys
