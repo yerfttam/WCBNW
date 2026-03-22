@@ -89,6 +89,11 @@ Current version: **v1.1.4**
 
 To update: find `site-version">v1.1.x` across all 7 HTML files and increment.
 
+**Commit message format:** Always lead the commit message with the version number so it is visible on the Render dashboard. Example:
+```
+v1.1.5 fix: correct nav anchor IDs for dynamic sections
+```
+
 ## Third-Party Services
 
 ### Formspree (Contact Form)
