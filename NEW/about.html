@@ -576,6 +576,7 @@
       .footer-brand { flex-direction: column; align-items: flex-start; }
       .footer-nav { gap: 1rem 2rem; }
     }
+    .site-version { font-size: 0.55rem; opacity: 0.4; margin-top: 0.3rem; display: block; }
   </style>
 </head>
 <body>
@@ -758,48 +759,8 @@
   <div hidden>
 </div>
 
-  <!-- ══ FOOTER ══════════════════════════════════════ -->
-  <footer id="contact">
-    <div class="footer-inner">
-
-      <div class="footer-brand">
-        <img class="footer-logo-img" src="images/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
-      </div>
-
-      <div class="footer-nav">
-        <div class="footer-col">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="accommodations.html">Accommodations</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <ul>
-            <li><a href="policies.html">Policies</a></li>
-            <li><a href="other-properties.html">Other Properties</a></li>
-            <li><a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank">Reservations</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-contact">
-        <h4>Contact Info</h4>
-        <p>
-          1385 Whiskey Creek Beach Rd<br>
-          Port Angeles, WA 98363
-        </p>
-        <p style="margin-top:0.5rem;">
-          <a href="tel:8447692322">(844) 769-2322</a>
-        </p>
-      </div>
-
-    </div>
-    <div class="footer-bottom">
-      Copyright &copy; 2025. All Rights Reserved<br><span class="site-version">v1.1.5</span>
-    </div>
-  </footer>
+  <div id="site-footer-placeholder"></div>
+  <script src="js/footer-loader.js" defer></script>
 
   <script>
     function toggleMenu() {
