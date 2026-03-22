@@ -388,17 +388,20 @@
     /* Wave decoration strip under feature 1 */
     .feature-wave-strip {
       background: var(--navy);
-      padding: 1.5rem 0;
+      padding: 0.75rem 0 1.5rem;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: flex-end;
-      overflow: hidden;
+      overflow: visible;
+      position: relative;
+      z-index: 1;
     }
     .feature-wave-strip img {
-      height: 28px;
+      height: 48px;
       width: auto;
       opacity: 0.35;
       margin-right: 4rem;
+      margin-top: -28px;
       filter: brightness(0) invert(1);
     }
 
