@@ -61,6 +61,15 @@ function renderPrice(price) {
   return `From $${price.base}/night`;
 }
 
+// Short card description (4 lines max, ~440 chars)
+function getListingDesc(listing) {
+  if (!listing.description) return listing.summary || '';
+  const paras = listing.description.split('\n\n').map(p => p.trim()).filter(Boolean);
+  const para  = paras.find(p => !p.startsWith('***') && !p.startsWith('**') && p.length > 40) || paras[0] || '';
+  const clean = para.replace(/^\*+\s*/g, '').replace(/\*+\s*/g, '').trim();
+  return clean.length > 440 ? clean.slice(0, 440).replace(/\s+\S*$/, '') + '…' : clean;
+}
+
 // Full modal description — first 2 meaningful paragraphs
 function getFullDesc(listing) {
   if (!listing.description) return listing.summary ? [listing.summary] : [];
@@ -105,7 +114,7 @@ function renderCard(listing, slug) {
       <div class="prop-card-body">
         <div class="prop-card-dots">${dots}</div>
         <div class="prop-card-name copperplate">${listing.name}</div>
-        ${listing.summary ? `<div class="prop-card-desc">${listing.summary}</div>` : ''}
+        <div class="prop-card-desc">${getListingDesc(listing)}</div>
         ${price ? `<div class="prop-card-price">${price}</div>` : ''}
         ${meta  ? `<div class="prop-card-meta">${meta}</div>`   : ''}
         <a href="${listing.bookingUrl}" target="_blank" rel="noopener" class="prop-card-book">
