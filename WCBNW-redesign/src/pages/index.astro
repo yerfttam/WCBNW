@@ -4,18 +4,38 @@ import PropertyCard from '../components/PropertyCard.astro';
 import listingsData from '../data/listings.json';
 import experiencesData from '../data/experiences.json';
 
-const featured = listingsData.categories.slice(0, 5).map(cat => ({
-  listing: cat.listings[0],
-  categorySlug: cat.slug,
-}));
+// Build flat listing list for filtering
+const allListings = listingsData.categories.flatMap(cat =>
+  cat.listings.map(l => ({ ...l, categorySlug: cat.slug, categoryName: cat.name }))
+);
 
-const experiences = experiencesData.slice(0, 3);
+function getExperienceListings(filter: any) {
+  return allListings.filter(listing => {
+    if (filter.categories && !filter.categories.includes(listing.categorySlug)) return false;
+    if (filter.maxGuests && listing.accommodates > filter.maxGuests) return false;
+    if (filter.minGuests && listing.accommodates < filter.minGuests) return false;
+    if (filter.amenity && !listing.amenities.includes(filter.amenity)) return false;
+    return true;
+  });
+}
+
+// Experience icons (inline SVG paths)
+const experienceIcons: Record<string, string> = {
+  'romantic-escape': 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
+  'family-adventure': 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+  'solo-retreat': 'M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z',
+  'budget-friendly': 'M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z',
+  'pet-friendly': 'M4.5 9.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm5-3a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm5 0a2.5 2.5 0 100-5 2.5 2.5 0 000 5zm5 3a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM12 12.5c-3.5 0-7 2-7 5.5 0 1.5 1.5 3 3.5 3 1.5 0 2.5-.5 3.5-1.5 1 1 2 1.5 3.5 1.5 2 0 3.5-1.5 3.5-3 0-3.5-3.5-5.5-7-5.5z',
+  'beachfront-living': 'M21 17.5c-1.1 0-2-.5-2.8-1.3-.4-.4-1-.4-1.4 0-.8.8-1.7 1.3-2.8 1.3s-2-.5-2.8-1.3c-.4-.4-1-.4-1.4 0-.8.8-1.7 1.3-2.8 1.3s-2-.5-2.8-1.3c-.4-.4-1-.4-1.4 0-.7.8-1.6 1.3-2.8 1.3v2c1.4 0 2.7-.5 3.5-1.3.8.8 2.1 1.3 3.5 1.3s2.7-.5 3.5-1.3c.8.8 2.1 1.3 3.5 1.3s2.7-.5 3.5-1.3c.8.8 2.1 1.3 3.5 1.3v-2zM21 13c-1.1 0-2-.5-2.8-1.3-.4-.4-1-.4-1.4 0C16 12.5 15.1 13 14 13s-2-.5-2.8-1.3c-.4-.4-1-.4-1.4 0C9 12.5 8.1 13 7 13s-2-.5-2.8-1.3c-.4-.4-1-.4-1.4 0C2 12.5 1.1 13 0 13v2c1.4 0 2.7-.5 3.5-1.3.8.8 2.1 1.3 3.5 1.3s2.7-.5 3.5-1.3c.8.8 2.1 1.3 3.5 1.3s2.7-.5 3.5-1.3c.8.8 2.1 1.3 3.5 1.3v-2zM12 6L6 9.5V10h12v-.5L12 6z',
+};
+
+const categories = listingsData.categories;
 ---
 
 <BaseLayout title="Home" transparentNav={true}>
 
   <!-- ═══════════════════ 1. HERO ═══════════════════ -->
-  <section class="relative h-screen overflow-hidden">
+  <section class="relative min-h-screen overflow-hidden">
     <!-- Background image -->
     <img
       src="/photos/outdoor/DSC_0020.JPG"
@@ -26,41 +46,121 @@ const experiences = experiencesData.slice(0, 3);
     />
 
     <!-- Gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-midnight/60 via-midnight/20 to-midnight/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-midnight/70 via-midnight/30 to-midnight/70"></div>
 
     <!-- Content -->
-    <div class="relative z-10 flex items-center justify-center text-center text-white h-full px-6">
-      <div>
-        <p class="text-xs uppercase tracking-wider-caps font-body font-medium text-white/70 mb-4">
-          Whiskey Creek Beach NW
-        </p>
-        <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
-          Where the Forest<br />Meets the Sea
-        </h1>
-        <p class="text-lg md:text-xl text-white/80 font-body font-light mb-10">
-          Coastal stays on the Strait of Juan de Fuca
-        </p>
-        <a href="/properties" class="btn-ghost">Explore Our Properties</a>
+    <div class="relative z-10 flex flex-col items-center justify-center text-center text-white min-h-screen px-6 py-32">
+      <p class="text-xs uppercase tracking-wider-caps font-body font-medium text-white/70 mb-4">
+        Whiskey Creek Beach NW
+      </p>
+      <h1 class="font-display text-4xl md:text-6xl font-bold leading-tight mb-4">
+        Where the Forest<br />Meets the Sea
+      </h1>
+      <p class="text-lg md:text-xl text-white/70 font-body font-light mb-12 max-w-xl">
+        32 unique stays on the Strait of Juan de Fuca.
+        Tell us what you're dreaming of.
+      </p>
+
+      <!-- ── Wizard: Experience Chooser ── -->
+      <div class="w-full max-w-4xl">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {experiencesData.map((exp) => {
+            const count = getExperienceListings(exp.filter).length;
+            const iconPath = experienceIcons[exp.slug] || '';
+            return (
+              <a
+                href={`/experiences#${exp.slug}`}
+                class="wizard-card group relative flex flex-col items-center gap-2 md:gap-3 px-4 py-5 md:py-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 text-center"
+              >
+                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-copper/30 flex items-center justify-center group-hover:bg-copper/50 transition-colors duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-6 md:h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d={iconPath} />
+                  </svg>
+                </div>
+                <span class="font-display text-sm md:text-base font-bold text-white leading-tight">
+                  {exp.name}
+                </span>
+                <span class="text-white/50 text-xs font-body hidden md:block">
+                  {exp.tagline}
+                </span>
+                <span class="text-copper text-xs font-body font-medium">
+                  {count} {count === 1 ? 'property' : 'properties'}
+                </span>
+              </a>
+            );
+          })}
+        </div>
+
+        <!-- "I know what I want" shortcut -->
+        <div class="mt-8 flex flex-col items-center gap-3">
+          <span class="text-white/40 text-xs uppercase tracking-wide-caps font-body">or</span>
+          <a
+            href="/properties"
+            class="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm font-body font-medium transition-colors duration-200"
+          >
+            I know what I want — browse all properties
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-6 h-6 text-white/50"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce z-10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
       </svg>
     </div>
   </section>
 
-  <!-- ═══════════════════ 2. THE SETTING ═══════════════════ -->
-  <section class="fade-section py-24 px-6 bg-drift">
+  <!-- ═══════════════════ 2. QUICK BROWSE BY TYPE ═══════════════════ -->
+  <section class="fade-section py-20 px-6 bg-drift">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="section-label">Browse by Type</p>
+        <h2 class="section-title mt-3 mb-4">Pick Your Style</h2>
+        <p class="text-stone text-lg max-w-xl mx-auto">
+          From beachfront cabins to tent sites under the stars — every stay has its own personality.
+        </p>
+      </div>
+
+      <!-- Category cards -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {categories.map((cat) => {
+          const photo = cat.listings[0]?.photos[0]?.thumbnail;
+          return (
+            <a
+              href={`/properties#${cat.slug}`}
+              class="group relative rounded-lg overflow-hidden aspect-[3/4] block"
+            >
+              <img
+                src={photo}
+                alt={cat.name}
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-midnight/80"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                <span class="font-display text-sm md:text-base font-bold text-white block mb-1">
+                  {cat.name}
+                </span>
+                <span class="text-white/60 text-xs font-body">
+                  {cat.listings.length} {cat.listings.length === 1 ? 'stay' : 'stays'}
+                </span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 3. THE SETTING ═══════════════════ -->
+  <section class="fade-section py-24 px-6 bg-white">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <!-- Left: Photo -->
       <div>
@@ -102,77 +202,7 @@ const experiences = experiencesData.slice(0, 3);
     </div>
   </section>
 
-  <!-- ═══════════════════ 3. FEATURED PROPERTIES ═══════════════════ -->
-  <section class="fade-section py-24 px-6 bg-white">
-    <div class="max-w-7xl mx-auto">
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <p class="section-label">Our Properties</p>
-        <h2 class="section-title mt-3 mb-4">Find Your Perfect Stay</h2>
-        <p class="text-stone text-lg max-w-2xl mx-auto">
-          From rustic beachfront cabins to cozy forest retreats, every property has its own character.
-        </p>
-      </div>
-
-      <!-- Property grid -->
-      <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-        {featured.map(({ listing, categorySlug }) => (
-          <PropertyCard listing={listing} categorySlug={categorySlug} />
-        ))}
-      </div>
-
-      <!-- View all link -->
-      <div class="text-center mt-12">
-        <a
-          href="/properties"
-          class="text-moss font-medium hover:text-moss-dark text-sm uppercase tracking-wide-caps transition-colors duration-200"
-        >
-          View All Properties &rarr;
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ 4. EXPERIENCES TRIPTYCH ═══════════════════ -->
-  <section class="fade-section py-24 px-6 bg-drift">
-    <div class="max-w-7xl mx-auto">
-      <!-- Header -->
-      <div class="text-center">
-        <p class="section-label">Experiences</p>
-        <h2 class="section-title mt-3">Your Kind of Getaway</h2>
-      </div>
-
-      <!-- Three panels -->
-      <div class="grid lg:grid-cols-3 gap-6 mt-12">
-        {experiences.map((exp) => (
-          <a
-            href={`/experiences#${exp.slug}`}
-            class="relative rounded-lg overflow-hidden aspect-[3/4] group cursor-pointer block"
-          >
-            <img
-              src={exp.heroImage}
-              alt={exp.name}
-              loading="lazy"
-              decoding="async"
-              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-midnight/80"></div>
-            <!-- Content -->
-            <div class="absolute bottom-0 left-0 right-0 p-8">
-              <h3 class="font-display text-2xl font-bold text-white mb-2">{exp.name}</h3>
-              <p class="text-white/80 text-sm font-body mb-4">{exp.tagline}</p>
-              <span class="text-copper text-sm font-medium uppercase tracking-wide-caps">
-                Explore &rarr;
-              </span>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════ 5. THE PLACE ═══════════════════ -->
+  <!-- ═══════════════════ 4. THE PLACE ═══════════════════ -->
   <section class="fade-section py-24 px-6 bg-midnight text-white">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <!-- Left: Copy -->
@@ -222,7 +252,7 @@ const experiences = experiencesData.slice(0, 3);
     </div>
   </section>
 
-  <!-- ═══════════════════ 6. CTA BAND ═══════════════════ -->
+  <!-- ═══════════════════ 5. CTA BAND ═══════════════════ -->
   <section class="fade-section py-20 relative">
     <!-- Background texture -->
     <img
@@ -238,13 +268,13 @@ const experiences = experiencesData.slice(0, 3);
     <!-- Content -->
     <div class="relative z-10 text-center max-w-2xl mx-auto px-6">
       <h2 class="font-display text-3xl font-bold text-midnight mb-4">
-        Ready to find your perfect stay?
+        Still not sure? We can help.
       </h2>
       <p class="text-stone mb-8">
-        Browse our properties or get in touch — we'll help you plan the perfect getaway.
+        Drop us a line and tell us what you're looking for — we'll point you to the perfect stay.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4">
-        <a href="/properties" class="btn-primary">Browse Properties</a>
+        <a href="/properties" class="btn-primary">Browse All Properties</a>
         <a href="/contact" class="btn-secondary">Contact Us</a>
       </div>
     </div>
