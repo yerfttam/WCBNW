@@ -2,5 +2,7 @@ services:
   - type: web
     name: wcbnw
     runtime: static
-    staticPublishPath: NEW
+    rootDir: WCBNW-redesign
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
     pullRequestPreviewsEnabled: true
