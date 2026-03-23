@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PhotoGallery from '../../../components/PhotoGallery.astro';
+import PropertyCard from '../../../components/PropertyCard.astro';
+import listingsData from '../../../data/listings.json';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const category of listingsData.categories) {
+    for (const listing of category.listings) {
+      paths.push({
+        params: { category: category.slug, id: listing.id },
+        props: { listing, category, allCategories: listingsData.categories },
+      });
+    }
+  }
+  return paths;
+}
+
+const { listing, category, allCategories } = Astro.props;
+
+// Get related properties (same category, excluding current)
+const related = category.listings.filter(l => l.id !== listing.id).slice(0, 3);
+
+// Format price helper
+function formatPrice(price: number, currency: string): string {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(price);
+}
+
+const formattedPrice = formatPrice(listing.price.base, listing.price.currency);
+const formattedCleaning = formatPrice(listing.price.cleaning, listing.price.currency);
+
+// Split description into paragraphs
+const descriptionParagraphs = listing.description
+  .split('\n')
+  .map((p: string) => p.trim())
+  .filter((p: string) => p.length > 0);
+---
+
+<BaseLayout title={listing.name} description={listing.summary}>
+  <!-- Breadcrumb -->
+  <nav class="mt-[72px] py-4 px-6 max-w-7xl mx-auto" aria-label="Breadcrumb">
+    <ol class="flex items-center flex-wrap gap-1 text-sm text-stone">
+      <li>
+        <a href="/properties" class="text-moss hover:underline transition-colors">Properties</a>
+      </li>
+      <li class="mx-1">/</li>
+      <li>
+        <a href={`/properties#${category.slug}`} class="text-moss hover:underline transition-colors">{category.name}</a>
+      </li>
+      <li class="mx-1">/</li>
+      <li class="text-stone">{listing.name}</li>
+    </ol>
+  </nav>
+
+  <!-- Photo Gallery -->
+  <section class="max-w-7xl mx-auto px-6">
+    <PhotoGallery photos={listing.photos} propertyName={listing.name} />
+  </section>
+
+  <!-- Property Info -->
+  <section class="max-w-7xl mx-auto px-6 py-12">
+    <div class="lg:grid lg:grid-cols-[1fr_380px] gap-12">
+      <!-- Left Column -->
+      <div>
+        <!-- Category badge -->
+        <span class="inline-block bg-moss/10 text-moss text-xs px-3 py-1 rounded-full uppercase tracking-widest font-medium mb-4">
+          {category.name}
+        </span>
+
+        <!-- Property name -->
+        <h1 class="font-display text-3xl md:text-4xl font-bold text-midnight mb-2">
+          {listing.name}
+        </h1>
+
+        <!-- Property title -->
+        <p class="text-stone text-lg mb-6">{listing.title}</p>
+
+        <!-- Quick stats -->
+        <div class="flex gap-6 flex-wrap">
+          <!-- Guests -->
+          <span class="flex items-center gap-2 text-midnight font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-stone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            {listing.accommodates} {listing.accommodates === 1 ? 'Guest' : 'Guests'}
+          </span>
+
+          <!-- Bedrooms -->
+          <span class="flex items-center gap-2 text-midnight font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-stone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 4v16" />
+              <path d="M2 8h18a2 2 0 0 1 2 2v10" />
+              <path d="M2 17h20" />
+              <path d="M6 8v9" />
+            </svg>
+            {listing.bedrooms} {listing.bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
+          </span>
+
+          <!-- Bathrooms -->
+          <span class="flex items-center gap-2 text-midnight font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-stone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3a1 1 0 0 1 1-1z" />
+              <path d="M6 12V5a2 2 0 0 1 2-2h3v2.25" />
+              <path d="M4 21h16" />
+            </svg>
+            {listing.bathrooms} {listing.bathrooms === 1 ? 'Bathroom' : 'Bathrooms'}
+          </span>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-fog my-8"></div>
+
+        <!-- About this property -->
+        <h2 class="font-display text-xl font-bold text-midnight mb-4">About this property</h2>
+        <div>
+          {descriptionParagraphs.map((paragraph: string) => (
+            <p class="text-stone leading-relaxed mb-4">{paragraph}</p>
+          ))}
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-fog my-8"></div>
+
+        <!-- Amenities -->
+        {listing.amenities && listing.amenities.length > 0 && (
+          <>
+            <h2 class="font-display text-xl font-bold text-midnight mb-6">Amenities</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {listing.amenities.map((amenity: string) => (
+                <div class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-moss flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span class="text-stone text-sm">{amenity}</span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      <!-- Right Column — Sticky Booking Card -->
+      <div class="mt-8 lg:mt-0">
+        <div class="sticky top-[96px] bg-white rounded-xl shadow-xl p-8 border border-fog">
+          <!-- Price -->
+          <div>
+            <span class="text-stone text-sm">From</span>
+            <div class="flex items-baseline gap-1">
+              <span class="font-display text-4xl font-bold text-copper">{formattedPrice}</span>
+              <span class="text-stone text-sm">/night</span>
+            </div>
+            <p class="text-stone text-sm mt-1">+ {formattedCleaning} cleaning fee</p>
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t border-fog my-6"></div>
+
+          <!-- Quick facts -->
+          <ul class="space-y-2 text-sm text-stone">
+            <li class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-stone/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              Sleeps {listing.accommodates} guests
+            </li>
+            <li class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-stone/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 4v16" />
+                <path d="M2 8h18a2 2 0 0 1 2 2v10" />
+                <path d="M2 17h20" />
+                <path d="M6 8v9" />
+              </svg>
+              {listing.bedrooms} {listing.bedrooms === 1 ? 'bedroom' : 'bedrooms'}, {listing.bathrooms} {listing.bathrooms === 1 ? 'bathroom' : 'bathrooms'}
+            </li>
+          </ul>
+
+          <!-- CTA button -->
+          <a
+            href={listing.bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full btn-primary mt-6 text-center"
+          >
+            Check Availability
+          </a>
+
+          <!-- Call us -->
+          <p class="text-center text-stone text-sm mt-4">
+            Or call us: <a href="tel:+18447692322" class="text-moss hover:underline font-medium">(844) 769-2322</a>
+          </p>
+
+          <!-- Trust line -->
+          <p class="text-xs text-stone/60 mt-4 text-center">
+            Book directly through our secure platform
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Properties -->
+  {related.length > 0 && (
+    <section class="py-16 px-6 bg-fog/30">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="font-display text-2xl font-bold text-midnight mb-8">You might also like</h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {related.map((relatedListing) => (
+            <PropertyCard listing={relatedListing} categorySlug={category.slug} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Band -->
+  <section class="py-16 bg-midnight text-center">
+    <h2 class="text-white font-display text-2xl mb-4">Explore all our properties</h2>
+    <a href="/properties" class="btn-ghost">View Properties</a>
+  </section>
+</BaseLayout>

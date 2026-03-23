@@ -1,0 +1,219 @@
+---
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+
+const bookingUrl = 'https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1';
+
+const navLinks = [
+  { label: 'Properties', href: '/properties' },
+  { label: 'Experiences', href: '/experiences' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Policies', href: '/policies' },
+];
+
+const propertyDropdown = [
+  { label: 'Beach Front Cabins', href: '/properties#beach-front-cabins' },
+  { label: 'Cottages', href: '/properties#cottages' },
+  { label: 'A-Frames', href: '/properties#a-frames' },
+  { label: 'Tent Sites', href: '/properties#tent-sites' },
+  { label: 'RV Sites', href: '/properties#rv-sites' },
+];
+---
+
+<nav
+  id="site-nav"
+  class:list={[
+    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+    transparent ? 'nav-transparent' : 'bg-midnight shadow-lg',
+  ]}
+>
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-[72px]">
+    <!-- Logo -->
+    <a href="/" class="font-display text-white text-lg tracking-wide-caps whitespace-nowrap">
+      WHISKEY CREEK BEACH
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) =>
+        link.label === 'Properties' ? (
+          <div class="relative group">
+            <a
+              href={link.href}
+              class="text-white/80 hover:text-white font-body text-sm uppercase tracking-wide-caps transition-colors duration-200"
+            >
+              {link.label}
+            </a>
+            <!-- Dropdown -->
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div class="bg-midnight border border-white/10 rounded-sm shadow-xl py-2 min-w-[200px]">
+                {propertyDropdown.map((item) => (
+                  <a
+                    href={item.href}
+                    class="block px-5 py-2.5 text-white/70 hover:text-white hover:bg-white/5 font-body text-sm transition-colors duration-150"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <a
+            href={link.href}
+            class="text-white/80 hover:text-white font-body text-sm uppercase tracking-wide-caps transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        )
+      )}
+    </div>
+
+    <!-- Desktop Book Now -->
+    <a
+      href={bookingUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hidden md:inline-block bg-moss text-white px-6 py-2 text-sm uppercase tracking-wide-caps rounded-sm hover:bg-moss-dark transition-colors duration-200"
+    >
+      Book Now
+    </a>
+
+    <!-- Mobile Hamburger -->
+    <button
+      id="mobile-menu-open"
+      class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10"
+      aria-label="Open menu"
+    >
+      <span class="block w-6 h-0.5 bg-white"></span>
+      <span class="block w-6 h-0.5 bg-white"></span>
+      <span class="block w-6 h-0.5 bg-white"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Overlay Menu -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-50 bg-midnight flex flex-col opacity-0 invisible transition-all duration-300 md:hidden"
+>
+  <!-- Close Button -->
+  <div class="flex justify-end px-6 h-[72px] items-center">
+    <button
+      id="mobile-menu-close"
+      class="w-10 h-10 flex items-center justify-center"
+      aria-label="Close menu"
+    >
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Links -->
+  <div class="flex-1 flex flex-col px-8 pt-4 overflow-y-auto">
+    {navLinks.map((link) =>
+      link.label === 'Properties' ? (
+        <div>
+          <a
+            href={link.href}
+            class="block py-4 text-white font-body text-lg uppercase tracking-wide-caps border-b border-white/10"
+          >
+            {link.label}
+          </a>
+          <div class="pl-6">
+            {propertyDropdown.map((item) => (
+              <a
+                href={item.href}
+                class="block py-3 text-white/60 hover:text-white font-body text-base transition-colors duration-150"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <a
+          href={link.href}
+          class="block py-4 text-white font-body text-lg uppercase tracking-wide-caps border-b border-white/10"
+        >
+          {link.label}
+        </a>
+      )
+    )}
+
+    <!-- Mobile Book Now -->
+    <div class="mt-auto pb-12 pt-8">
+      <a
+        href={bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block w-full text-center bg-moss text-white px-6 py-4 text-sm uppercase tracking-wide-caps rounded-sm hover:bg-moss-dark transition-colors duration-200"
+      >
+        Book Now
+      </a>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ transparent }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('site-nav');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const openBtn = document.getElementById('mobile-menu-open');
+    const closeBtn = document.getElementById('mobile-menu-close');
+
+    // Scroll-based background toggle (transparent mode only)
+    if (transparent && nav) {
+      const updateNav = () => {
+        if (window.scrollY > 50) {
+          nav.classList.remove('nav-transparent');
+          nav.classList.add('bg-midnight', 'shadow-lg');
+        } else {
+          nav.classList.add('nav-transparent');
+          nav.classList.remove('bg-midnight', 'shadow-lg');
+        }
+      };
+      window.addEventListener('scroll', updateNav, { passive: true });
+      updateNav();
+    }
+
+    // Mobile menu open/close
+    if (openBtn && mobileMenu) {
+      openBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('opacity-0', 'invisible');
+        mobileMenu.classList.add('opacity-100', 'visible');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    if (closeBtn && mobileMenu) {
+      closeBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('opacity-100', 'visible');
+        mobileMenu.classList.add('opacity-0', 'invisible');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Close mobile menu on link click
+    if (mobileMenu) {
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('opacity-100', 'visible');
+          mobileMenu.classList.add('opacity-0', 'invisible');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  });
+</script>
+
+<style>
+  .nav-transparent {
+    background-color: transparent;
+  }
+</style>

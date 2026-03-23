@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PropertyCard from '../components/PropertyCard.astro';
+import listingsData from '../data/listings.json';
+import experiencesData from '../data/experiences.json';
+
+const featured = listingsData.categories.slice(0, 5).map(cat => ({
+  listing: cat.listings[0],
+  categorySlug: cat.slug,
+}));
+
+const experiences = experiencesData.slice(0, 3);
+---
+
+<BaseLayout title="Home" transparentNav={true}>
+
+  <!-- ═══════════════════ 1. HERO ═══════════════════ -->
+  <section class="relative h-screen overflow-hidden">
+    <!-- Background image -->
+    <img
+      src="/photos/outdoor/DSC_0020.JPG"
+      alt="Whiskey Creek Beach shoreline"
+      loading="eager"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover animate-slow-zoom"
+    />
+
+    <!-- Gradient overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-midnight/60 via-midnight/20 to-midnight/40"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex items-center justify-center text-center text-white h-full px-6">
+      <div>
+        <p class="text-xs uppercase tracking-wider-caps font-body font-medium text-white/70 mb-4">
+          Whiskey Creek Beach NW
+        </p>
+        <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight mb-6">
+          Where the Forest<br />Meets the Sea
+        </h1>
+        <p class="text-lg md:text-xl text-white/80 font-body font-light mb-10">
+          Coastal stays on the Strait of Juan de Fuca
+        </p>
+        <a href="/properties" class="btn-ghost">Explore Our Properties</a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-6 h-6 text-white/50"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 2. THE SETTING ═══════════════════ -->
+  <section class="fade-section py-24 px-6 bg-drift">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Photo -->
+      <div>
+        <img
+          src="/photos/outdoor/DSC_0030.JPG"
+          alt="View of the Strait of Juan de Fuca shoreline"
+          loading="lazy"
+          decoding="async"
+          class="rounded-lg shadow-2xl aspect-[3/4] w-full object-cover"
+        />
+      </div>
+
+      <!-- Right: Copy -->
+      <div>
+        <p class="section-label">The Setting</p>
+        <h2 class="section-title mt-3 mb-6">On the shores of the Strait of Juan&nbsp;de&nbsp;Fuca</h2>
+        <p class="text-stone text-lg leading-relaxed mb-8">
+          Where the Olympic Mountains meet the Pacific, a string of handcrafted cabins, cottages,
+          and hideaways wait along a pristine stretch of beach. This isn't a resort — it's a place
+          that feels like it's yours.
+        </p>
+
+        <!-- Stats row -->
+        <div class="flex gap-8">
+          <div>
+            <span class="font-display text-3xl font-bold text-copper block">32</span>
+            <span class="text-stone text-sm uppercase tracking-wide-caps">Unique Stays</span>
+          </div>
+          <div>
+            <span class="font-display text-3xl font-bold text-copper block">6</span>
+            <span class="text-stone text-sm uppercase tracking-wide-caps">Property Styles</span>
+          </div>
+          <div>
+            <span class="font-display text-3xl font-bold text-copper block">Steps</span>
+            <span class="text-stone text-sm uppercase tracking-wide-caps">From the Beach</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 3. FEATURED PROPERTIES ═══════════════════ -->
+  <section class="fade-section py-24 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <p class="section-label">Our Properties</p>
+        <h2 class="section-title mt-3 mb-4">Find Your Perfect Stay</h2>
+        <p class="text-stone text-lg max-w-2xl mx-auto">
+          From rustic beachfront cabins to cozy forest retreats, every property has its own character.
+        </p>
+      </div>
+
+      <!-- Property grid -->
+      <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+        {featured.map(({ listing, categorySlug }) => (
+          <PropertyCard listing={listing} categorySlug={categorySlug} />
+        ))}
+      </div>
+
+      <!-- View all link -->
+      <div class="text-center mt-12">
+        <a
+          href="/properties"
+          class="text-moss font-medium hover:text-moss-dark text-sm uppercase tracking-wide-caps transition-colors duration-200"
+        >
+          View All Properties &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 4. EXPERIENCES TRIPTYCH ═══════════════════ -->
+  <section class="fade-section py-24 px-6 bg-drift">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header -->
+      <div class="text-center">
+        <p class="section-label">Experiences</p>
+        <h2 class="section-title mt-3">Your Kind of Getaway</h2>
+      </div>
+
+      <!-- Three panels -->
+      <div class="grid lg:grid-cols-3 gap-6 mt-12">
+        {experiences.map((exp) => (
+          <a
+            href={`/experiences#${exp.slug}`}
+            class="relative rounded-lg overflow-hidden aspect-[3/4] group cursor-pointer block"
+          >
+            <img
+              src={exp.heroImage}
+              alt={exp.name}
+              loading="lazy"
+              decoding="async"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-midnight/80"></div>
+            <!-- Content -->
+            <div class="absolute bottom-0 left-0 right-0 p-8">
+              <h3 class="font-display text-2xl font-bold text-white mb-2">{exp.name}</h3>
+              <p class="text-white/80 text-sm font-body mb-4">{exp.tagline}</p>
+              <span class="text-copper text-sm font-medium uppercase tracking-wide-caps">
+                Explore &rarr;
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 5. THE PLACE ═══════════════════ -->
+  <section class="fade-section py-24 px-6 bg-midnight text-white">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Left: Copy -->
+      <div>
+        <p class="section-label text-stone">The Place</p>
+        <h2 class="font-display text-4xl font-bold text-white mt-3 mb-6">
+          Port Angeles, Washington
+        </h2>
+        <p class="text-fog text-lg leading-relaxed mb-8">
+          Nestled on the northern edge of the Olympic Peninsula, Whiskey Creek Beach sits between
+          the wild beauty of Olympic National Park and the serene waters of the Strait of Juan de Fuca.
+          Port Angeles is your basecamp for hiking Hurricane Ridge, exploring tide pools, kayaking the
+          coast, and discovering charming downtown shops and restaurants.
+        </p>
+
+        <!-- Feature items -->
+        <div class="flex gap-4 mb-4 items-center">
+          <div class="w-10 h-10 rounded-full bg-moss/20 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-moss" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <span class="text-fog">10 minutes to downtown Port Angeles</span>
+        </div>
+
+        <div class="flex gap-4 mb-4 items-center">
+          <div class="w-10 h-10 rounded-full bg-moss/20 flex items-center justify-center flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-moss" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 3l7 4 7-4v11a2 2 0 01-2 2H7a2 2 0 01-2-2V3z" />
+            </svg>
+          </div>
+          <span class="text-fog">30 minutes to Hurricane Ridge</span>
+        </div>
+      </div>
+
+      <!-- Right: Photo -->
+      <div>
+        <img
+          src="/images/properties/DJI_0043-aerial.jpg"
+          alt="Aerial view of Whiskey Creek Beach"
+          loading="lazy"
+          decoding="async"
+          class="rounded-lg shadow-2xl object-cover aspect-[4/3] w-full"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 6. CTA BAND ═══════════════════ -->
+  <section class="fade-section py-20 relative">
+    <!-- Background texture -->
+    <img
+      src="/images/bkgds/bkgd1.jpg"
+      alt=""
+      loading="lazy"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover opacity-10"
+      aria-hidden="true"
+    />
+    <div class="absolute inset-0 bg-copper/10"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center max-w-2xl mx-auto px-6">
+      <h2 class="font-display text-3xl font-bold text-midnight mb-4">
+        Ready to find your perfect stay?
+      </h2>
+      <p class="text-stone mb-8">
+        Browse our properties or get in touch — we'll help you plan the perfect getaway.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="/properties" class="btn-primary">Browse Properties</a>
+        <a href="/contact" class="btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

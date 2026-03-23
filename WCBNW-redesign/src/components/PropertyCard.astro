@@ -1,0 +1,193 @@
+---
+interface Props {
+  listing: {
+    id: string;
+    name: string;
+    title: string;
+    summary: string;
+    price: { base: number; cleaning: number; currency: string };
+    accommodates: number;
+    bedrooms: number;
+    bathrooms: number;
+    amenities: string[];
+    photos: { original: string; thumbnail: string }[];
+    bookingUrl: string;
+  };
+  categorySlug?: string;
+}
+
+const { listing, categorySlug } = Astro.props;
+
+const href = `/properties/${categorySlug || 'all'}/${listing.id}`;
+const photoCount = listing.photos.length;
+const primaryPhoto = listing.photos[0]?.thumbnail ?? listing.photos[0]?.original;
+const secondaryPhoto = listing.photos[1]?.thumbnail ?? listing.photos[1]?.original;
+const hasSecondPhoto = !!secondaryPhoto;
+
+function prettifyCategory(slug: string | undefined): string {
+  if (!slug) return '';
+  const map: Record<string, string> = {
+    'beach-front-cabins': 'Beachfront',
+    'forest-retreats': 'Forest Retreat',
+    'waterfront': 'Waterfront',
+    'pet-friendly': 'Pet Friendly',
+  };
+  if (map[slug]) return map[slug];
+  return slug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+const categoryLabel = prettifyCategory(categorySlug);
+
+function formatPrice(price: number, currency: string): string {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(price);
+}
+
+const formattedPrice = formatPrice(listing.price.base, listing.price.currency);
+---
+
+<a
+  href={href}
+  class="group block bg-white rounded-lg overflow-hidden shadow-md card-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2"
+>
+  {/* Photo area */}
+  <div class="relative aspect-[3/2] overflow-hidden">
+    <img
+      src={primaryPhoto}
+      alt={listing.name}
+      loading="lazy"
+      decoding="async"
+      class:list={[
+        'absolute inset-0 w-full h-full object-cover transition-opacity duration-500',
+        hasSecondPhoto ? 'group-hover:opacity-0' : '',
+      ]}
+    />
+    {hasSecondPhoto && (
+      <img
+        src={secondaryPhoto}
+        alt={`${listing.name} - photo 2`}
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
+    )}
+
+    {/* Category badge */}
+    {categoryLabel && (
+      <span class="absolute top-3 left-3 bg-midnight/80 text-white text-xs px-3 py-1 rounded-full uppercase tracking-widest font-body font-medium">
+        {categoryLabel}
+      </span>
+    )}
+
+    {/* Photo count badge */}
+    {photoCount > 0 && (
+      <span class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-3.5 h-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+          <circle cx="12" cy="13" r="4" />
+        </svg>
+        {photoCount}
+      </span>
+    )}
+  </div>
+
+  {/* Content area */}
+  <div class="p-5">
+    <h3 class="font-display text-lg font-bold text-midnight mb-1">
+      {listing.name}
+    </h3>
+    <p class="text-stone text-sm line-clamp-2 mb-3">
+      {listing.summary}
+    </p>
+
+    <div class="border-t border-fog my-3"></div>
+
+    {/* Details row */}
+    <div class="flex items-center gap-4 text-stone text-xs">
+      {/* Guests */}
+      <span class="flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        {listing.accommodates} {listing.accommodates === 1 ? 'Guest' : 'Guests'}
+      </span>
+
+      {/* Bedrooms */}
+      <span class="flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M2 4v16" />
+          <path d="M2 8h18a2 2 0 0 1 2 2v10" />
+          <path d="M2 17h20" />
+          <path d="M6 8v9" />
+        </svg>
+        {listing.bedrooms} {listing.bedrooms === 1 ? 'Bed' : 'Beds'}
+      </span>
+
+      {/* Bathrooms */}
+      <span class="flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3a1 1 0 0 1 1-1z" />
+          <path d="M6 12V5a2 2 0 0 1 2-2h3v2.25" />
+          <path d="M4 21h16" />
+        </svg>
+        {listing.bathrooms} {listing.bathrooms === 1 ? 'Bath' : 'Baths'}
+      </span>
+    </div>
+
+    {/* Price row */}
+    <div class="mt-3 flex items-baseline justify-between">
+      <div class="flex items-baseline gap-1">
+        <span class="text-stone text-xs">From</span>
+        <span class="text-copper font-display text-xl font-bold">{formattedPrice}</span>
+        <span class="text-stone text-xs">/night</span>
+      </div>
+      <span class="text-moss text-sm font-medium group-hover:text-moss-dark transition-colors duration-200">
+        View Details &rarr;
+      </span>
+    </div>
+  </div>
+</a>

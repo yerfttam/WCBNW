@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "romantic-escape",
+    "name": "Romantic Escape",
+    "tagline": "Fireside evenings, morning tides, just the two of you",
+    "description": "Intimate cabins and cottages with fireplaces, stunning waterfront views, and the kind of quiet that lets you reconnect. Wake to the sound of the Strait and end the day by the fire pit under a blanket of stars.",
+    "heroImage": "/photos/codfish/DSC_6006-HDR.jpg",
+    "filter": { "maxGuests": 4, "categories": ["beach-front-cabins", "cottages"] }
+  },
+  {
+    "slug": "family-adventure",
+    "name": "Family Adventure",
+    "tagline": "Room to roam, beaches to explore, memories to make",
+    "description": "Spacious cabins and cottages that sleep the whole crew. Steps from the beach, surrounded by nature, and close to Olympic National Park for day trips. The kids won't want to leave.",
+    "heroImage": "/images/about/family.jpg",
+    "filter": { "minGuests": 4, "categories": ["beach-front-cabins", "cottages"] }
+  },
+  {
+    "slug": "solo-retreat",
+    "name": "Solo Retreat",
+    "tagline": "Unplug, reset, breathe",
+    "description": "Cozy A-frames and small cabins tucked among the trees. Perfect for a writer's weekend, a digital detox, or simply being alone with the sound of the waves. Solitude never felt so good.",
+    "heroImage": "/photos/outdoor/A_Frames_photo_01.jpg",
+    "filter": { "maxGuests": 3, "categories": ["a-frames"] }
+  },
+  {
+    "slug": "budget-friendly",
+    "name": "Budget Friendly",
+    "tagline": "All the beauty, easy on the wallet",
+    "description": "Tent sites and RV hookups right on the beach. Bring your gear and fall asleep to the sound of the surf. All the magic of Whiskey Creek Beach at a fraction of the cost.",
+    "heroImage": "/images/properties/Tent_Sites_photo_01.jpg",
+    "filter": { "categories": ["tent-sites", "rv-sites"] }
+  },
+  {
+    "slug": "pet-friendly",
+    "name": "Pet Friendly",
+    "tagline": "Your best friend deserves a vacation too",
+    "description": "Select properties that welcome your four-legged family members. Miles of beach for zoomies, forest trails to sniff, and cozy spots to curl up together at the end of the day.",
+    "heroImage": "/photos/outdoor/DSC_0335.jpg",
+    "filter": { "amenity": "Pets allowed" }
+  },
+  {
+    "slug": "beachfront-living",
+    "name": "Beachfront Living",
+    "tagline": "Wake up to the Strait of Juan de Fuca",
+    "description": "Our premium waterfront properties put you steps from the shore. Watch ships pass through the Strait from your window, catch sunsets over the Olympic Mountains, and let the rhythm of the tides set your pace.",
+    "heroImage": "/photos/outdoor/DSC_0020.JPG",
+    "filter": { "categories": ["beach-front-cabins"] }
+  }
+]

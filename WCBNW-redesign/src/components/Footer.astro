@@ -1,0 +1,106 @@
+---
+const bookingUrl = 'https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1';
+
+const exploreLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Properties', href: '/properties' },
+  { label: 'Experiences', href: '/experiences' },
+  { label: 'About', href: '/about' },
+];
+
+const infoLinks = [
+  { label: 'Contact', href: '/contact' },
+  { label: 'Policies', href: '/policies' },
+  { label: 'Book Now', href: bookingUrl, external: true },
+];
+---
+
+<footer class="bg-midnight">
+  <div class="max-w-6xl mx-auto py-16 px-6">
+    <!-- Four-column grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+
+      <!-- Brand -->
+      <div>
+        <a href="/" class="font-display text-white text-xl tracking-wide-caps">
+          WHISKEY CREEK BEACH
+        </a>
+        <p class="mt-3 text-stone text-sm italic">Where the forest meets the sea</p>
+        <p class="mt-4 text-stone/70 text-sm leading-relaxed">
+          1385 Whiskey Creek Beach Rd<br />
+          Port Angeles, WA 98363
+        </p>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h3 class="text-white font-body text-sm uppercase tracking-wide-caps mb-4">Explore</h3>
+        <ul class="space-y-3">
+          {exploreLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-stone hover:text-white text-sm font-body transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <h3 class="text-white font-body text-sm uppercase tracking-wide-caps mb-4">Info</h3>
+        <ul class="space-y-3">
+          {infoLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-stone hover:text-white text-sm font-body transition-colors duration-200"
+                {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-white font-body text-sm uppercase tracking-wide-caps mb-4">Contact</h3>
+        <ul class="space-y-3">
+          <li>
+            <a
+              href="tel:+18447692322"
+              class="text-stone hover:text-white text-sm font-body transition-colors duration-200"
+            >
+              (844) 769-2322
+            </a>
+          </li>
+          <li>
+            <a
+              href="mailto:whiskeycreekbeachnw@gmail.com"
+              class="text-stone hover:text-white text-sm font-body transition-colors duration-200 break-all"
+            >
+              whiskeycreekbeachnw@gmail.com
+            </a>
+          </li>
+          <li class="text-stone text-sm leading-relaxed">
+            1385 Whiskey Creek Beach Rd<br />
+            Port Angeles, WA 98363
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-white/10 pt-8 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-stone/50 text-xs">
+        &copy; 2026 Whiskey Creek Beach NW. All rights reserved.
+      </p>
+      <span class="text-stone/30 text-xs site-version">v3.0.0</span>
+    </div>
+  </div>
+</footer>

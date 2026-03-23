@@ -1,0 +1,278 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PropertyCard from '../../components/PropertyCard.astro';
+import listingsData from '../../data/listings.json';
+
+const allListings = listingsData.categories.flatMap(cat =>
+  cat.listings.map(l => ({ ...l, categorySlug: cat.slug, categoryName: cat.name }))
+);
+const categories = listingsData.categories.map(c => ({ name: c.name, slug: c.slug, count: c.listings.length }));
+---
+
+<BaseLayout title="Our Properties" description="Browse 32 unique vacation rental properties at Whiskey Creek Beach NW on the Strait of Juan de Fuca. Cabins, cottages, A-frames and more." transparentNav={true}>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="relative h-[40vh] min-h-[320px] overflow-hidden">
+    <img
+      src="/images/properties/Beach_Front_Cabins_photo_01.jpg"
+      alt="Beachfront cabins at Whiskey Creek Beach"
+      loading="eager"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-midnight/60 to-midnight/30"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center text-center text-white h-full px-6">
+      <p class="section-label text-white/70 mb-4">OUR PROPERTIES</p>
+      <h1 class="font-display text-4xl md:text-5xl font-bold mb-4">Find Your Perfect Stay</h1>
+      <p class="text-white/70 font-body text-lg">{allListings.length} unique properties across {categories.length} styles</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ STICKY FILTER BAR ═══════════════════ -->
+  <div id="filter-bar" class="sticky top-[72px] z-30 bg-white shadow-md">
+    <div class="max-w-7xl mx-auto py-4 px-6">
+      <!-- Row 1: Category pills -->
+      <div class="flex flex-wrap gap-2" id="category-pills">
+        <button
+          class="filter-pill active px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors duration-200 bg-midnight text-white"
+          data-category="all"
+        >
+          All
+        </button>
+        {categories.map(cat => (
+          <button
+            class="filter-pill px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-colors duration-200 bg-fog text-stone hover:bg-fog/80"
+            data-category={cat.slug}
+          >
+            {cat.name} <span class="text-xs opacity-70">({cat.count})</span>
+          </button>
+        ))}
+      </div>
+
+      <!-- Row 2: Dropdowns + toggle -->
+      <div class="flex flex-wrap items-center gap-4 mt-3">
+        <select
+          id="guest-filter"
+          class="px-3 py-2 rounded-lg border border-fog text-sm text-stone bg-white focus:outline-none focus:ring-2 focus:ring-moss focus:border-moss"
+        >
+          <option value="0">Any guests</option>
+          {[1,2,3,4,5,6,7,8,9,10].map(n => (
+            <option value={n}>{n}{n === 10 ? '+' : ''} {n === 1 ? 'guest' : 'guests'}</option>
+          ))}
+        </select>
+
+        <select
+          id="price-sort"
+          class="px-3 py-2 rounded-lg border border-fog text-sm text-stone bg-white focus:outline-none focus:ring-2 focus:ring-moss focus:border-moss"
+        >
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
+
+        <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" id="pet-filter" class="sr-only peer" />
+          <span class="px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-fog text-stone peer-checked:bg-moss peer-checked:text-white hover:bg-fog/80 peer-checked:hover:bg-moss/90">
+            Pet Friendly
+          </span>
+        </label>
+
+        <span id="property-count" class="ml-auto text-stone text-sm whitespace-nowrap">
+          Showing {allListings.length} properties
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ PROPERTY GRID ═══════════════════ -->
+  <div class="max-w-7xl mx-auto py-12 px-6" id="property-grid-container">
+    {listingsData.categories.map(cat => (
+      <section class="category-section mb-12" id={cat.slug} data-category-section={cat.slug}>
+        <p class="section-label mb-2">{cat.name}</p>
+        <h2 class="section-title mb-8">{cat.name}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {cat.listings.map(listing => (
+            <div
+              class="property-card-wrapper"
+              data-category={cat.slug}
+              data-guests={listing.accommodates}
+              data-price={listing.price.base}
+              data-pets={listing.amenities.includes('Pets allowed') ? 'true' : 'false'}
+            >
+              <PropertyCard listing={listing} categorySlug={cat.slug} />
+            </div>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden text-center py-20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mx-auto text-stone/40 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+      </svg>
+      <h3 class="font-display text-2xl font-bold text-midnight mb-3">No properties match your filters</h3>
+      <p class="text-stone mb-6">Try adjusting your search criteria to see more options.</p>
+      <button
+        id="reset-filters"
+        class="px-6 py-3 rounded-full bg-midnight text-white text-sm font-medium hover:bg-midnight/90 transition-colors duration-200"
+      >
+        Reset All Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ CLIENT-SIDE FILTERING ═══════════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pills = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+      const guestFilter = document.getElementById('guest-filter') as HTMLSelectElement;
+      const priceSort = document.getElementById('price-sort') as HTMLSelectElement;
+      const petFilter = document.getElementById('pet-filter') as HTMLInputElement;
+      const countEl = document.getElementById('property-count')!;
+      const emptyState = document.getElementById('empty-state')!;
+      const resetBtn = document.getElementById('reset-filters')!;
+      const sections = document.querySelectorAll<HTMLElement>('.category-section');
+      const cards = document.querySelectorAll<HTMLElement>('.property-card-wrapper');
+
+      let activeCategory = 'all';
+
+      function getActivePill(): string {
+        return activeCategory;
+      }
+
+      function setActivePill(slug: string) {
+        activeCategory = slug;
+        pills.forEach(pill => {
+          const isActive = pill.dataset.category === slug;
+          pill.classList.toggle('active', isActive);
+          pill.classList.toggle('bg-midnight', isActive);
+          pill.classList.toggle('text-white', isActive);
+          pill.classList.toggle('bg-fog', !isActive);
+          pill.classList.toggle('text-stone', !isActive);
+        });
+      }
+
+      function applyFilters() {
+        const category = getActivePill();
+        const minGuests = parseInt(guestFilter.value) || 0;
+        const petOnly = petFilter.checked;
+        const sort = priceSort.value;
+        let visibleCount = 0;
+
+        // Filter cards
+        cards.forEach(card => {
+          const cardCat = card.dataset.category!;
+          const cardGuests = parseInt(card.dataset.guests!) || 0;
+          const cardPets = card.dataset.pets === 'true';
+
+          const matchCategory = category === 'all' || cardCat === category;
+          const matchGuests = minGuests === 0 || cardGuests >= minGuests;
+          const matchPets = !petOnly || cardPets;
+
+          const visible = matchCategory && matchGuests && matchPets;
+          card.classList.toggle('hidden', !visible);
+          if (visible) visibleCount++;
+        });
+
+        // Show/hide category sections
+        sections.forEach(section => {
+          const sectionSlug = section.dataset.categorySection!;
+          if (category !== 'all') {
+            section.classList.toggle('hidden', sectionSlug !== category);
+          } else {
+            // In "All" view, hide section if no visible cards within it
+            const visibleCards = section.querySelectorAll('.property-card-wrapper:not(.hidden)');
+            section.classList.toggle('hidden', visibleCards.length === 0);
+          }
+        });
+
+        // Sort cards within each visible section
+        if (sort !== 'featured') {
+          sections.forEach(section => {
+            if (section.classList.contains('hidden')) return;
+            const grid = section.querySelector('.grid')!;
+            const sectionCards = Array.from(grid.querySelectorAll<HTMLElement>('.property-card-wrapper:not(.hidden)'));
+
+            sectionCards.sort((a, b) => {
+              const priceA = parseInt(a.dataset.price!) || 0;
+              const priceB = parseInt(b.dataset.price!) || 0;
+              return sort === 'price-asc' ? priceA - priceB : priceB - priceA;
+            });
+
+            // Re-append in sorted order (hidden cards stay at end)
+            sectionCards.forEach(card => grid.appendChild(card));
+          });
+        }
+
+        // Update count
+        countEl.textContent = `Showing ${visibleCount} propert${visibleCount === 1 ? 'y' : 'ies'}`;
+
+        // Toggle empty state
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+
+      // Category pill clicks
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const slug = pill.dataset.category!;
+          setActivePill(slug);
+          applyFilters();
+
+          // Smooth scroll to section if selecting specific category in "All" view
+          if (slug !== 'all') {
+            const target = document.getElementById(slug);
+            if (target) {
+              const filterBar = document.getElementById('filter-bar')!;
+              const offset = filterBar.offsetHeight + 72 + 16;
+              const top = target.getBoundingClientRect().top + window.scrollY - offset;
+              window.scrollTo({ top, behavior: 'smooth' });
+            }
+          }
+
+          // Update URL hash without scroll
+          history.replaceState(null, '', slug === 'all' ? '/properties/' : `#${slug}`);
+        });
+      });
+
+      // Dropdown and toggle changes
+      guestFilter.addEventListener('change', applyFilters);
+      priceSort.addEventListener('change', applyFilters);
+      petFilter.addEventListener('change', applyFilters);
+
+      // Reset button
+      resetBtn.addEventListener('click', () => {
+        setActivePill('all');
+        guestFilter.value = '0';
+        priceSort.value = 'featured';
+        petFilter.checked = false;
+        applyFilters();
+        history.replaceState(null, '', '/properties/');
+      });
+
+      // Handle hash on load
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        const matchingPill = Array.from(pills).find(p => p.dataset.category === hash);
+        if (matchingPill) {
+          setActivePill(hash);
+          applyFilters();
+          // Delay scroll to let layout settle
+          requestAnimationFrame(() => {
+            const target = document.getElementById(hash);
+            if (target) {
+              const filterBar = document.getElementById('filter-bar')!;
+              const offset = filterBar.offsetHeight + 72 + 16;
+              const top = target.getBoundingClientRect().top + window.scrollY - offset;
+              window.scrollTo({ top, behavior: 'smooth' });
+            }
+          });
+        }
+      }
+
+      // Initial render
+      applyFilters();
+    });
+  </script>
+
+</BaseLayout>

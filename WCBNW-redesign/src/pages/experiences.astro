@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PropertyCard from '../components/PropertyCard.astro';
+import listingsData from '../data/listings.json';
+import experiencesData from '../data/experiences.json';
+
+// Build a flat list of all listings with category info
+const allListings = listingsData.categories.flatMap(cat =>
+  cat.listings.map(l => ({ ...l, categorySlug: cat.slug, categoryName: cat.name }))
+);
+
+// Filter logic for each experience
+function getExperienceListings(filter) {
+  return allListings.filter(listing => {
+    if (filter.categories && !filter.categories.includes(listing.categorySlug)) return false;
+    if (filter.maxGuests && listing.accommodates > filter.maxGuests) return false;
+    if (filter.minGuests && listing.accommodates < filter.minGuests) return false;
+    if (filter.amenity && !listing.amenities.includes(filter.amenity)) return false;
+    return true;
+  });
+}
+
+const totalListings = allListings.length;
+---
+
+<BaseLayout title="Experiences">
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="relative h-[40vh] min-h-[320px] overflow-hidden">
+    <img
+      src="/photos/outdoor/DSC_0560.JPG"
+      alt="Whiskey Creek Beach scenic view"
+      loading="eager"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-midnight/60 to-midnight/30"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center text-center h-full px-6">
+      <p class="text-xs uppercase tracking-wider-caps font-body font-medium text-white/70 mb-4">
+        Experiences
+      </p>
+      <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">
+        Your Kind of Getaway
+      </h1>
+      <p class="text-white/70 font-body text-lg max-w-xl">
+        Curated collections for every type of traveler
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ EXPERIENCE SECTIONS ═══════════════════ -->
+  {experiencesData.map((experience, index) => {
+    const listings = getExperienceListings(experience.filter);
+    const displayListings = listings.slice(0, 6);
+    const hasMore = listings.length > 6;
+    const isEven = index % 2 === 1;
+
+    return (
+      <>
+        <section
+          id={experience.slug}
+          class:list={[
+            'py-20 px-6 fade-section',
+            isEven ? 'bg-drift' : 'bg-white',
+          ]}
+        >
+          <div class="max-w-7xl mx-auto">
+
+            {/* Section Header — two-column on desktop */}
+            <div class="lg:grid lg:grid-cols-[1fr_1fr] gap-12 items-center mb-12">
+              <div>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-midnight">
+                  {experience.name}
+                </h2>
+                <p class="text-copper text-lg font-body italic mt-2">
+                  {experience.tagline}
+                </p>
+                <p class="text-stone text-base leading-relaxed mt-4">
+                  {experience.description}
+                </p>
+                <p class="text-stone/60 text-sm mt-4">
+                  {listings.length} {listings.length === 1 ? 'property' : 'properties'}
+                </p>
+              </div>
+              <div class="mt-8 lg:mt-0">
+                <img
+                  src={experience.heroImage}
+                  alt={experience.name}
+                  loading="lazy"
+                  decoding="async"
+                  class="rounded-lg shadow-lg aspect-[16/10] w-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Property Grid */}
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              id={`grid-${experience.slug}`}
+            >
+              {displayListings.map(listing => (
+                <PropertyCard listing={listing} categorySlug={listing.categorySlug} />
+              ))}
+            </div>
+
+            {/* "Show all" toggle */}
+            {hasMore && (
+              <div class="text-center mt-10">
+                <button
+                  type="button"
+                  class="inline-flex items-center gap-2 px-6 py-3 border-2 border-midnight/20 text-midnight font-body font-medium text-sm rounded-full hover:border-midnight/40 hover:bg-midnight/5 transition-all duration-200 cursor-pointer"
+                  data-toggle-target={`hidden-${experience.slug}`}
+                  data-total={listings.length}
+                  data-slug={experience.slug}
+                >
+                  Show all {listings.length} properties
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+              </div>
+            )}
+
+            {/* Hidden extra cards — rendered server-side but hidden */}
+            {hasMore && (
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8 hidden"
+                id={`hidden-${experience.slug}`}
+              >
+                {listings.slice(6).map(listing => (
+                  <PropertyCard listing={listing} categorySlug={listing.categorySlug} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Divider between sections (not after last) */}
+        {index < experiencesData.length - 1 && (
+          <div class:list={[isEven ? 'bg-drift' : 'bg-white']}>
+            <div class="max-w-xs mx-auto border-t border-fog"></div>
+          </div>
+        )}
+      </>
+    );
+  })}
+
+  <!-- ═══════════════════ BOTTOM CTA ═══════════════════ -->
+  <section class="py-20 bg-midnight text-center px-6 fade-section">
+    <h2 class="font-display text-2xl md:text-3xl text-white mb-4">
+      Not sure which experience fits?
+    </h2>
+    <p class="text-fog font-body mb-8 max-w-lg mx-auto">
+      Browse all {totalListings} properties and find your ideal stay.
+    </p>
+    <a href="/properties" class="btn-ghost">View All Properties</a>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // Toggle "Show all" buttons
+  document.querySelectorAll('[data-toggle-target]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-toggle-target');
+      const target = document.getElementById(targetId!);
+      if (!target) return;
+
+      const isHidden = target.classList.contains('hidden');
+      target.classList.toggle('hidden');
+
+      const slug = btn.getAttribute('data-slug');
+      const total = btn.getAttribute('data-total');
+      const arrow = btn.querySelector('svg');
+
+      if (isHidden) {
+        btn.innerHTML = '';
+        btn.textContent = 'Show fewer';
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'w-4 h-4 transition-transform duration-200 rotate-180');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+        polyline.setAttribute('points', '6 9 12 15 18 9');
+        svg.appendChild(polyline);
+        btn.appendChild(document.createTextNode(' '));
+        btn.appendChild(svg);
+      } else {
+        btn.innerHTML = '';
+        btn.textContent = `Show all ${total} properties`;
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'w-4 h-4 transition-transform duration-200');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+        polyline.setAttribute('points', '6 9 12 15 18 9');
+        svg.appendChild(polyline);
+        btn.appendChild(document.createTextNode(' '));
+        btn.appendChild(svg);
+      }
+    });
+  });
+</script>

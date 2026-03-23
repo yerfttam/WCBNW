@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact Us" transparentNav={true}>
+
+  <!-- ═══════════════════ 1. HERO ═══════════════════ -->
+  <section class="relative h-[35vh] overflow-hidden">
+    <img
+      src="/images/properties/DJI_0043-aerial.jpg"
+      alt="Aerial view of Whiskey Creek Beach"
+      loading="eager"
+      decoding="async"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-midnight/50 to-midnight/30"></div>
+
+    <div class="relative h-full flex flex-col items-center justify-center text-center px-6">
+      <p class="section-label text-white/70">GET IN TOUCH</p>
+      <h1 class="font-display text-4xl md:text-5xl font-bold text-white mt-3">Contact Us</h1>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 2. CONTACT SECTION ═══════════════════ -->
+  <section class="py-24 px-6 bg-white">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-[380px_1fr] gap-16">
+
+      <!-- Left — Contact Info Card -->
+      <div class="bg-midnight rounded-xl p-10 text-white h-fit">
+        <h2 class="font-display text-2xl font-bold mb-8">Reach Out</h2>
+
+        <div class="flex flex-col gap-8">
+          <!-- Phone -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-white/50 text-xs uppercase tracking-wider-caps">Phone</p>
+              <a href="tel:+18447692322" class="text-white font-medium hover:text-copper transition-colors">(844) 769-2322</a>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-white/50 text-xs uppercase tracking-wider-caps">Email</p>
+              <a href="mailto:whiskeycreekbeachnw@gmail.com" class="text-white font-medium hover:text-copper transition-colors break-all">whiskeycreekbeachnw@gmail.com</a>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-white/50 text-xs uppercase tracking-wider-caps">Address</p>
+              <p class="text-white font-medium">1385 Whiskey Creek Beach Rd<br>Port Angeles, WA 98363</p>
+            </div>
+          </div>
+
+          <!-- Hours -->
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-white/50 text-xs uppercase tracking-wider-caps">Check-in / Check-out</p>
+              <p class="text-white font-medium">Check-in: 4:00 PM<br>Check-out: 11:00 AM</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Book directly -->
+        <div class="border-t border-white/10 mt-8 pt-8">
+          <p class="text-white/60 text-sm mb-4">Prefer to book directly?</p>
+          <a
+            href="https://whiskeycreekbeachnw.guestybookings.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block bg-moss text-white w-full text-center py-3 rounded-sm text-sm uppercase tracking-wider-caps font-medium hover:bg-moss-dark transition-colors"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Right — Contact Form -->
+      <div>
+        <h2 class="font-display text-2xl font-bold text-midnight mb-2">Send Us a Message</h2>
+        <p class="text-stone text-sm mb-8">We'll get back to you within 24 hours.</p>
+
+        <form action="https://formspree.io/f/xkoqaqjr" method="POST" class="space-y-5">
+          <!-- First + Last Name -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-midnight mb-1">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                required
+                placeholder="Jane"
+                class="w-full px-4 py-3 border border-fog rounded-sm text-midnight font-body text-sm placeholder:text-stone/50 focus:outline-none focus:border-moss focus:ring-1 focus:ring-moss transition-colors"
+              />
+            </div>
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-midnight mb-1">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                required
+                placeholder="Doe"
+                class="w-full px-4 py-3 border border-fog rounded-sm text-midnight font-body text-sm placeholder:text-stone/50 focus:outline-none focus:border-moss focus:ring-1 focus:ring-moss transition-colors"
+              />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-midnight mb-1">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="jane@example.com"
+              class="w-full px-4 py-3 border border-fog rounded-sm text-midnight font-body text-sm placeholder:text-stone/50 focus:outline-none focus:border-moss focus:ring-1 focus:ring-moss transition-colors"
+            />
+          </div>
+
+          <!-- Subject -->
+          <div>
+            <label for="subject" class="block text-sm font-medium text-midnight mb-1">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              required
+              placeholder="How can we help?"
+              class="w-full px-4 py-3 border border-fog rounded-sm text-midnight font-body text-sm placeholder:text-stone/50 focus:outline-none focus:border-moss focus:ring-1 focus:ring-moss transition-colors"
+            />
+          </div>
+
+          <!-- Property Interest -->
+          <div>
+            <label for="propertyInterest" class="block text-sm font-medium text-midnight mb-1">Property Interest</label>
+            <select
+              id="propertyInterest"
+              name="propertyInterest"
+              class="w-full px-4 py-3 border border-fog rounded-sm text-midnight font-body text-sm focus:outline-none focus:border-moss focus:ring-1 focus:ring-moss transition-colors bg-white"
+            >
+              <option value="General Inquiry">General Inquiry</option>
+              <option value="Beach Front Cabins">Beach Front Cabins</option>
+              <option value="Cottages">Cottages</option>
+              <option value="A-Frames">A-Frames</option>
+              <option value="Tent Sites">Tent Sites</option>
+              <option value="RV Sites">RV Sites</option>
+              <option value="Other Properties">Other Properties</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium text-midnight mb-1">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="6"
+              placeholder="Tell us about your trip plans, questions, or special requests..."
+              class="w-full px-4 py-3 border border-fog rounded-sm text-midnight font-body text-sm placeholder:text-stone/50 focus:outline-none focus:border-moss focus:ring-1 focus:ring-moss transition-colors resize-vertical"
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-primary w-full">Send Message</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ 3. BELOW FORM — CTA ═══════════════════ -->
+  <section class="fade-section py-16 bg-drift">
+    <div class="max-w-4xl mx-auto text-center px-6">
+      <img
+        src="/photos/outdoor/DSC_0328.JPG"
+        alt="Scenic view of Whiskey Creek Beach"
+        loading="lazy"
+        decoding="async"
+        class="rounded-lg shadow-lg aspect-[21/9] w-full object-cover mb-8"
+      />
+      <h2 class="font-display text-2xl text-midnight">We're here to help make your stay perfect.</h2>
+      <p class="text-stone mt-4 max-w-2xl mx-auto">
+        Whether you have questions about our properties, need help choosing the right one,
+        or want to plan something special — don't hesitate to reach out.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>

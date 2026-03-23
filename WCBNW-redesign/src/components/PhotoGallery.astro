@@ -1,0 +1,317 @@
+---
+interface Props {
+  photos: { original: string; thumbnail: string }[];
+  propertyName: string;
+}
+
+const { photos, propertyName } = Astro.props;
+
+const heroPhoto = photos[0];
+---
+
+<div
+  class="photo-gallery"
+  data-photos={JSON.stringify(photos)}
+  data-property-name={propertyName}
+>
+  {/* Hero image */}
+  <button
+    type="button"
+    class="gallery-hero relative w-full aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-lg cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-copper focus-visible:ring-offset-2"
+    aria-label={`Open fullscreen gallery for ${propertyName}`}
+  >
+    <img
+      src={heroPhoto?.original}
+      alt={`${propertyName} - photo 1`}
+      class="gallery-hero-img w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+      loading="eager"
+      decoding="async"
+    />
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+    <span class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 3h6v6" />
+        <path d="M9 21H3v-6" />
+        <path d="M21 3l-7 7" />
+        <path d="M3 21l7-7" />
+      </svg>
+      {photos.length} photos
+    </span>
+  </button>
+
+  {/* Thumbnail strip */}
+  {photos.length > 1 && (
+    <div class="gallery-thumbs flex gap-2 mt-2 overflow-x-auto scrollbar-hide pb-1">
+      {photos.map((photo, i) => (
+        <button
+          type="button"
+          class:list={[
+            'gallery-thumb flex-shrink-0 w-20 h-20 rounded-md overflow-hidden cursor-pointer transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-copper',
+            i === 0 ? 'opacity-100 ring-2 ring-copper' : 'opacity-60 hover:opacity-100',
+          ]}
+          data-index={i}
+          aria-label={`View photo ${i + 1} of ${photos.length}`}
+        >
+          <img
+            src={photo.thumbnail || photo.original}
+            alt={`${propertyName} - photo ${i + 1}`}
+            class="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </button>
+      ))}
+    </div>
+  )}
+
+  {/* Lightbox overlay */}
+  <div
+    class="gallery-lightbox fixed inset-0 bg-black/95 z-[60] hidden items-center justify-center"
+    role="dialog"
+    aria-modal="true"
+    aria-label={`${propertyName} photo gallery`}
+  >
+    {/* Close button */}
+    <button
+      type="button"
+      class="lightbox-close absolute top-4 right-4 z-10 text-white/70 hover:text-white transition-colors p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded-full"
+      aria-label="Close gallery"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+
+    {/* Previous arrow */}
+    <button
+      type="button"
+      class="lightbox-prev absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 transition-colors rounded-full w-12 h-12 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+      aria-label="Previous photo"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+
+    {/* Main lightbox image */}
+    <img
+      src=""
+      alt=""
+      class="lightbox-img max-w-5xl max-h-[85vh] object-contain select-none"
+      draggable="false"
+    />
+
+    {/* Next arrow */}
+    <button
+      type="button"
+      class="lightbox-next absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 transition-colors rounded-full w-12 h-12 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+      aria-label="Next photo"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+
+    {/* Photo counter */}
+    <div class="lightbox-counter absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm tabular-nums">
+      1 / {photos.length}
+    </div>
+  </div>
+</div>
+
+<style>
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  function initGalleries() {
+    document.querySelectorAll<HTMLDivElement>('.photo-gallery').forEach((gallery) => {
+      // Avoid double-init
+      if (gallery.dataset.initialized) return;
+      gallery.dataset.initialized = 'true';
+
+      const photos: { original: string; thumbnail: string }[] = JSON.parse(
+        gallery.dataset.photos || '[]'
+      );
+      const propertyName = gallery.dataset.propertyName || 'Property';
+
+      if (photos.length === 0) return;
+
+      const heroImg = gallery.querySelector<HTMLImageElement>('.gallery-hero-img')!;
+      const heroBtn = gallery.querySelector<HTMLButtonElement>('.gallery-hero')!;
+      const thumbs = gallery.querySelectorAll<HTMLButtonElement>('.gallery-thumb');
+      const lightbox = gallery.querySelector<HTMLDivElement>('.gallery-lightbox')!;
+      const lightboxImg = gallery.querySelector<HTMLImageElement>('.lightbox-img')!;
+      const lightboxCounter = gallery.querySelector<HTMLDivElement>('.lightbox-counter')!;
+      const closeBtn = gallery.querySelector<HTMLButtonElement>('.lightbox-close')!;
+      const prevBtn = gallery.querySelector<HTMLButtonElement>('.lightbox-prev')!;
+      const nextBtn = gallery.querySelector<HTMLButtonElement>('.lightbox-next')!;
+
+      let currentIndex = 0;
+      let lightboxOpen = false;
+
+      // Touch/swipe state
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchDeltaX = 0;
+      const SWIPE_THRESHOLD = 50;
+
+      function setActiveThumb(index: number) {
+        thumbs.forEach((thumb, i) => {
+          if (i === index) {
+            thumb.classList.remove('opacity-60');
+            thumb.classList.add('opacity-100', 'ring-2', 'ring-copper');
+          } else {
+            thumb.classList.add('opacity-60');
+            thumb.classList.remove('opacity-100', 'ring-2', 'ring-copper');
+          }
+        });
+      }
+
+      function setHeroImage(index: number) {
+        currentIndex = index;
+        heroImg.src = photos[index].original;
+        heroImg.alt = `${propertyName} - photo ${index + 1}`;
+        setActiveThumb(index);
+      }
+
+      function openLightbox(index: number) {
+        currentIndex = index;
+        updateLightboxImage();
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        lightboxOpen = true;
+        document.body.style.overflow = 'hidden';
+        // Focus the close button for accessibility
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        lightboxOpen = false;
+        document.body.style.overflow = '';
+        // Return focus to hero button
+        heroBtn.focus();
+      }
+
+      function updateLightboxImage() {
+        lightboxImg.src = photos[currentIndex].original;
+        lightboxImg.alt = `${propertyName} - photo ${currentIndex + 1} of ${photos.length}`;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${photos.length}`;
+      }
+
+      function goTo(index: number) {
+        currentIndex = ((index % photos.length) + photos.length) % photos.length;
+        updateLightboxImage();
+        setHeroImage(currentIndex);
+      }
+
+      function goPrev() {
+        goTo(currentIndex - 1);
+      }
+
+      function goNext() {
+        goTo(currentIndex + 1);
+      }
+
+      // Thumbnail clicks
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const index = parseInt(thumb.dataset.index || '0', 10);
+          setHeroImage(index);
+        });
+      });
+
+      // Hero click opens lightbox
+      heroBtn.addEventListener('click', () => {
+        openLightbox(currentIndex);
+      });
+
+      // Lightbox controls
+      closeBtn.addEventListener('click', closeLightbox);
+      prevBtn.addEventListener('click', goPrev);
+      nextBtn.addEventListener('click', goNext);
+
+      // Close on backdrop click (not on image or buttons)
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!lightboxOpen) return;
+
+        switch (e.key) {
+          case 'Escape':
+            closeLightbox();
+            break;
+          case 'ArrowLeft':
+            e.preventDefault();
+            goPrev();
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            goNext();
+            break;
+        }
+      });
+
+      // Touch / swipe support
+      lightbox.addEventListener(
+        'touchstart',
+        (e) => {
+          if (!lightboxOpen) return;
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchDeltaX = 0;
+        },
+        { passive: true }
+      );
+
+      lightbox.addEventListener(
+        'touchmove',
+        (e) => {
+          if (!lightboxOpen) return;
+          touchDeltaX = e.touches[0].clientX - touchStartX;
+          const touchDeltaY = Math.abs(e.touches[0].clientY - touchStartY);
+
+          // Only handle horizontal swipes
+          if (Math.abs(touchDeltaX) > touchDeltaY) {
+            e.preventDefault();
+          }
+        },
+        { passive: false }
+      );
+
+      lightbox.addEventListener('touchend', () => {
+        if (!lightboxOpen) return;
+
+        if (Math.abs(touchDeltaX) > SWIPE_THRESHOLD) {
+          if (touchDeltaX > 0) {
+            goPrev();
+          } else {
+            goNext();
+          }
+        }
+
+        touchDeltaX = 0;
+      });
+    });
+  }
+
+  // Initialize on first load
+  initGalleries();
+
+  // Re-initialize after Astro page transitions (View Transitions)
+  document.addEventListener('astro:after-swap', initGalleries);
+</script>
