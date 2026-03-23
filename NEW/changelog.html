@@ -65,9 +65,13 @@
     .cl-items li { font-size: 0.8rem; color: var(--text-body); line-height: 1.65; padding-left: 1rem; position: relative; margin-bottom: 0.2rem; }
     .cl-items li::before { content: '—'; position: absolute; left: 0; color: var(--sage); }
 
+    .cl-datetime { font-size: 0.68rem; color: var(--sage); margin-bottom: 0.5rem; letter-spacing: 0.03em; }
     .cl-tag { display: inline-block; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.15rem 0.45rem; border-radius: 3px; margin-right: 0.35rem; vertical-align: middle; position: relative; top: -1px; }
-    .cl-tag--feat { background: rgba(41,59,78,0.12); color: var(--navy); }
-    .cl-tag--fix  { background: rgba(107,69,46,0.12); color: var(--brown); }
+    .cl-tag--feat  { background: rgba(41,59,78,0.12); color: var(--navy); }
+    .cl-tag--fix   { background: rgba(107,69,46,0.12); color: var(--brown); }
+    .cl-tag--docs  { background: rgba(181,184,163,0.3); color: var(--text-body); }
+    .cl-tag--chore { background: rgba(181,184,163,0.3); color: var(--text-body); }
+    .cl-loading { text-align: center; padding: 4rem 2rem; font-size: 0.85rem; color: var(--sage); letter-spacing: 0.1em; text-transform: uppercase; }
 
     /* FOOTER */
     footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
@@ -108,9 +112,11 @@
     <p class="page-hero-sub">Build history &amp; release notes</p>
   </div>
 
-  <div class="changelog-wrap">
+  <div class="changelog-wrap" id="changelog-wrap">
+    <div class="cl-loading">Loading release history…</div>
 
-    <!-- ── v2.x ── -->
+    <!-- populated dynamically by loadChangelog() below -->
+    <!--
     <div class="cl-group">
       <p class="cl-group-label">Version 2 — March 2026</p>
 
@@ -326,6 +332,7 @@
       </div>
 
     </div>
+    -->
   </div><!-- /.changelog-wrap -->
 
   <div id="site-footer-placeholder"></div>
@@ -336,6 +343,67 @@
     document.querySelectorAll('.mobile-menu a').forEach(a => {
       a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
     });
+
+    // ── Dynamic changelog renderer ────────────────────────────────────────────
+
+    function groupLabel(version, displayDate) {
+      const [major, minor] = version.replace('v','').split('.').map(Number);
+      const monthYear = displayDate ? displayDate.replace(/\s+\d+,/, ',') : ''; // "March, 2026"
+      if (major === 1 && minor === 0) return `Version 1.0 — Initial Launch`;
+      return `Version ${major}.${minor} — ${monthYear}`;
+    }
+
+    function renderEntry(entry) {
+      const tag = `<span class="cl-tag cl-tag--${entry.type}">${entry.type}</span>`;
+      return `<li>${tag}${entry.description}</li>`;
+    }
+
+    function renderRelease(release) {
+      const entries = release.entries.map(renderEntry).join('');
+      return `
+        <div class="cl-entry">
+          <span class="cl-version">${release.version}</span>
+          <div class="cl-content">
+            <div class="cl-datetime">${release.display_date} &middot; ${release.display_time}</div>
+            <ul class="cl-items">${entries}</ul>
+          </div>
+        </div>`;
+    }
+
+    async function loadChangelog() {
+      const wrap = document.getElementById('changelog-wrap');
+      try {
+        const res  = await fetch('data/changelog.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        // Group releases by major.minor
+        const groups = new Map();
+        for (const release of data.releases) {
+          const [major, minor] = release.version.replace('v','').split('.').map(Number);
+          const key = `${major}.${minor}`;
+          if (!groups.has(key)) groups.set(key, { label: groupLabel(release.version, release.display_date), releases: [] });
+          groups.get(key).releases.push(release);
+        }
+
+        let html = '';
+        for (const [, group] of groups) {
+          const releasesHtml = group.releases.map(renderRelease).join('');
+          html += `
+            <div class="cl-group">
+              <p class="cl-group-label">${group.label}</p>
+              ${releasesHtml}
+            </div>`;
+        }
+
+        wrap.innerHTML = html;
+      } catch (err) {
+        wrap.innerHTML = `<p style="padding:3rem;text-align:center;color:var(--brown);">Unable to load changelog.</p>`;
+        console.error('changelog:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadChangelog);
   </script>
 </body>
 </html>

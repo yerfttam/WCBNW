@@ -1,0 +1,32 @@
+name: Generate Changelog
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  changelog:
+    # Don't run on auto-commits from this workflow or the Guesty sync
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history needed for git log
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate changelog.json
+        run: python3 scripts/generate-changelog.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add NEW/data/changelog.json
+          git diff --cached --quiet && echo "No changes" || \
+            git commit -m "chore: regenerate changelog.json [skip ci]" && \
+            git push
