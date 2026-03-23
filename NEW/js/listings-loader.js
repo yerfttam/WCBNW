@@ -7,6 +7,9 @@
  * Matches the existing CSS classes in accommodations.html — no style changes needed.
  */
 
+// Registry of all listings by id — used by modal
+const listingRegistry = new Map();
+
 // Section descriptions keyed by category slug.
 // These come from the owner, not Guesty — edit here to update copy.
 const SECTION_COPY = {
@@ -53,13 +56,17 @@ const CARD_CLASS = {
   'rv-sites':   'prop-card--site',
 };
 
-function slugify(str) {
-  return str.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
-}
-
 function renderPrice(price) {
   if (!price || !price.base) return '';
   return `From $${price.base}/night`;
+}
+
+// Full modal description — first 2 meaningful paragraphs
+function getFullDesc(listing) {
+  if (!listing.description) return listing.summary ? [listing.summary] : [];
+  const paras = listing.description.split('\n\n').map(p => p.trim()).filter(Boolean);
+  const good  = paras.filter(p => !p.startsWith('***') && !p.startsWith('**') && p.length > 40);
+  return good.slice(0, 2);
 }
 
 function renderCard(listing, slug) {
@@ -86,7 +93,7 @@ function renderCard(listing, slug) {
     <button class="carousel-btn carousel-btn--next" aria-label="Next photo">&#8250;</button>` : '';
 
   return `
-    <div class="prop-card ${cardMod}">
+    <div class="prop-card ${cardMod}" data-listing-id="${listing.id}">
       <div class="prop-card-carousel" data-photos='${photoData}' data-index="0">
         <img class="prop-card-img"
              src="${firstSrc}"
@@ -135,6 +142,129 @@ function renderCatNav(categories) {
   ).join('');
 }
 
+// ── Modal ────────────────────────────────────────────────────────────────────
+
+let modalPhotoIndex = 0;
+let modalPhotos     = [];
+
+function buildModal() {
+  const el = document.createElement('div');
+  el.id = 'prop-modal';
+  el.innerHTML = `
+    <div class="modal-overlay"></div>
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-carousel">
+        <img class="modal-img" src="" alt="" />
+        <button class="modal-carousel-btn modal-carousel-prev">&#8249;</button>
+        <button class="modal-carousel-btn modal-carousel-next">&#8250;</button>
+        <div class="modal-dots"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-name copperplate"></h2>
+            <p class="modal-meta"></p>
+          </div>
+          <div class="modal-price-wrap">
+            <p class="modal-price"></p>
+            <a class="modal-book" href="#" target="_blank" rel="noopener">Book Now</a>
+          </div>
+        </div>
+        <div class="modal-desc"></div>
+        <div class="modal-amenities-wrap">
+          <h3 class="modal-amenities-title copperplate">Amenities</h3>
+          <ul class="modal-amenities"></ul>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+  return el;
+}
+
+function openModal(listing) {
+  const modal = document.getElementById('prop-modal');
+  modalPhotos     = (listing.photos || []).map(p => p.original);
+  modalPhotoIndex = 0;
+
+  const price  = renderPrice(listing.price);
+  const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
+  const beds   = listing.bedrooms     ? `${listing.bedrooms} bed`        : '';
+  const baths  = listing.bathrooms    ? `${listing.bathrooms} bath`      : '';
+  const meta   = [guests, beds, baths].filter(Boolean).join(' · ');
+  const descParas = getFullDesc(listing);
+  const amenities = listing.amenities || [];
+
+  modal.querySelector('.modal-img').src           = modalPhotos[0] || '';
+  modal.querySelector('.modal-img').alt           = listing.name;
+  modal.querySelector('.modal-name').textContent  = listing.name;
+  modal.querySelector('.modal-price').textContent = price;
+  modal.querySelector('.modal-meta').textContent  = meta;
+  modal.querySelector('.modal-desc').innerHTML    = descParas.map(p => `<p>${p}</p>`).join('');
+  modal.querySelector('.modal-book').href         = listing.bookingUrl;
+  modal.querySelector('.modal-amenities').innerHTML = amenities.map(a => `<li>${a}</li>`).join('');
+  modal.querySelector('.modal-amenities-wrap').style.display = amenities.length ? '' : 'none';
+
+  // Dots
+  const dotsEl = modal.querySelector('.modal-dots');
+  dotsEl.innerHTML = modalPhotos.map((_, i) =>
+    `<span class="modal-dot${i === 0 ? ' active' : ''}"></span>`
+  ).join('');
+
+  // Arrow visibility
+  const showArrows = modalPhotos.length > 1;
+  modal.querySelector('.modal-carousel-prev').style.display = showArrows ? '' : 'none';
+  modal.querySelector('.modal-carousel-next').style.display = showArrows ? '' : 'none';
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('prop-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function stepModalPhoto(dir) {
+  const modal = document.getElementById('prop-modal');
+  modalPhotoIndex = (modalPhotoIndex + dir + modalPhotos.length) % modalPhotos.length;
+  modal.querySelector('.modal-img').src = modalPhotos[modalPhotoIndex];
+  modal.querySelectorAll('.modal-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === modalPhotoIndex)
+  );
+}
+
+function initModal() {
+  const modal = buildModal();
+
+  // Close on overlay click or X
+  modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
+  modal.querySelector('.modal-close').addEventListener('click', closeModal);
+
+  // Keyboard close + arrow nav
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape')     closeModal();
+    if (e.key === 'ArrowLeft')  stepModalPhoto(-1);
+    if (e.key === 'ArrowRight') stepModalPhoto(1);
+  });
+
+  // Modal carousel arrows
+  modal.querySelector('.modal-carousel-prev').addEventListener('click', () => stepModalPhoto(-1));
+  modal.querySelector('.modal-carousel-next').addEventListener('click', () => stepModalPhoto(1));
+
+  // Card click → open modal (ignore carousel buttons and book link)
+  document.getElementById('listings-sections').addEventListener('click', e => {
+    if (e.target.closest('.carousel-btn'))   return;
+    if (e.target.closest('.prop-card-book')) return;
+    const card = e.target.closest('.prop-card');
+    if (!card) return;
+    const listing = listingRegistry.get(card.dataset.listingId);
+    if (listing) openModal(listing);
+  });
+}
+
+// ── Load + init ──────────────────────────────────────────────────────────────
+
 async function loadListings() {
   const navEl      = document.getElementById('listings-cat-nav');
   const sectionsEl = document.getElementById('listings-sections');
@@ -147,8 +277,19 @@ async function loadListings() {
     const data = await res.json();
 
     const categories = data.categories.filter(c => c.slug !== 'other-properties');
+
+    // Register all listings by id
+    categories.forEach(cat =>
+      cat.listings.forEach(l => listingRegistry.set(l.id, l))
+    );
+
     navEl.innerHTML      = renderCatNav(categories);
     sectionsEl.innerHTML = categories.map(renderSection).join('');
+
+    if (window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 50);
+    }
 
   } catch (err) {
     console.error('listings-loader: failed to load listings.json', err);
@@ -191,5 +332,8 @@ function initCarousels() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', loadListings);
-document.addEventListener('DOMContentLoaded', initCarousels);
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadListings();
+  initCarousels();
+  initModal();
+});
