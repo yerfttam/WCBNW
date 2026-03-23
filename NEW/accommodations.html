@@ -193,8 +193,8 @@
     .modal-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-bottom: 1rem; }
     .modal-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 1.3rem; color: var(--navy); line-height: 1.2; margin-bottom: 0.25rem; }
     .modal-meta { font-size: 0.8rem; color: var(--sage); letter-spacing: 0.05em; }
-    .modal-price-wrap { text-align: right; flex-shrink: 0; }
-    .modal-price { font-family: 'Josefin Sans', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--brown); margin-bottom: 0.6rem; }
+    .modal-price-wrap { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+    .modal-price { font-family: 'Josefin Sans', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--brown); margin-bottom: 0; white-space: nowrap; }
     .modal-book { display: inline-block; background: var(--navy); color: var(--cream); font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.6rem 1.4rem; transition: background 0.2s; white-space: nowrap; }
     .modal-book:hover { background: var(--navy-dark); }
     .modal-desc { font-size: 0.78rem; line-height: 1.75; color: var(--text-body); margin-bottom: 1.25rem; }
@@ -206,7 +206,6 @@
     @media (max-width: 600px) {
       .modal-img { height: 220px; }
       .modal-header { flex-direction: column; gap: 0.75rem; }
-      .modal-price-wrap { text-align: left; }
       .modal-amenities { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
