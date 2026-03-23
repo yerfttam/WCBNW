@@ -5,6 +5,9 @@
  * category into the horizontal listing-card layout on other-properties.html.
  */
 
+// Registry of all listings by id — used by modal
+const listingRegistry = new Map();
+
 const FEATURE_PRIORITY = [
   'Waterfront', 'Beach access', 'Pets allowed', 'Indoor fireplace',
   'BBQ grill', 'Hot tub', 'Patio or balcony', 'Wireless Internet',
@@ -19,6 +22,19 @@ function pickFeatures(amenities, n = 4) {
     if (!picked.includes(a)) picked.push(a);
   }
   return picked.slice(0, n);
+}
+
+function renderPrice(price) {
+  if (!price || !price.base) return '';
+  return `From $${price.base}/night`;
+}
+
+// Full modal description — first 2 meaningful paragraphs
+function getFullDesc(listing) {
+  if (!listing.description) return listing.summary ? [listing.summary] : [];
+  const paras = listing.description.split('\n\n').map(p => p.trim()).filter(Boolean);
+  const good  = paras.filter(p => !p.startsWith('***') && !p.startsWith('**') && p.length > 40);
+  return good.slice(0, 2);
 }
 
 function renderCard(listing, index) {
@@ -50,7 +66,7 @@ function renderCard(listing, index) {
   const featureHtml = features.map(f => `<li>${f}</li>`).join('');
 
   return `
-    <div class="listing-card${isReverse ? ' listing-card--reverse' : ''}">
+    <div class="listing-card${isReverse ? ' listing-card--reverse' : ''}" data-listing-id="${listing.id}">
       <div class="listing-card-photo">
         <div class="lc-carousel" data-photos='${photoData}' data-index="0">
           <img class="lc-carousel-img"
@@ -73,6 +89,126 @@ function renderCard(listing, index) {
       </div>
     </div>`;
 }
+
+// ── Modal ────────────────────────────────────────────────────────────────────
+
+let modalPhotoIndex = 0;
+let modalPhotos     = [];
+
+function buildModal() {
+  const el = document.createElement('div');
+  el.id = 'prop-modal';
+  el.innerHTML = `
+    <div class="modal-overlay"></div>
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-carousel">
+        <img class="modal-img" src="" alt="" />
+        <button class="modal-carousel-btn modal-carousel-prev">&#8249;</button>
+        <button class="modal-carousel-btn modal-carousel-next">&#8250;</button>
+        <div class="modal-dots"></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-name copperplate"></h2>
+            <p class="modal-meta"></p>
+          </div>
+          <div class="modal-price-wrap">
+            <p class="modal-price"></p>
+            <a class="modal-book" href="#" target="_blank" rel="noopener">Book Now</a>
+          </div>
+        </div>
+        <div class="modal-desc"></div>
+        <div class="modal-amenities-wrap">
+          <h3 class="modal-amenities-title copperplate">Amenities</h3>
+          <ul class="modal-amenities"></ul>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(el);
+  return el;
+}
+
+function openModal(listing) {
+  const modal = document.getElementById('prop-modal');
+  modalPhotos     = (listing.photos || []).map(p => p.original);
+  modalPhotoIndex = 0;
+
+  const price  = renderPrice(listing.price);
+  const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
+  const beds   = listing.bedrooms     ? `${listing.bedrooms} bed`        : '';
+  const baths  = listing.bathrooms    ? `${listing.bathrooms} bath`      : '';
+  const meta   = [guests, beds, baths].filter(Boolean).join(' · ');
+  const descParas = getFullDesc(listing);
+  const amenities = listing.amenities || [];
+
+  modal.querySelector('.modal-img').src           = modalPhotos[0] || '';
+  modal.querySelector('.modal-img').alt           = listing.name;
+  modal.querySelector('.modal-name').textContent  = listing.title || listing.name;
+  modal.querySelector('.modal-price').textContent = price;
+  modal.querySelector('.modal-meta').textContent  = meta;
+  modal.querySelector('.modal-desc').innerHTML    = descParas.map(p => `<p>${p}</p>`).join('');
+  modal.querySelector('.modal-book').href         = listing.bookingUrl;
+  modal.querySelector('.modal-amenities').innerHTML = amenities.map(a => `<li>${a}</li>`).join('');
+  modal.querySelector('.modal-amenities-wrap').style.display = amenities.length ? '' : 'none';
+
+  // Dots
+  const dotsEl = modal.querySelector('.modal-dots');
+  dotsEl.innerHTML = modalPhotos.map((_, i) =>
+    `<span class="modal-dot${i === 0 ? ' active' : ''}"></span>`
+  ).join('');
+
+  // Arrow visibility
+  const showArrows = modalPhotos.length > 1;
+  modal.querySelector('.modal-carousel-prev').style.display = showArrows ? '' : 'none';
+  modal.querySelector('.modal-carousel-next').style.display = showArrows ? '' : 'none';
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('prop-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function stepModalPhoto(dir) {
+  const modal = document.getElementById('prop-modal');
+  modalPhotoIndex = (modalPhotoIndex + dir + modalPhotos.length) % modalPhotos.length;
+  modal.querySelector('.modal-img').src = modalPhotos[modalPhotoIndex];
+  modal.querySelectorAll('.modal-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === modalPhotoIndex)
+  );
+}
+
+function initModal() {
+  const modal = buildModal();
+
+  modal.querySelector('.modal-overlay').addEventListener('click', closeModal);
+  modal.querySelector('.modal-close').addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape')     closeModal();
+    if (e.key === 'ArrowLeft')  stepModalPhoto(-1);
+    if (e.key === 'ArrowRight') stepModalPhoto(1);
+  });
+
+  modal.querySelector('.modal-carousel-prev').addEventListener('click', () => stepModalPhoto(-1));
+  modal.querySelector('.modal-carousel-next').addEventListener('click', () => stepModalPhoto(1));
+
+  // Card click → open modal (ignore carousel buttons and book link)
+  document.getElementById('listings-container').addEventListener('click', e => {
+    if (e.target.closest('.lc-btn'))   return;
+    if (e.target.closest('.btn-book')) return;
+    const card = e.target.closest('.listing-card');
+    if (!card) return;
+    const listing = listingRegistry.get(card.dataset.listingId);
+    if (listing) openModal(listing);
+  });
+}
+
+// ── Carousels ────────────────────────────────────────────────────────────────
 
 function initCarousels() {
   const container = document.getElementById('listings-container');
@@ -103,6 +239,8 @@ function initCarousels() {
   });
 }
 
+// ── Load + init ──────────────────────────────────────────────────────────────
+
 async function loadOtherProperties() {
   const container = document.getElementById('listings-container');
   if (!container) return;
@@ -118,6 +256,9 @@ async function loadOtherProperties() {
       return;
     }
 
+    // Register all listings by id
+    category.listings.forEach(l => listingRegistry.set(l.id, l));
+
     container.innerHTML = category.listings.map(renderCard).join('');
 
   } catch (err) {
@@ -129,7 +270,8 @@ async function loadOtherProperties() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadOtherProperties();
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadOtherProperties();
   initCarousels();
+  initModal();
 });
