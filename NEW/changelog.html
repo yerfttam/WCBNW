@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog — Whiskey Creek Beach NW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
+      --navy-dark: #1e2c3a;
+      --text-body: #4a4a4a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 16px; background: var(--cream); color: var(--text-body); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.85; transition: opacity 0.2s; }
+    .nav-links a:hover { opacity: 1; }
+    .nav-book-btn { background: var(--white) !important; color: var(--brown) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); }
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); z-index: 999; padding: 1.5rem 2rem; flex-direction: column; gap: 0.75rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); opacity: 0.85; }
+    .mobile-menu .mob-book { margin-top: 0.5rem; border: 1px solid rgba(246,239,229,0.6) !important; text-align: center; padding: 0.6rem !important; }
+
+    /* PAGE HERO */
+    .page-hero { background: var(--navy-dark); margin-top: 68px; padding: 4rem 2rem 3.5rem; text-align: center; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--cream); letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .page-hero-sub { font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.5); }
+
+    /* CHANGELOG */
+    .changelog-wrap { max-width: 760px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+    .cl-group { margin-bottom: 3.5rem; }
+    .cl-group-label { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--sage); margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(181,184,163,0.35); }
+
+    .cl-entry { display: grid; grid-template-columns: 110px 1fr; gap: 0 2rem; margin-bottom: 1.75rem; }
+    .cl-version { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.82rem; color: var(--navy); padding-top: 0.1rem; white-space: nowrap; }
+    .cl-content {}
+    .cl-title { font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 0.4rem; letter-spacing: 0.02em; }
+    .cl-items { list-style: none; }
+    .cl-items li { font-size: 0.8rem; color: var(--text-body); line-height: 1.65; padding-left: 1rem; position: relative; margin-bottom: 0.2rem; }
+    .cl-items li::before { content: '—'; position: absolute; left: 0; color: var(--sage); }
+
+    .cl-tag { display: inline-block; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.15rem 0.45rem; border-radius: 3px; margin-right: 0.35rem; vertical-align: middle; position: relative; top: -1px; }
+    .cl-tag--feat { background: rgba(41,59,78,0.12); color: var(--navy); }
+    .cl-tag--fix  { background: rgba(107,69,46,0.12); color: var(--brown); }
+
+    /* FOOTER */
+    footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 4rem; align-items: start; margin-bottom: 3rem; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-contact { min-width: 180px; }
+    .footer-contact h4 { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(181,184,163,0.2); text-align: center; font-size: 0.75rem; color: rgba(246,239,229,0.35); }
+    .site-version { font-size: 0.55rem; opacity: 0.4; margin-top: 0.3rem; display: block; color: inherit; text-decoration: none; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .cl-entry { grid-template-columns: 1fr; gap: 0.2rem; }
+      .cl-version { color: var(--sage); }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-brand { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-nav-placeholder"></div>
+  <script src="js/nav-loader.js" defer></script>
+
+  <div class="page-hero">
+    <h1 class="page-hero-title copperplate">Changelog</h1>
+    <p class="page-hero-sub">Build history &amp; release notes</p>
+  </div>
+
+  <div class="changelog-wrap">
+
+    <!-- ── v2.x ── -->
+    <div class="cl-group">
+      <p class="cl-group-label">Version 2 — March 2026</p>
+
+      <div class="cl-entry">
+        <span class="cl-version">v2.0.6</span>
+        <div class="cl-content">
+          <div class="cl-title">Modal polish</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Close button wrapped in dark navy circle for visibility</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v2.0.5</span>
+        <div class="cl-content">
+          <div class="cl-title">Modal layout</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Price and Book Now button placed side by side to reduce vertical height</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v2.0.4</span>
+        <div class="cl-content">
+          <div class="cl-title">Modal readability</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Description font size reduced to fit more content without scrolling</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v2.0.3</span>
+        <div class="cl-content">
+          <div class="cl-title">Modal background</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Modal panel background changed from cream to white</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v2.0.2</span>
+        <div class="cl-content">
+          <div class="cl-title">Property card descriptions</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Cards now show unique per-property descriptions pulled from Guesty (first real paragraph, skipping boilerplate)</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Description line clamp extended from 2 to 4 lines</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v2.0.1</span>
+        <div class="cl-content">
+          <div class="cl-title">Property card modal</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Clicking any property card opens a detail modal with full photo carousel, description, amenities grid, and Book Now button</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Keyboard arrow keys navigate photos; Escape closes modal</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Modal carousel arrows with dot indicators</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v2.0.0</span>
+        <div class="cl-content">
+          <div class="cl-title">Visual polish &amp; automation</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Page hero overlays removed — photos show through cleanly on all inner pages</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Replaced bkgd1-icon.jpg (crab baked in) with clean bkgd1.jpg across all sections</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Added wcb-4.jpg rocks photo as decorative divider band (newsletter section)</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>GitHub Actions nightly Guesty sync — listings.json auto-updates every night and triggers Render redeploy</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>New hero photo (DSC_0020 — designer-specified beach lineup shot)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── v1.1.x ── -->
+    <div class="cl-group">
+      <p class="cl-group-label">Version 1.1 — Early 2026</p>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.1.6</span>
+        <div class="cl-content">
+          <div class="cl-title">Mobile &amp; photo fixes</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Wave strip graphic no longer overlaps the feature section above it</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Mobile feature sections styled to match designer mockup</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Replaced duplicate cabin photo in Our Spaces grid with exterior shot</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.1.5</span>
+        <div class="cl-content">
+          <div class="cl-title">Shared footer &amp; housekeeping</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Footer converted to shared partial — version, links, and contact info now maintained in one file</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Copyright year updated to 2026</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Mobile feature section gap removed on About page</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Newsletter section hidden (pending content decision)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.1.4</span>
+        <div class="cl-content">
+          <div class="cl-title">Version numbers</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Version number added to footer on all pages for deploy verification</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Newsletter section hidden with display:none across all pages</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.1.3</span>
+        <div class="cl-content">
+          <div class="cl-title">Contact form</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Contact form wired to Formspree — submissions delivered to whiskeycreekbeachnw@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.1.2</span>
+        <div class="cl-content">
+          <div class="cl-title">Guesty booking links</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>All Book Now links updated to direct Guesty booking URLs per property</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Hardcoded cabin cards removed from home page — now driven by listings.json</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.1.1</span>
+        <div class="cl-content">
+          <div class="cl-title">Guesty integration</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Dynamic property cards on accommodations page — rendered from Guesty API data</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>listings.json sync script — fetches live pricing, photos, and descriptions from Guesty</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Category nav tabs auto-populated from listings data</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Photo carousels with prev/next arrows and dot indicators on each card</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── v1.0.x ── -->
+    <div class="cl-group">
+      <p class="cl-group-label">Version 1.0 — Initial Launch</p>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.0.8</span>
+        <div class="cl-content">
+          <div class="cl-title">Footer cleanup</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Removed redundant brand name text from footer</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.0.7</span>
+        <div class="cl-content">
+          <div class="cl-title">Mobile fixes</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Footer no longer overlaps content on mobile viewports</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.0.6</span>
+        <div class="cl-content">
+          <div class="cl-title">Mobile nav</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--fix">fix</span>Accommodations category tab bar wraps correctly on mobile instead of clipping</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.0.4 – v1.0.5</span>
+        <div class="cl-content">
+          <div class="cl-title">Version display</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Version number added to footer for deploy confirmation</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>Version number font size reduced</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cl-entry">
+        <span class="cl-version">v1.0.0 – v1.0.3</span>
+        <div class="cl-content">
+          <div class="cl-title">Initial site launch</div>
+          <ul class="cl-items">
+            <li><span class="cl-tag cl-tag--feat">feat</span>Full site built and deployed to Render — Home, Accommodations, About, Contact, Policies, Other Properties</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Shared nav partial with hamburger mobile menu</li>
+            <li><span class="cl-tag cl-tag--feat">feat</span>Book Now button styled as white with navy text</li>
+            <li><span class="cl-tag cl-tag--fix">fix</span>All photos copied into NEW/ for Render deployment</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /.changelog-wrap -->
+
+  <div id="site-footer-placeholder"></div>
+  <script src="js/footer-loader.js" defer></script>
+
+  <script>
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
+    });
+  </script>
+</body>
+</html>
