@@ -27,34 +27,36 @@ const propertyDropdown = [
 <nav
   id="site-nav"
   class:list={[
-    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-    transparent ? 'nav-transparent' : 'bg-midnight shadow-lg',
+    'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+    transparent ? 'nav-transparent' : 'bg-forest shadow-lg',
   ]}
 >
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-[72px]">
-    <!-- Logo -->
-    <a href="/" class="font-display text-white text-lg tracking-wide-caps whitespace-nowrap">
-      WHISKEY CREEK BEACH
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-[72px]">
+    <!-- Logo / Wordmark -->
+    <a href="/" class="flex items-center gap-3 group">
+      <span class="font-display text-white text-xl md:text-2xl font-light tracking-wide-caps transition-opacity duration-300 group-hover:opacity-80">
+        Whiskey Creek Beach
+      </span>
     </a>
 
     <!-- Desktop Links -->
-    <div class="hidden md:flex items-center gap-8">
+    <div class="hidden lg:flex items-center gap-8">
       {navLinks.map((link) =>
         link.label === 'Properties' ? (
           <div class="relative group">
             <a
               href={link.href}
-              class="text-white/80 hover:text-white font-body text-sm uppercase tracking-wide-caps transition-colors duration-200"
+              class="nav-link text-white/70 hover:text-white font-body text-[13px] uppercase tracking-wide-caps transition-colors duration-300 py-2"
             >
               {link.label}
             </a>
             <!-- Dropdown -->
-            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <div class="bg-midnight border border-white/10 rounded-sm shadow-xl py-2 min-w-[200px]">
+            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-1 group-hover:translate-y-0">
+              <div class="bg-forest-light/95 backdrop-blur-xl border border-white/10 rounded-lg shadow-2xl py-2 min-w-[220px]">
                 {propertyDropdown.map((item) => (
                   <a
                     href={item.href}
-                    class="block px-5 py-2.5 text-white/70 hover:text-white hover:bg-white/5 font-body text-sm transition-colors duration-150"
+                    class="block px-5 py-2.5 text-white/60 hover:text-white hover:bg-white/5 font-body text-sm transition-all duration-200"
                   >
                     {item.label}
                   </a>
@@ -65,7 +67,7 @@ const propertyDropdown = [
         ) : (
           <a
             href={link.href}
-            class="text-white/80 hover:text-white font-body text-sm uppercase tracking-wide-caps transition-colors duration-200"
+            class="nav-link text-white/70 hover:text-white font-body text-[13px] uppercase tracking-wide-caps transition-colors duration-300"
           >
             {link.label}
           </a>
@@ -78,20 +80,23 @@ const propertyDropdown = [
       href={bookingUrl}
       target="_blank"
       rel="noopener noreferrer"
-      class="hidden md:inline-block bg-moss text-white px-6 py-2 text-sm uppercase tracking-wide-caps rounded-sm hover:bg-moss-dark transition-colors duration-200"
+      class="hidden lg:inline-flex items-center gap-2 bg-ember text-white px-6 py-2.5 text-xs uppercase tracking-wide-caps font-medium transition-all duration-300 hover:bg-ember-dark hover:shadow-lg hover:shadow-ember/20"
     >
       Book Now
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+      </svg>
     </a>
 
     <!-- Mobile Hamburger -->
     <button
       id="mobile-menu-open"
-      class="md:hidden flex flex-col justify-center items-center gap-1.5 w-10 h-10"
+      class="lg:hidden flex flex-col justify-center items-center gap-[5px] w-10 h-10"
       aria-label="Open menu"
     >
-      <span class="block w-6 h-0.5 bg-white"></span>
-      <span class="block w-6 h-0.5 bg-white"></span>
-      <span class="block w-6 h-0.5 bg-white"></span>
+      <span class="block w-6 h-[1.5px] bg-white transition-all duration-300"></span>
+      <span class="block w-4 h-[1.5px] bg-white/70 transition-all duration-300"></span>
+      <span class="block w-6 h-[1.5px] bg-white transition-all duration-300"></span>
     </button>
   </div>
 </nav>
@@ -99,37 +104,41 @@ const propertyDropdown = [
 <!-- Mobile Overlay Menu -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-50 bg-midnight flex flex-col opacity-0 invisible transition-all duration-300 md:hidden"
+  class="fixed inset-0 z-50 bg-forest flex flex-col opacity-0 invisible transition-all duration-400 lg:hidden"
 >
   <!-- Close Button -->
-  <div class="flex justify-end px-6 h-[72px] items-center">
+  <div class="flex justify-between items-center px-6 h-[72px]">
+    <span class="font-display text-white text-xl font-light tracking-wide-caps">
+      Whiskey Creek
+    </span>
     <button
       id="mobile-menu-close"
       class="w-10 h-10 flex items-center justify-center"
       aria-label="Close menu"
     >
       <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
   <!-- Mobile Links -->
-  <div class="flex-1 flex flex-col px-8 pt-4 overflow-y-auto">
-    {navLinks.map((link) =>
+  <div class="flex-1 flex flex-col px-6 pt-8 overflow-y-auto">
+    {navLinks.map((link, i) =>
       link.label === 'Properties' ? (
         <div>
           <a
             href={link.href}
-            class="block py-4 text-white font-body text-lg uppercase tracking-wide-caps border-b border-white/10"
+            class="block py-4 text-white font-display text-3xl font-light border-b border-white/5"
+            style={`animation-delay: ${i * 0.06}s`}
           >
             {link.label}
           </a>
-          <div class="pl-6">
+          <div class="pl-4 py-2">
             {propertyDropdown.map((item) => (
               <a
                 href={item.href}
-                class="block py-3 text-white/60 hover:text-white font-body text-base transition-colors duration-150"
+                class="block py-2.5 text-white/40 hover:text-white font-body text-sm transition-colors duration-200"
               >
                 {item.label}
               </a>
@@ -139,7 +148,8 @@ const propertyDropdown = [
       ) : (
         <a
           href={link.href}
-          class="block py-4 text-white font-body text-lg uppercase tracking-wide-caps border-b border-white/10"
+          class="block py-4 text-white font-display text-3xl font-light border-b border-white/5"
+          style={`animation-delay: ${i * 0.06}s`}
         >
           {link.label}
         </a>
@@ -152,10 +162,13 @@ const propertyDropdown = [
         href={bookingUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="block w-full text-center bg-moss text-white px-6 py-4 text-sm uppercase tracking-wide-caps rounded-sm hover:bg-moss-dark transition-colors duration-200"
+        class="block w-full text-center bg-ember text-white px-6 py-4 text-sm uppercase tracking-wide-caps font-medium transition-colors duration-300 hover:bg-ember-dark"
       >
         Book Now
       </a>
+      <p class="text-center text-white/20 text-xs mt-4 font-body">
+        (844) 769-2322
+      </p>
     </div>
   </div>
 </div>
@@ -170,12 +183,12 @@ const propertyDropdown = [
     // Scroll-based background toggle (transparent mode only)
     if (transparent && nav) {
       const updateNav = () => {
-        if (window.scrollY > 50) {
+        if (window.scrollY > 80) {
           nav.classList.remove('nav-transparent');
-          nav.classList.add('bg-midnight', 'shadow-lg');
+          nav.classList.add('bg-forest/95', 'backdrop-blur-xl', 'shadow-lg');
         } else {
           nav.classList.add('nav-transparent');
-          nav.classList.remove('bg-midnight', 'shadow-lg');
+          nav.classList.remove('bg-forest/95', 'backdrop-blur-xl', 'shadow-lg');
         }
       };
       window.addEventListener('scroll', updateNav, { passive: true });
@@ -211,9 +224,3 @@ const propertyDropdown = [
     }
   });
 </script>
-
-<style>
-  .nav-transparent {
-    background-color: transparent;
-  }
-</style>

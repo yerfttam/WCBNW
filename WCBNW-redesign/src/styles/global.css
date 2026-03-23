@@ -1,66 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════
+   BASE — The ground layer
+   ═══════════════════════════════════════════ */
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply font-body text-midnight bg-drift;
+    @apply font-body text-forest bg-cloud;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   h1, h2, h3, h4 {
     @apply font-display;
-    line-height: 1.15;
+    line-height: 1.08;
   }
 
   ::selection {
-    @apply bg-copper/20 text-midnight;
+    @apply bg-fern/20 text-forest;
   }
 }
 
+/* ═══════════════════════════════════════════
+   COMPONENTS — Reusable patterns
+   ═══════════════════════════════════════════ */
 @layer components {
+
+  /* ── Typography ── */
   .section-label {
-    @apply text-xs font-body font-medium uppercase tracking-wider-caps text-stone;
+    @apply text-xs font-body font-semibold uppercase tracking-wider-caps text-stone;
   }
 
   .section-title {
-    @apply font-display text-4xl md:text-5xl font-bold text-midnight;
+    @apply font-display text-5xl md:text-6xl lg:text-7xl font-light text-forest;
+    letter-spacing: -0.02em;
   }
 
+  .section-title-light {
+    @apply font-display text-5xl md:text-6xl lg:text-7xl font-light text-cloud;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-3 bg-moss text-white font-body font-medium text-sm
-           tracking-wide-caps uppercase rounded-sm transition-all duration-200
-           hover:bg-moss-dark hover:shadow-lg;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-ember text-white font-body font-medium text-sm
+           tracking-wide-caps uppercase transition-all duration-300
+           hover:bg-ember-dark hover:shadow-lg hover:shadow-ember/20;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-8 py-3 border-2 border-midnight text-midnight font-body font-medium text-sm
-           tracking-wide-caps uppercase rounded-sm transition-all duration-200
-           hover:bg-midnight hover:text-white;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-forest/30 text-forest font-body font-medium text-sm
+           tracking-wide-caps uppercase transition-all duration-300
+           hover:bg-forest hover:text-cloud hover:border-forest;
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center px-8 py-3 border-2 border-white/70 text-white font-body font-medium text-sm
-           tracking-wide-caps uppercase rounded-sm transition-all duration-200
-           hover:bg-white hover:text-midnight;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/30 text-white font-body font-medium text-sm
+           tracking-wide-caps uppercase transition-all duration-300
+           hover:bg-white/10 hover:border-white/60;
   }
 
+  /* ── Cards ── */
   .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+    @apply transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl;
   }
 
+  /* ── Scroll reveal ── */
   .fade-section {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .fade-section.visible {
@@ -68,27 +86,172 @@
     transform: translateY(0);
   }
 
+  /* Staggered children */
+  .fade-section.visible .stagger-child {
+    animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .fade-section .stagger-child { opacity: 0; }
+  .fade-section.visible .stagger-child:nth-child(1) { animation-delay: 0s; }
+  .fade-section.visible .stagger-child:nth-child(2) { animation-delay: 0.12s; }
+  .fade-section.visible .stagger-child:nth-child(3) { animation-delay: 0.24s; }
+  .fade-section.visible .stagger-child:nth-child(4) { animation-delay: 0.36s; }
+  .fade-section.visible .stagger-child:nth-child(5) { animation-delay: 0.48s; }
+  .fade-section.visible .stagger-child:nth-child(6) { animation-delay: 0.6s; }
+
+  /* ── Fog layers (pure CSS atmospheric effect) ── */
+  .fog-layer {
+    position: absolute;
+    width: 300%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .fog-layer-1 {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(232, 228, 223, 0.02) 6%,
+      rgba(232, 228, 223, 0.06) 12%,
+      rgba(232, 228, 223, 0.09) 18%,
+      rgba(232, 228, 223, 0.06) 24%,
+      rgba(232, 228, 223, 0.02) 30%,
+      transparent 36%
+    );
+  }
+
+  .fog-layer-2 {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(232, 228, 223, 0.03) 10%,
+      rgba(232, 228, 223, 0.07) 20%,
+      rgba(232, 228, 223, 0.03) 30%,
+      transparent 40%
+    );
+  }
+
+  .fog-layer-3 {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(247, 245, 241, 0.02) 8%,
+      rgba(247, 245, 241, 0.05) 16%,
+      rgba(247, 245, 241, 0.02) 24%,
+      transparent 32%
+    );
+  }
+
+  /* ── Photo overlay ── */
   .photo-overlay {
     @apply absolute inset-0;
     background: linear-gradient(
       to bottom,
-      rgba(26, 38, 52, 0.6) 0%,
-      rgba(26, 38, 52, 0.2) 40%,
-      rgba(26, 38, 52, 0.3) 100%
+      rgba(15, 35, 24, 0.65) 0%,
+      rgba(15, 35, 24, 0.25) 40%,
+      rgba(15, 35, 24, 0.45) 100%
     );
   }
 }
 
-/* Scrollbar styling */
+/* ═══════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════ */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-drift;
+  @apply bg-cloud;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-stone/40 rounded-full;
+  @apply bg-driftwood rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-stone/60;
+  @apply bg-stone;
+}
+
+/* ═══════════════════════════════════════════
+   WIZARD — Step transitions
+   ═══════════════════════════════════════════ */
+.wizard-container {
+  position: relative;
+}
+
+.wizard-step {
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wizard-step[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.wizard-step[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ═══════════════════════════════════════════
+   WIZARD CARDS — Portal effect
+   ═══════════════════════════════════════════ */
+.wizard-portal {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.wizard-portal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 35, 24, 0.85) 0%,
+    rgba(15, 35, 24, 0.3) 50%,
+    rgba(15, 35, 24, 0.15) 100%
+  );
+  transition: all 0.6s ease;
+}
+
+.wizard-portal:hover::after {
+  background: linear-gradient(
+    to top,
+    rgba(15, 35, 24, 0.7) 0%,
+    rgba(15, 35, 24, 0.15) 50%,
+    rgba(15, 35, 24, 0.05) 100%
+  );
+}
+
+.wizard-portal img {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wizard-portal:hover img {
+  transform: scale(1.08);
+}
+
+/* ═══════════════════════════════════════════
+   ORGANIC DIVIDERS
+   ═══════════════════════════════════════════ */
+.divider-ridge {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.divider-ridge svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ═══════════════════════════════════════════
+   NAV transparency
+   ═══════════════════════════════════════════ */
+.nav-transparent {
+  background-color: transparent !important;
+  box-shadow: none !important;
 }

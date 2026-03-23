@@ -55,7 +55,7 @@ const formattedPrice = formatPrice(listing.price.base, listing.price.currency);
 
 <a
   href={href}
-  class="group block bg-white rounded-lg overflow-hidden shadow-md card-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-moss focus-visible:ring-offset-2"
+  class="group block bg-white rounded-xl overflow-hidden shadow-md card-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-fern focus-visible:ring-offset-2"
 >
   {/* Photo area */}
   <div class="relative aspect-[3/2] overflow-hidden">
@@ -81,14 +81,14 @@ const formattedPrice = formatPrice(listing.price.base, listing.price.currency);
 
     {/* Category badge */}
     {categoryLabel && (
-      <span class="absolute top-3 left-3 bg-midnight/80 text-white text-xs px-3 py-1 rounded-full uppercase tracking-widest font-body font-medium">
+      <span class="absolute top-3 left-3 bg-forest/80 backdrop-blur-sm text-white text-[10px] px-3 py-1 rounded-full uppercase tracking-wider-caps font-body font-medium">
         {categoryLabel}
       </span>
     )}
 
     {/* Photo count badge */}
     {photoCount > 0 && (
-      <span class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+      <span class="absolute bottom-3 right-3 bg-black/40 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full flex items-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="w-3.5 h-3.5"
@@ -109,47 +109,26 @@ const formattedPrice = formatPrice(listing.price.base, listing.price.currency);
 
   {/* Content area */}
   <div class="p-5">
-    <h3 class="font-display text-lg font-bold text-midnight mb-1">
+    <h3 class="font-display text-xl font-medium text-forest mb-1">
       {listing.name}
     </h3>
-    <p class="text-stone text-sm line-clamp-2 mb-3">
+    <p class="text-stone text-sm line-clamp-2 mb-3 font-light">
       {listing.summary}
     </p>
 
-    <div class="border-t border-fog my-3"></div>
+    <div class="border-t border-mist-dark my-3"></div>
 
     {/* Details row */}
     <div class="flex items-center gap-4 text-stone text-xs">
-      {/* Guests */}
       <span class="flex items-center gap-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
         {listing.accommodates} {listing.accommodates === 1 ? 'Guest' : 'Guests'}
       </span>
-
-      {/* Bedrooms */}
       <span class="flex items-center gap-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M2 4v16" />
           <path d="M2 8h18a2 2 0 0 1 2 2v10" />
           <path d="M2 17h20" />
@@ -157,19 +136,8 @@ const formattedPrice = formatPrice(listing.price.base, listing.price.currency);
         </svg>
         {listing.bedrooms} {listing.bedrooms === 1 ? 'Bed' : 'Beds'}
       </span>
-
-      {/* Bathrooms */}
       <span class="flex items-center gap-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3a1 1 0 0 1 1-1z" />
           <path d="M6 12V5a2 2 0 0 1 2-2h3v2.25" />
           <path d="M4 21h16" />
@@ -182,10 +150,10 @@ const formattedPrice = formatPrice(listing.price.base, listing.price.currency);
     <div class="mt-3 flex items-baseline justify-between">
       <div class="flex items-baseline gap-1">
         <span class="text-stone text-xs">From</span>
-        <span class="text-copper font-display text-xl font-bold">{formattedPrice}</span>
+        <span class="text-ember font-display text-xl font-medium">{formattedPrice}</span>
         <span class="text-stone text-xs">/night</span>
       </div>
-      <span class="text-moss text-sm font-medium group-hover:text-moss-dark transition-colors duration-200">
+      <span class="text-fern text-sm font-medium group-hover:text-fern-light transition-colors duration-300">
         View Details &rarr;
       </span>
     </div>

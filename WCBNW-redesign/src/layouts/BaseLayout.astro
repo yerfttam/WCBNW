@@ -22,7 +22,7 @@ const { title, description = 'Coastal vacation rentals on the Strait of Juan de 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
-<body>
+<body class="overflow-x-hidden">
   <Nav transparent={transparentNav} />
   <main>
     <slot />
@@ -40,7 +40,7 @@ const { title, description = 'Coastal vacation rentals on the Strait of Juan de 
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
     );
 
     document.querySelectorAll('.fade-section').forEach((el) => {
