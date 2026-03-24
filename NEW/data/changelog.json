@@ -1,13 +1,17 @@
 {
-  "generated": "2026-03-24T18:23:20Z",
+  "generated": "2026-03-24T18:25:45Z",
   "releases": [
     {
       "version": "v2.1.7",
       "date": "2026-03-24",
-      "datetime": "2026-03-24T18:20:39Z",
+      "datetime": "2026-03-24T18:25:31Z",
       "display_date": "March 24, 2026",
-      "display_time": "6:20 PM UTC",
+      "display_time": "6:25 PM UTC",
       "entries": [
+        {
+          "type": "feat",
+          "description": "move newsletter section into footer partial, consistent display across all pages"
+        },
         {
           "type": "feat",
           "description": "move newsletter section into footer partial, consistent display across all pages"
