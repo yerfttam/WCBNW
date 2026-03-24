@@ -1,6 +1,19 @@
 {
-  "generated": "2026-03-24T17:59:09Z",
+  "generated": "2026-03-24T18:09:09Z",
   "releases": [
+    {
+      "version": "v2.1.4",
+      "date": "2026-03-24",
+      "datetime": "2026-03-24T18:08:55Z",
+      "display_date": "March 24, 2026",
+      "display_time": "6:08 PM UTC",
+      "entries": [
+        {
+          "type": "fix",
+          "description": "update about page map image, stats (10 cabins/7 A-frames/6 tent/3 RV), beach background photo"
+        }
+      ]
+    },
     {
       "version": "v2.1.3",
       "date": "2026-03-24",
