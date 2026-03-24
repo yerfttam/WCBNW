@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whiskey Creek Beach NW — Cozy Beachfront Cabins in the PNW</title>
+  <title>About Us — Whiskey Creek Beach NW</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ── CSS Variables ─────────────────────────────── */
     :root {
-      --navy:   #293b4e;
-      --cream:  #f6efe5;
-      --sage:   #b5b8a3;
-      --brown:  #6b452e;
-      --white:  #ffffff;
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
       --navy-dark: #1e2c3a;
       --text-body: #4a4a4a;
     }
@@ -36,9 +36,7 @@
       font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy;
     }
 
-    /* ══════════════════════════════════════════════════
-       NAVIGATION
-    ══════════════════════════════════════════════════ */
+    /* NAVIGATION */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -51,24 +49,9 @@
       height: 68px;
       box-shadow: 0 2px 16px rgba(0,0,0,0.25);
     }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-shrink: 0;
-    }
-    .nav-logo-img {
-      height: 44px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      opacity: 0.95;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.75rem;
-      list-style: none;
-    }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
     .nav-links a {
       font-family: 'Josefin Sans', sans-serif;
       font-weight: 700;
@@ -79,7 +62,7 @@
       opacity: 0.85;
       transition: opacity 0.2s;
     }
-    .nav-links a:hover { opacity: 1; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
     .nav-links .dropdown { position: relative; }
     .nav-links .dropdown-menu {
       display: none;
@@ -88,7 +71,7 @@
       left: 50%;
       transform: translateX(-50%);
       background: var(--navy);
-      min-width: 180px;
+      min-width: 220px;
       border-top: 2px solid var(--brown);
       list-style: none;
       padding: 0.5rem 0;
@@ -142,10 +125,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
       opacity: 0.85;
     }
-    .mobile-menu .sub-links {
-      padding-left: 1rem;
-      display: flex; flex-direction: column; gap: 0.4rem;
-    }
+    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
     .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
     .mobile-menu .mob-book {
       margin-top: 0.5rem;
@@ -155,193 +135,68 @@
       border-bottom: 1px solid rgba(246,239,229,0.6) !important;
     }
 
-    /* ══════════════════════════════════════════════════
-       HERO
-    ══════════════════════════════════════════════════ */
-    .hero {
-      position: relative;
-      height: 90vh;
-      min-height: 540px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('photos/outdoor/DSC_0020.JPG') center/cover no-repeat;
-      animation: slowZoom 25s ease-in-out infinite alternate;
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-    @keyframes slowZoom {
-      from { transform: scale(1.02) translateZ(0); }
-      to   { transform: scale(1.08) translateZ(0); }
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(41,59,78,0.25) 0%, rgba(41,59,78,0.1) 60%, rgba(41,59,78,0.3) 100%);
-    }
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 55vh; min-height: 360px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('photos/outdoor/DSC_0318.JPG') center/cover no-repeat; animation: slowZoom 25s ease-in-out infinite alternate; }
+    @keyframes slowZoom { from { transform: scale(1.0); } to { transform: scale(1.06); } }
+    .page-hero-overlay { display: none; }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--cream); line-height: 1.15; }
+    .page-hero-sub { margin-top: 1rem; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
 
     /* ══════════════════════════════════════════════════
-       INTRO / TAGLINE
+       OUR STORY
     ══════════════════════════════════════════════════ */
-    .intro-section {
+    .story-section {
       background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
-      padding: 5rem 1.5rem;
-      text-align: center;
+      padding: 5.5rem 2rem;
     }
-    .intro-inner {
-      max-width: 720px;
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1100px;
       margin: 0 auto;
+      align-items: center;
     }
-    .intro-title {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(2rem, 4.5vw, 3rem);
+    .story-label {
+      font-weight: 700;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
       color: var(--brown);
-      line-height: 1.25;
-      margin-bottom: 1.75rem;
+      margin-bottom: 0.75rem;
     }
-    .intro-body {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 400;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--text-body);
-      max-width: 580px;
-      margin: 0 auto;
-    }
-
-    /* ══════════════════════════════════════════════════
-       OUR SPACES
-    ══════════════════════════════════════════════════ */
-    .spaces-section {
-      background: var(--navy);
-    }
-    .spaces-inner {
-      display: flex;
-      min-height: 400px;
-    }
-    .spaces-left {
-      width: 30%;
-      flex-shrink: 0;
-      background: var(--navy);
-      padding: 3.5rem 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .spaces-heading {
+    .story-title {
       font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
       font-size: clamp(1.6rem, 3vw, 2.2rem);
-      color: var(--cream);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-    }
-    .spaces-subtitle {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: rgba(246,239,229,0.7);
-      margin-bottom: 2rem;
-    }
-    .btn-outline-cream {
-      display: inline-block;
-      border: 1px solid rgba(246,239,229,0.65);
-      color: var(--cream);
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 0.6rem 1.4rem;
-      transition: background 0.2s, border-color 0.2s;
-      width: fit-content;
-    }
-    .btn-outline-cream:hover {
-      background: rgba(246,239,229,0.12);
-      border-color: var(--cream);
-    }
-    .spaces-right {
-      flex: 1;
-      overflow: hidden;
-    }
-    .spaces-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      height: 100%;
-    }
-    .spaces-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ══════════════════════════════════════════════════
-       CABIN CARDS
-    ══════════════════════════════════════════════════ */
-    .cabins-section {
-      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
-      padding: 3rem 2rem;
-    }
-    .cabins-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.25rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cabin-card {
-      background: var(--white);
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-      cursor: pointer;
-    }
-    .cabin-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(41,59,78,0.18);
-    }
-    .cabin-card-img {
-      width: 100%;
-      height: 170px;
-      object-fit: cover;
-      display: block;
-    }
-    .cabin-card-body {
-      padding: 1rem 1.1rem 1.25rem;
-    }
-    .cabin-card-name {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 0.88rem;
       color: var(--navy);
-      margin-bottom: 0.3rem;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
     }
-    .cabin-card-price {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.8rem;
-      color: var(--brown);
-      font-weight: 400;
+    .story-body {
+      font-size: 0.95rem;
+      line-height: 1.82;
+      color: var(--text-body);
+      margin-bottom: 1.1rem;
     }
-    .cabin-dots {
-      display: flex;
-      gap: 5px;
-      margin-top: 0.75rem;
+    .story-photo {
+      position: relative;
     }
-    .cabin-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--sage);
-      opacity: 0.5;
+    .story-photo img {
+      width: 100%;
+      height: 460px;
+      object-fit: cover;
+      object-position: center top;
+      box-shadow: 0 8px 32px rgba(41,59,78,0.18);
     }
-    .cabin-dot.active { opacity: 1; background: var(--brown); }
 
     /* ══════════════════════════════════════════════════
-       FEATURE SECTIONS
+       FEATURE SECTIONS  (same pattern as home)
     ══════════════════════════════════════════════════ */
     .feature-section {
       position: relative;
-      min-height: 560px;
+      min-height: 520px;
       display: flex;
       align-items: center;
       overflow: hidden;
@@ -351,26 +206,20 @@
       inset: 0;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
     }
     .feature-box {
       position: relative;
       z-index: 2;
       background: var(--cream);
       padding: 3.5rem 3rem;
-      width: 42%;
+      width: 44%;
       min-width: 300px;
     }
     .feature-box--right { margin-left: auto; }
     .feature-box--left  { margin-right: auto; }
     .feature-label {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 0.9rem;
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.9rem;
     }
     .feature-title {
       font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
@@ -380,133 +229,227 @@
       margin-bottom: 1.1rem;
     }
     .feature-body {
-      font-family: 'Josefin Sans', sans-serif;
       font-size: 0.92rem;
       line-height: 1.78;
       color: var(--text-body);
     }
-    /* Feature 1 split layout: photo left, cream box center-right, navy accent far right */
-    .feature-section--split {
-      background: var(--navy); /* navy shows in the right band uncovered by the photo */
-    }
-    .feature-section--split .feature-bg {
-      right: 18%; /* photo covers left 82%, leaving an 18% navy band on the right */
-    }
-    .feature-section--split .feature-box--right {
-      margin-left: auto;
-      margin-right: 8%; /* box straddles the photo/navy boundary */
-      width: 34%;
-    }
-    /* Feature section: navy band on LEFT, photo on right */
-    .feature-section--split-left {
-      background: var(--navy);
-    }
-    .feature-section--split-left .feature-bg {
-      left: 18%; /* photo covers right 82%, leaving an 18% navy band on the left */
-    }
-    .feature-section--split-left .feature-box--left {
-      margin-right: auto;
-      margin-left: 8%; /* box straddles the navy/photo boundary */
-      width: 34%;
-    }
-    /* Sailboat icon in the navy band of feature 3 */
-    .feature-sailboat-img {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      height: 160px;
-      width: auto;
-      opacity: 0.35;
-      filter: brightness(0) invert(1);
-      z-index: 3;
-    }
-    /* Wave lives at bottom of the navy band */
-    .feature-wave-img {
-      position: absolute;
-      bottom: 1.25rem;
-      right: 1.5rem;
-      height: 48px;
-      width: auto;
-      opacity: 0.4;
-      filter: brightness(0) invert(1);
-      z-index: 3;
-    }
-
-    /* ══════════════════════════════════════════════════
-       COZY STAYS / DIRECT BOOKING
-    ══════════════════════════════════════════════════ */
-    .cozy-section {
-      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
-      padding: 5rem 2rem 4rem;
-    }
-    .cozy-inner {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr 1fr;
-      gap: 3.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      align-items: center;
-    }
-    .cozy-crab {
-      width: 140px;
-      height: auto;
-      opacity: 0.18;
-      margin-top: 2rem;
-    }
-    .cozy-heading {
-      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      color: var(--brown);
-      line-height: 1.25;
-    }
-    .cozy-body {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--text-body);
-      margin-bottom: 2rem;
-    }
-    .direct-booking-title {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--brown);
-      margin-bottom: 1.5rem;
-    }
-    .direct-booking-list {
+    .feature-body ul {
+      margin-top: 0.9rem;
+      padding-left: 0;
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 1.4rem;
+      gap: 0.45rem;
     }
-    .direct-booking-list li {
-      display: flex;
+    .feature-body ul li::before {
+      content: '— ';
+      color: var(--sage);
+      font-weight: 700;
+    }
+
+    /* ══════════════════════════════════════════════════
+       PROPERTY MAP
+    ══════════════════════════════════════════════════ */
+    .map-section {
+      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
+      padding: 5rem 2rem;
+    }
+    .map-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
       align-items: center;
-      gap: 0.75rem;
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 0.9rem;
+    }
+    .map-text .story-label { margin-bottom: 0.75rem; }
+    .map-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 2.8vw, 2rem);
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+    .map-body {
+      font-size: 0.93rem;
+      line-height: 1.8;
       color: var(--text-body);
+      margin-bottom: 0.9rem;
     }
-    .direct-booking-list li::before {
-      content: '';
-      display: block;
-      width: 22px; height: 22px;
-      flex-shrink: 0;
-      border-radius: 50%;
-      border: 1.5px solid var(--sage);
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6 L5 9 L10 3' stroke='%23b5b8a3' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/60% no-repeat;
+    .map-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--sage);
     }
-    .cozy-cta-wrap {
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 2rem;
+      color: var(--brown);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-top: 0.35rem;
+    }
+    .map-image img {
+      width: 100%;
+      box-shadow: 0 6px 28px rgba(41,59,78,0.15);
+    }
+
+    /* ══════════════════════════════════════════════════
+       ACTIVITIES GRID
+    ══════════════════════════════════════════════════ */
+    .activities-section {
+      background: var(--navy);
+      padding: 5rem 2rem;
+    }
+    .activities-header {
       text-align: center;
-      margin-top: 3.5rem;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
     }
-    .btn-primary-brown {
-      display: inline-block;
-      background: var(--brown);
+    .activities-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.75rem;
+    }
+    .activities-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
       color: var(--cream);
-      font-family: 'Josefin Sans', sans-serif;
+      line-height: 1.25;
+    }
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .activity-card {
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(181,184,163,0.18);
+      transition: transform 0.25s, background 0.25s;
+    }
+    .activity-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.09);
+    }
+    .activity-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .activity-card-body { padding: 1.5rem; }
+    .activity-card-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: 1rem;
+      color: var(--cream);
+      margin-bottom: 0.6rem;
+    }
+    .activity-card-desc {
+      font-size: 0.87rem;
+      line-height: 1.7;
+      color: rgba(246,239,229,0.65);
+    }
+
+    /* ══════════════════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════════════════ */
+    .testimonials-section {
+      background: url('images/bkgds/bkgd2-icon.jpg') center/cover no-repeat;
+      padding: 5.5rem 2rem;
+    }
+    .testimonials-header {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 3rem;
+    }
+    .testimonials-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--brown); margin-bottom: 0.75rem;
+    }
+    .testimonials-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--navy);
+      line-height: 1.25;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: var(--white);
+      padding: 2rem 1.75rem;
+      position: relative;
+    }
+    .testimonial-quote {
+      font-size: 2.5rem;
+      line-height: 1;
+      color: var(--sage);
+      font-family: Georgia, serif;
+      margin-bottom: 0.5rem;
+    }
+    .testimonial-text {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text-body);
+      font-style: italic;
+      margin-bottom: 1.25rem;
+    }
+    .testimonial-author {
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    /* ══════════════════════════════════════════════════
+       CTA / COZY SECTION
+    ══════════════════════════════════════════════════ */
+    .cta-section {
+      background: var(--navy);
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .cta-label {
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.75rem;
+    }
+    .cta-title {
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: var(--cream);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(246,239,229,0.7);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+    .btn-primary-cream {
+      display: inline-block;
+      background: var(--cream);
+      color: var(--navy);
       font-weight: 700;
       font-size: 0.75rem;
       letter-spacing: 0.22em;
@@ -514,78 +457,53 @@
       padding: 0.9rem 2.8rem;
       transition: background 0.25s, transform 0.2s;
     }
-    .btn-primary-brown:hover { background: #7a4f35; transform: translateY(-2px); }
+    .btn-primary-cream:hover { background: var(--white); transform: translateY(-2px); }
 
     /* ══════════════════════════════════════════════════
-       NEWSLETTER / DEAL BANNER
+       NEWSLETTER / DEAL  (same as home)
     ══════════════════════════════════════════════════ */
     .newsletter-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 100px;
+      min-height: 200px;
     }
     .newsletter-left {
       background: var(--sage);
       padding: 3rem 3rem 3rem 3.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: flex; flex-direction: column; justify-content: center;
     }
     .newsletter-label {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 0.5rem;
+      font-weight: 700; font-size: 0.68rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 0.5rem;
     }
     .newsletter-title {
       font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 1rem;
-      color: var(--navy);
-      margin-bottom: 0.4rem;
+      font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem;
     }
     .newsletter-subtitle {
-      font-size: 0.85rem;
-      color: rgba(41,59,78,0.75);
-      line-height: 1.6;
-      font-style: italic;
+      font-size: 0.85rem; color: rgba(41,59,78,0.75);
+      line-height: 1.6; font-style: italic;
     }
     .newsletter-right {
       position: relative;
-      background: url('images/wcb-4.jpg') center 60%/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: url('images/wcb-4.jpg') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
     }
     .newsletter-right::before {
-      content: none;
+      content: ''; position: absolute; inset: 0; background: rgba(41,59,78,0.55);
     }
-    .deal-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 2rem;
-    }
+    .deal-content { position: relative; z-index: 1; text-align: center; padding: 2rem; }
     .deal-label {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 0.5rem;
+      font-weight: 700; font-size: 0.65rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 0.5rem;
     }
     .deal-title {
       font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: clamp(1rem, 2vw, 1.4rem);
-      color: var(--cream);
-      line-height: 1.3;
+      font-size: clamp(1rem, 2vw, 1.4rem); color: var(--cream); line-height: 1.3;
     }
 
     /* ══════════════════════════════════════════════════
-       FOOTER
+       FOOTER  (identical to home)
     ══════════════════════════════════════════════════ */
     footer {
       background: var(--navy);
@@ -593,138 +511,64 @@
       color: rgba(246,239,229,0.65);
     }
     .footer-inner {
-      max-width: 1160px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 4rem;
-      align-items: start;
-      margin-bottom: 3rem;
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 4rem; align-items: start; margin-bottom: 3rem;
     }
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .footer-logo-img {
-      height: 80px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      opacity: 0.9;
-    }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
     .footer-brand-name {
       font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 0.78rem;
-      color: var(--cream);
-      text-align: center;
-      line-height: 1.5;
-      letter-spacing: 0.05em;
+      font-size: 0.78rem; color: var(--cream); text-align: center;
+      line-height: 1.5; letter-spacing: 0.05em;
     }
-    .footer-nav {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem 3rem;
-    }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
     .footer-col h4 {
       font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-      font-size: 0.78rem;
-      color: var(--cream);
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
+      font-size: 0.78rem; color: var(--cream); margin-bottom: 1rem; letter-spacing: 0.05em;
     }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 0.55rem; }
-    .footer-col ul li a {
-      font-size: 0.8rem;
-      color: rgba(246,239,229,0.55);
-      transition: color 0.2s;
-    }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
     .footer-col ul li a:hover { color: var(--cream); }
     .footer-contact { min-width: 180px; }
     .footer-contact h4 {
-      font-family: 'Josefin Sans', sans-serif;
-      font-weight: 700;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--cream);
-      margin-bottom: 1rem;
+      font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--cream); margin-bottom: 1rem;
     }
-    .footer-contact p {
-      font-size: 0.82rem;
-      color: rgba(246,239,229,0.6);
-      line-height: 1.7;
-    }
-    .footer-contact a {
-      color: rgba(246,239,229,0.6);
-      transition: color 0.2s;
-    }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
     .footer-contact a:hover { color: var(--cream); }
     .footer-bottom {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(181,184,163,0.2);
-      text-align: center;
-      font-size: 0.75rem;
-      color: rgba(246,239,229,0.35);
-    }
-    .site-version { font-size: 0.55rem; opacity: 0.4; margin-top: 0.3rem; display: block; 
+      max-width: 1160px; margin: 0 auto; padding-top: 1.5rem;
+      border-top: 1px solid rgba(181,184,163,0.2); text-align: center;
+      font-size: 0.75rem; color: rgba(246,239,229,0.35);
     }
 
     /* ══════════════════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════════════════ */
     @media (max-width: 1024px) {
-      .cabins-grid { grid-template-columns: repeat(2, 1fr); }
-      .spaces-left { width: 35%; padding: 2.5rem 1.75rem; }
-      .feature-box { width: 50%; padding: 2.5rem 2rem; }
+      .story-inner, .map-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-photo img { height: 340px; }
+      .activities-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
       .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
       .footer-contact { grid-column: 2; grid-row: 2; }
+      .feature-box { width: 50%; padding: 2.5rem 2rem; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 1.25rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .hero { height: 70vh; }
-      .spaces-inner { flex-direction: column; }
-      .spaces-left { width: 100%; padding: 2.5rem 1.5rem; }
-      .spaces-grid { grid-template-columns: repeat(3, 1fr); height: 220px; }
-      .cabins-grid { grid-template-columns: repeat(2, 1fr); }
-      /* Feature sections: stack photo on top, text below */
-      .feature-section {
-        flex-direction: column;
-        min-height: unset;
-        align-items: stretch;
-        background: transparent;
-      }
-      .feature-bg {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        height: 260px;
-      }
-      .feature-box,
-      .feature-box--right,
-      .feature-box--left {
-        width: 100%;
-        min-width: unset;
-        margin: 0 !important;
-        padding: 2rem 1.5rem;
-      }
-      /* Remove navy band on mobile, reset split widths/margins */
-      .feature-section--split,
-      .feature-section--split-left { background: transparent; }
-      .feature-section--split .feature-bg,
-      .feature-section--split-left .feature-bg { left: 0; right: 0; }
-      .feature-section--split .feature-box--right,
-      .feature-section--split-left .feature-box--left { width: 100%; margin: 0; }
-      /* Hide decorative icons on mobile */
-      .feature-sailboat-img,
-      .feature-wave-img,
-      .cozy-crab { display: none; }
-      .cozy-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .page-hero { height: 45vh; }
+      .story-section, .map-section { padding: 3.5rem 1.25rem; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .feature-section { flex-direction: column; min-height: unset; align-items: stretch; }
+      .feature-bg { position: relative; width: 100%; height: 280px; }
+      .feature-box { width: 100%; min-width: unset; margin: 0 !important; padding: 2rem 1.5rem; }
+      .map-stats { gap: 1.25rem; }
       .newsletter-section { grid-template-columns: 1fr; }
       .newsletter-right { min-height: 160px; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -732,16 +576,195 @@
       .footer-brand { display: none; }
       .footer-nav { gap: 1rem 2rem; }
     }
-    @media (max-width: 480px) {
-      .cabins-grid { grid-template-columns: 1fr; }
-      .spaces-grid { grid-template-columns: 1fr 1fr; }
-      .spaces-grid img:last-child { display: none; }
-    }
+    .site-version { font-size: 0.55rem; opacity: 0.4; margin-top: 0.3rem; display: block; color: inherit; text-decoration: none; }
   </style>
 </head>
 <body>
-  <div id="site-nav-placeholder"></div>
+
+   <div id="site-nav-placeholder"></div>
   <script src="js/nav-loader.js" defer></script>
+
+  <!-- ══ PAGE HERO ════════════════════════════════════ -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title copperplate">About Us</h1>
+    </div>
+  </div>
+
+  <!-- ══ OUR STORY ════════════════════════════════════ -->
+  <section class="story-section">
+    <div class="story-inner">
+      <div class="story-text">
+        <p class="story-label">Our Story</p>
+        <h2 class="story-title copperplate">The Pinson Family &amp;<br>Whiskey Creek Beach NW</h2>
+        <p class="story-body">
+          The Whiskey Creek Beach NW property was purchased in 2017 by the Pinson family, and has since become a spectacular destination for peaceful getaways, family reunions, and even a few weddings.
+        </p>
+        <p class="story-body">
+          Located just 25 minutes outside Port Angeles, guests can enjoy the serenity and beauty of the Olympic Peninsula with easy access to town and some of the best hiking, hunting, fishing, and exploring you will ever find.
+        </p>
+        <p class="story-body">
+          There is so much to do in and around the Olympic National Forest — so take your time, breathe the salt air, and enjoy your stay.
+        </p>
+      </div>
+      <div class="story-photo">
+        <img src="images/about/family.jpg" alt="The Pinson family at Whiskey Creek Beach NW" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURE: OLYMPIC PENINSULA BASE CAMP ════════ -->
+  <div class="feature-section">
+    <div class="feature-bg" style="background-image: url('photos/outdoor/DSC_0335.jpg');"></div>
+    <div class="feature-box feature-box--left">
+      <p class="feature-label">Location</p>
+      <h2 class="feature-title copperplate">Your Base Camp for the Olympic Peninsula</h2>
+      <p class="feature-body">
+        Nearby Olympic National Park entrances make this location an excellent launching point for exploring the Peninsula and beyond.
+        <ul>
+          <li>Sol Duc Hot Springs</li>
+          <li>Hurricane Ridge</li>
+          <li>Hoh Rain Forest</li>
+          <li>Cape Flattery &amp; Shi Shi Beach</li>
+          <li>Towns of Forks &amp; Neah Bay</li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ PROPERTY MAP ══════════════════════════════════ -->
+  <section class="map-section">
+    <div class="map-inner">
+      <div class="map-text">
+        <p class="story-label">The Property</p>
+        <h2 class="map-title copperplate">One Stunning<br>Oceanfront Property</h2>
+        <p class="map-body">
+          Whiskey Creek Beach NW sits right on the Strait of Juan de Fuca, offering direct beach access from every accommodation. The property spans from the forested hillside down to the rocky shoreline.
+        </p>
+        <p class="map-body">
+          Walk the private beach, use the boat ramp for kayaking or fishing on the Strait, gather around a beachfront fire pit in the evening, and wake up to bald eagles soaring overhead.
+        </p>
+        <div class="map-stats">
+          <div class="stat-item">
+            <div class="stat-number copperplate">10</div>
+            <div class="stat-label">Cabins</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number copperplate">7</div>
+            <div class="stat-label">A-Frames</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number copperplate">6</div>
+            <div class="stat-label">Tent Sites</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number copperplate">3</div>
+            <div class="stat-label">RV Sites</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number copperplate">1</div>
+            <div class="stat-label">Boat Ramp</div>
+          </div>
+        </div>
+      </div>
+      <div class="map-image">
+        <img src="images/about/map.jpg" alt="Whiskey Creek Beach NW property map" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURE: PRIVATE BEACH ══════════════════════ -->
+  <div class="feature-section">
+    <div class="feature-bg" style="background-image: url('photos/outdoor/DSC_0560.JPG');"></div>
+    <div class="feature-box feature-box--right">
+      <p class="feature-label">The Setting</p>
+      <h2 class="feature-title copperplate">A Private Beach<br>All Your Own</h2>
+      <p class="feature-body">
+        Few places offer this level of shoreline access. At Whiskey Creek, the beach is part of your stay — not a destination you drive to. Explore the tide flats, spot seals and otters, and watch for migrating whales along the Strait.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ ACTIVITIES ════════════════════════════════════ -->
+  <section class="activities-section">
+    <div class="activities-header">
+      <p class="activities-label">Things To Do</p>
+      <h2 class="activities-title copperplate">What Awaits You Here</h2>
+    </div>
+    <div class="activities-grid">
+
+      <div class="activity-card">
+        <img class="activity-card-img" src="images/about/bonfire.jpg" alt="Beachfront bonfire" loading="lazy" />
+        <div class="activity-card-body">
+          <h3 class="activity-card-title copperplate">Beachfront Bonfires</h3>
+          <p class="activity-card-desc">Gather around a fire with family and friends as the tide comes in. Bonfire evenings on the Strait are something you'll remember for years.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <img class="activity-card-img" src="images/about/hiking.jpg" alt="Hiking the Olympic Peninsula" loading="lazy" />
+        <div class="activity-card-body">
+          <h3 class="activity-card-title copperplate">Explore &amp; Hike</h3>
+          <p class="activity-card-desc">From ancient rainforests to alpine ridgelines, Olympic National Park offers world-class trails just minutes from the property. Day trips for every ability level.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <img class="activity-card-img" src="photos/outdoor/DSC_0030.JPG" alt="Wildlife and ocean" loading="lazy" />
+        <div class="activity-card-body">
+          <h3 class="activity-card-title copperplate">Wildlife &amp; Water</h3>
+          <p class="activity-card-desc">Launch a kayak from the private boat ramp, fish the Strait, or simply watch bald eagles, seals, and the occasional whale pass by from your own stretch of beach.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ TESTIMONIALS ══════════════════════════════════ -->
+  <section class="testimonials-section">
+    <div class="testimonials-header">
+      <p class="testimonials-label">Guest Reviews</p>
+      <h2 class="testimonials-title copperplate">What Guests Say</h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">From the warm hospitality to the stunning surroundings, every moment at Whiskey Creek felt truly magical. The perfect place to recharge and reconnect with nature.</p>
+        <p class="testimonial-author">— Sophia M.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">Our stay was unforgettable. The beachfront cabin, the sound of the waves, and waking up to eagles flying overhead — we can't wait to come back!</p>
+        <p class="testimonial-author">— Emma J.</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">&ldquo;</div>
+        <p class="testimonial-text">Waking up to the sound of waves and sipping coffee on the deck while watching the sun rise over the Strait... pure bliss. A must-visit for any nature lover.</p>
+        <p class="testimonial-author">— Liam R.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CTA ══════════════════════════════════════════ -->
+  <section class="cta-section">
+    <p class="cta-label">Ready to Begin Your Adventure?</p>
+    <h2 class="cta-title copperplate">Embrace the Peace of Whiskey Creek</h2>
+    <p class="cta-body">Discover a serene retreat on the Pacific shore. Book your stay and experience relaxation, adventure, and unforgettable memories.</p>
+    <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="btn-primary-cream">Book Now</a>
+  </section>
+
+    <!-- ══ NEWSLETTER / DEAL ═══════════════════════════ -->
+  <section class="newsletter-section" id="specials">
+    <div class="newsletter-left"></div>
+    <div class="newsletter-right"></div>
+  </section>
+
   <div id="site-footer-placeholder"></div>
   <script src="js/footer-loader.js" defer></script>
 
