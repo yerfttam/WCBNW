@@ -1,6 +1,19 @@
 {
-  "generated": "2026-03-24T18:09:09Z",
+  "generated": "2026-03-24T18:10:50Z",
   "releases": [
+    {
+      "version": "v2.1.5",
+      "date": "2026-03-24",
+      "datetime": "2026-03-24T18:10:37Z",
+      "display_date": "March 24, 2026",
+      "display_time": "6:10 PM UTC",
+      "entries": [
+        {
+          "type": "fix",
+          "description": "simplify check-in to single 3:00 PM line, separate check-out row"
+        }
+      ]
+    },
     {
       "version": "v2.1.4",
       "date": "2026-03-24",
