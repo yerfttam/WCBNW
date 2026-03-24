@@ -1,6 +1,19 @@
 {
-  "generated": "2026-03-24T18:25:45Z",
+  "generated": "2026-03-24T18:27:43Z",
   "releases": [
+    {
+      "version": "v2.1.8",
+      "date": "2026-03-24",
+      "datetime": "2026-03-24T18:27:27Z",
+      "display_date": "March 24, 2026",
+      "display_time": "6:27 PM UTC",
+      "entries": [
+        {
+          "type": "fix",
+          "description": "reduce cozy heading font size on home page"
+        }
+      ]
+    },
     {
       "version": "v2.1.7",
       "date": "2026-03-24",
