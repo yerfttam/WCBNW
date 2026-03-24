@@ -84,9 +84,7 @@ function renderCard(listing, slug) {
   const cardMod  = CARD_CLASS[slug] || '';
   const price    = renderPrice(listing.price);
   const guests   = listing.accommodates ? `${listing.accommodates} guests` : '';
-  const beds     = listing.bedrooms     ? `${listing.bedrooms} bd`         : '';
-  const baths    = listing.bathrooms    ? `${listing.bathrooms} ba`        : '';
-  const meta     = [guests, beds, baths].filter(Boolean).join(' &middot; ');
+  const meta     = [guests].filter(Boolean).join(' &middot; ');
 
   // Encode photo URLs as a data attribute for the carousel JS
   const photoData = JSON.stringify(photos.map(p => p.original));
@@ -198,9 +196,7 @@ function openModal(listing) {
 
   const price  = renderPrice(listing.price);
   const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
-  const beds   = listing.bedrooms     ? `${listing.bedrooms} bed`        : '';
-  const baths  = listing.bathrooms    ? `${listing.bathrooms} bath`      : '';
-  const meta   = [guests, beds, baths].filter(Boolean).join(' · ');
+  const meta   = [guests].filter(Boolean).join(' · ');
   const descParas = getFullDesc(listing);
   const amenities = listing.amenities || [];
 
