@@ -1,6 +1,19 @@
 {
-  "generated": "2026-03-24T19:19:03Z",
+  "generated": "2026-03-24T19:22:59Z",
   "releases": [
+    {
+      "version": "v2.2.0",
+      "date": "2026-03-24",
+      "datetime": "2026-03-24T19:22:42Z",
+      "display_date": "March 24, 2026",
+      "display_time": "7:22 PM UTC",
+      "entries": [
+        {
+          "type": "fix",
+          "description": "show full family photo, increase version number readability"
+        }
+      ]
+    },
     {
       "version": "v2.1.8",
       "date": "2026-03-24",
