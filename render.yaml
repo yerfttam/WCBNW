@@ -12,7 +12,7 @@ services:
     runtime: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: gunicorn app:app --timeout 120
     envVars:
       - key: ADMIN_PASSWORD
         sync: false          # set manually in Render dashboard
