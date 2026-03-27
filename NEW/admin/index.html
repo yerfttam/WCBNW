@@ -35,6 +35,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      position: relative;
     }
     header img {
       height: 52px;
@@ -124,7 +125,7 @@
     }
     .bubble-wrap.user .bubble {
       background: var(--navy);
-      color: var(--cream);
+      color: var(--grey);
       border-bottom-right-radius: 4px;
     }
     .bubble-wrap.bot .bubble {
@@ -310,8 +311,9 @@
   function addNewChatButton() {
     const btn = document.createElement('button');
     btn.id = 'new-chat-btn';
-    btn.textContent = 'Website Assistant Chat';
-    btn.style.cssText = 'display:block;margin:8px auto 0;background:none;border:none;color:var(--sage);font-size:0.8rem;cursor:pointer;font-family:inherit;letter-spacing:0.04em;';
+    btn.title = 'Start a new chat';
+    btn.textContent = '↺';
+    btn.style.cssText = 'position:absolute;top:12px;right:16px;background:none;border:none;color:var(--sage);font-size:1.3rem;cursor:pointer;line-height:1;';
     btn.addEventListener('click', newChat);
     document.querySelector('header').appendChild(btn);
   }
