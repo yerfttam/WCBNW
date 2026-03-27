@@ -259,6 +259,89 @@ Located in `.github/workflows/sync-guesty.yml`
 
 ---
 
+## Making Changes with Claude Code
+
+This project was built and is maintained using **Claude Code** — an AI-powered coding
+assistant that understands the entire codebase. If you have access to it, it's the
+fastest way to make changes safely.
+
+### What is Claude Code?
+
+Claude Code is a CLI tool you run in your terminal inside the project directory.
+You describe what you want in plain English, and it reads the code, makes the changes,
+and can commit and push for you. Think of it as a very capable assistant who has read
+every file in the project.
+
+Install it via: https://docs.anthropic.com/en/docs/claude-code
+
+### Connecting Claude Code to This Project
+
+1. Clone the GitHub repo to your local machine
+2. `cd` into the project directory
+3. Run `claude` in your terminal
+4. That's it — Claude Code automatically reads `CLAUDE.md` on startup
+
+### CLAUDE.md — The Key File
+
+**`CLAUDE.md` in the repo root is the most important file for a new developer.**
+It is the project's instruction manual, written specifically for Claude Code but
+equally useful for any human developer. It covers:
+
+- Project structure and what each folder does
+- How deployment works
+- Every third-party service (credentials, endpoints, what they do)
+- Style conventions (colors, fonts, CSS patterns)
+- Mobile/responsive requirements
+- How to update the version number
+- Commit message format
+- Known quirks and things left undone
+
+**Read `CLAUDE.md` first, before touching anything.**
+
+### Typical Claude Code Workflow
+
+```
+# Start a session
+$ claude
+
+# Describe what you want
+> Update the contact page phone number to (555) 123-4567
+
+# Claude reads the relevant files, makes the change, shows you a diff
+# You approve, it commits and pushes
+
+# For bigger tasks
+> Add a new FAQ page with the same nav/footer pattern as the other pages
+```
+
+### What Claude Code Knows About This Project
+
+When you start a session, Claude Code has full context of:
+- Every HTML page and how they're structured
+- The shared nav/footer partial system
+- The Guesty sync pipeline
+- All third-party integrations
+- The version numbering convention
+- Render hosting and deploy flow
+- Mobile responsiveness requirements
+
+You can ask it things like:
+- *"What would break if I changed the nav partial?"*
+- *"Why does the accommodations page work the way it does?"*
+- *"Show me all the places that reference Guesty"*
+- *"Run a mobile preview of the about page"*
+
+### Permissions / Secrets
+
+Claude Code will need read/write access to the repo. It will **not** have access
+to GitHub Secrets (those live in GitHub's encrypted store) — but it knows what
+secrets exist and what they're for, from `CLAUDE.md`.
+
+If you need to rotate a secret (e.g. Guesty API key), update it in:
+**GitHub → repo → Settings → Secrets and variables → Actions**
+
+---
+
 ## If Something Breaks
 
 | Symptom | Likely cause | Where to look |
