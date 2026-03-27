@@ -285,6 +285,24 @@ How it works:
 
 **Render dashboard:** render.com — log in to see deploy history and logs.
 
+### Staging environment
+
+There are two Render sites:
+
+| Environment | URL | Branch |
+|-------------|-----|--------|
+| Production | https://www.whiskeycreekbeachnw.com | `main` |
+| Staging | https://wcbnw-staging.onrender.com | `staging` |
+
+**Always make changes on the `staging` branch first.** Once you've verified the change looks correct at the staging URL, merge to `main` to push it live. This protects the live site from broken changes.
+
+**The workflow in plain English:**
+1. Tell Claude Code what you want to change — it works on the `staging` branch
+2. Wait ~2 minutes for staging to deploy
+3. Check https://wcbnw-staging.onrender.com — does it look right?
+4. Say "looks good, merge to main" — Claude handles the merge and push
+5. Production updates within ~2 minutes
+
 ---
 
 ## Third-Party Services
@@ -388,8 +406,7 @@ Located in `.github/workflows/sync-guesty.yml`
 
 ## Things That Are Intentionally Left Undone
 
-- **`policies.html`** still has an inline nav (not using the shared partial). It works fine;
-  it just means nav changes need to be made there separately too. Migrate it when convenient.
+- All pages now use the shared nav partial — including `policies.html`, migrated in v2.2.1.
 - **Newsletter section** — visible on all pages as a decorative visual band only.
   No email form is wired up. If you want to add a newsletter, wire `.newsletter-left`
   and `.newsletter-right` to Mailchimp or similar.
