@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>WCBNW — Website Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:  #293b4e;
+      --cream: #f6efe5;
+      --sage:  #b5b8a3;
+      --brown: #6b452e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--navy);
+      color: var(--cream);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    header h1 {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    header span {
+      font-size: 0.75rem;
+      color: var(--sage);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Password screen ── */
+    #lock-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      gap: 16px;
+    }
+    #lock-screen .lock-icon { font-size: 2.5rem; }
+    #lock-screen h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    #lock-screen p {
+      font-size: 0.85rem;
+      color: #666;
+      text-align: center;
+      max-width: 260px;
+      line-height: 1.5;
+    }
+    #password-input {
+      width: 100%;
+      max-width: 300px;
+      padding: 14px 16px;
+      border: 2px solid var(--sage);
+      border-radius: 10px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 1rem;
+      background: white;
+      color: var(--navy);
+      text-align: center;
+      letter-spacing: 0.1em;
+      outline: none;
+    }
+    #password-input:focus { border-color: var(--navy); }
+    #lock-error {
+      color: #c0392b;
+      font-size: 0.82rem;
+      display: none;
+    }
+
+    /* ── Chat screen ── */
+    #chat-screen {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #chat-screen.active { display: flex; }
+
+    #messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .bubble-wrap {
+      display: flex;
+      flex-direction: column;
+      max-width: 82%;
+    }
+    .bubble-wrap.user  { align-self: flex-end; align-items: flex-end; }
+    .bubble-wrap.bot   { align-self: flex-start; align-items: flex-start; }
+
+    .bubble {
+      padding: 11px 15px;
+      border-radius: 18px;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .bubble-wrap.user .bubble {
+      background: var(--navy);
+      color: var(--cream);
+      border-bottom-right-radius: 4px;
+    }
+    .bubble-wrap.bot .bubble {
+      background: white;
+      color: var(--navy);
+      border: 1px solid #e0d8cc;
+      border-bottom-left-radius: 4px;
+    }
+    .bubble-label {
+      font-size: 0.7rem;
+      color: #999;
+      margin: 3px 6px 0;
+      letter-spacing: 0.03em;
+    }
+
+    /* Typing indicator */
+    .typing-bubble {
+      background: white;
+      border: 1px solid #e0d8cc;
+      border-radius: 18px;
+      border-bottom-left-radius: 4px;
+      padding: 13px 16px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      background: var(--sage);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30%            { transform: translateY(-6px); }
+    }
+
+    /* ── Input bar ── */
+    #input-bar {
+      background: white;
+      border-top: 1px solid #e0d8cc;
+      padding: 10px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+    #message-input {
+      flex: 1;
+      padding: 11px 14px;
+      border: 1px solid #ccc;
+      border-radius: 22px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.95rem;
+      resize: none;
+      outline: none;
+      line-height: 1.4;
+      max-height: 120px;
+      overflow-y: auto;
+      background: var(--cream);
+      color: var(--navy);
+    }
+    #message-input:focus { border-color: var(--navy); }
+    #send-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: var(--navy);
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    #send-btn:disabled { background: var(--sage); cursor: default; }
+
+    /* Utility */
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      background: var(--navy);
+      color: var(--cream);
+      width: 100%;
+      max-width: 300px;
+    }
+
+    #new-chat-btn {
+      background: none;
+      border: none;
+      color: var(--sage);
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-family: 'Josefin Sans', sans-serif;
+      letter-spacing: 0.04em;
+      padding: 2px 6px;
+    }
+    #new-chat-btn:hover { color: var(--cream); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Whiskey Creek Beach NW</h1>
+  <span id="header-right">Website Assistant</span>
+</header>
+
+<!-- Password screen -->
+<div id="lock-screen">
+  <div class="lock-icon">🔒</div>
+  <h2>Website Assistant</h2>
+  <p>Enter your password to make updates to the website.</p>
+  <input id="password-input" type="password" placeholder="Password" autocomplete="current-password" />
+  <p id="lock-error">Incorrect password — please try again.</p>
+  <button class="btn" id="unlock-btn">Sign In</button>
+</div>
+
+<!-- Chat screen -->
+<div id="chat-screen">
+  <div id="messages"></div>
+  <div id="input-bar">
+    <textarea id="message-input" rows="1" placeholder="Ask me to update the website…"></textarea>
+    <button id="send-btn" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script>
+  // ── Config ────────────────────────────────────────────────────────────────
+  const API_URL = 'https://wcbnw-admin-api.onrender.com';
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  let password = '';
+  let busy = false;
+
+  // ── Elements ──────────────────────────────────────────────────────────────
+  const lockScreen    = document.getElementById('lock-screen');
+  const chatScreen    = document.getElementById('chat-screen');
+  const passwordInput = document.getElementById('password-input');
+  const lockError     = document.getElementById('lock-error');
+  const unlockBtn     = document.getElementById('unlock-btn');
+  const messagesEl    = document.getElementById('messages');
+  const messageInput  = document.getElementById('message-input');
+  const sendBtn       = document.getElementById('send-btn');
+  const headerRight   = document.getElementById('header-right');
+
+  // ── Password ──────────────────────────────────────────────────────────────
+  unlockBtn.addEventListener('click', attemptUnlock);
+  passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') attemptUnlock(); });
+
+  async function attemptUnlock() {
+    const pw = passwordInput.value.trim();
+    if (!pw) return;
+
+    // Test password against /chat with an empty-ish ping
+    unlockBtn.disabled = true;
+    unlockBtn.textContent = 'Checking…';
+
+    try {
+      const res = await fetch(`${API_URL}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pw, message: 'hello' })
+      });
+
+      if (res.status === 401) {
+        lockError.style.display = 'block';
+      } else {
+        password = pw;
+        const data = await res.json();
+        lockScreen.style.display = 'none';
+        chatScreen.classList.add('active');
+        addNewChatButton();
+        // Show the greeting response
+        addBubble('bot', data.response || 'Hi! How can I help you update the website today?');
+      }
+    } catch {
+      lockError.style.display = 'block';
+      lockError.textContent = 'Could not connect — please try again.';
+    }
+
+    unlockBtn.disabled = false;
+    unlockBtn.textContent = 'Sign In';
+  }
+
+  // ── New chat button in header ─────────────────────────────────────────────
+  function addNewChatButton() {
+    headerRight.innerHTML = '';
+    const btn = document.createElement('button');
+    btn.id = 'new-chat-btn';
+    btn.textContent = 'New Chat';
+    btn.addEventListener('click', newChat);
+    headerRight.appendChild(btn);
+  }
+
+  async function newChat() {
+    await fetch(`${API_URL}/reset`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password })
+    });
+    messagesEl.innerHTML = '';
+    addBubble('bot', 'Fresh start! What would you like to update on the website?');
+  }
+
+  // ── Messaging ─────────────────────────────────────────────────────────────
+  sendBtn.addEventListener('click', sendMessage);
+  messageInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Auto-resize textarea
+  messageInput.addEventListener('input', () => {
+    messageInput.style.height = 'auto';
+    messageInput.style.height = messageInput.scrollHeight + 'px';
+  });
+
+  async function sendMessage() {
+    const text = messageInput.value.trim();
+    if (!text || busy) return;
+
+    addBubble('user', text);
+    messageInput.value = '';
+    messageInput.style.height = 'auto';
+
+    const typingEl = addTyping();
+    setBusy(true);
+
+    try {
+      const res = await fetch(`${API_URL}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, message: text })
+      });
+      const data = await res.json();
+      typingEl.remove();
+      addBubble('bot', data.error ? `Sorry, something went wrong: ${data.error}` : data.response);
+    } catch {
+      typingEl.remove();
+      addBubble('bot', 'Sorry, I had trouble connecting. Please try again.');
+    }
+
+    setBusy(false);
+  }
+
+  // ── UI helpers ────────────────────────────────────────────────────────────
+  function addBubble(role, text) {
+    const wrap = document.createElement('div');
+    wrap.className = `bubble-wrap ${role}`;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.textContent = text;
+
+    const label = document.createElement('div');
+    label.className = 'bubble-label';
+    label.textContent = role === 'user' ? 'You' : 'Assistant';
+
+    wrap.appendChild(bubble);
+    wrap.appendChild(label);
+    messagesEl.appendChild(wrap);
+    scrollToBottom();
+    return wrap;
+  }
+
+  function addTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'bubble-wrap bot';
+    wrap.innerHTML = `<div class="typing-bubble"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
+    messagesEl.appendChild(wrap);
+    scrollToBottom();
+    return wrap;
+  }
+
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function setBusy(state) {
+    busy = state;
+    sendBtn.disabled = state;
+    messageInput.disabled = state;
+  }
+</script>
+</body>
+</html>
