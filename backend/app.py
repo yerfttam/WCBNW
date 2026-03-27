@@ -2,11 +2,16 @@ import os
 import base64
 import requests
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 import anthropic
 
 app = Flask(__name__)
-CORS(app)
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+    return response
 
 # Environment variables (set these in Render dashboard)
 ADMIN_PASSWORD   = os.environ.get('ADMIN_PASSWORD', 'changeme')
