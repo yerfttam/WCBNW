@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-27T15:43:21Z",
+  "generated": "2026-03-27T15:50:02Z",
   "releases": [
     {
       "version": "v2.2.0",
@@ -125,10 +125,14 @@
     {
       "version": "v2.1.0",
       "date": "2026-03-27",
-      "datetime": "2026-03-27T15:43:05Z",
+      "datetime": "2026-03-27T15:49:46Z",
       "display_date": "March 27, 2026",
-      "display_time": "3:43 PM UTC",
+      "display_time": "3:49 PM UTC",
       "entries": [
+        {
+          "type": "docs",
+          "description": "remove GitHub Desktop dependency, use Claude Code to clone; replace owner with website developer"
+        },
         {
           "type": "docs",
           "description": "add GitHub repo URL and plain-English explanation of what GitHub is"
