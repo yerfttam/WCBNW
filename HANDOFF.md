@@ -1,7 +1,6 @@
-# Technical Handoff — Whiskey Creek Beach NW (WCBNW)
+# WCBNW Website Guide
 
-> This document is for the person who inherits technical ownership of this website.
-> It covers everything you need to understand, maintain, and update the site.
+> Everything you need to understand, maintain, and update the Whiskey Creek Beach NW website.
 
 ---
 
@@ -23,7 +22,7 @@ update it.
 | Property address | 1385 Whiskey Creek Beach Rd, Port Angeles, WA 98363 |
 | Phone | (844) 769-2322 |
 | Email | whiskeycreekbeachnw@gmail.com |
-| Booking platform | reservenow.com |
+| Booking platform | Guesty (app.guesty.com) |
 | Live site | www.whiskeycreekbeachnw.com |
 
 ---
@@ -223,7 +222,7 @@ WCBNW/
     sync-guesty.yml      ← GitHub Actions job that runs sync-guesty.py every day
   render.yaml            ← Render hosting config (one line: publish NEW/)
   CLAUDE.md              ← AI assistant instructions (also useful reference for developers)
-  HANDOFF.md             ← This file
+  HANDOFF.md             ← This guide (source for the WCBNW Website Guide PDF)
 ```
 
 ### Pages
