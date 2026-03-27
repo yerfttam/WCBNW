@@ -27,24 +27,18 @@
 
     /* ── Header ── */
     header {
-      background: var(--navy);
-      color: var(--cream);
-      padding: 14px 20px;
+      background: var(--cream);
+      border-bottom: 2px solid var(--navy);
+      padding: 12px 20px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       flex-shrink: 0;
     }
-    header h1 {
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    header span {
-      font-size: 0.75rem;
-      color: var(--sage);
-      letter-spacing: 0.05em;
+    header img {
+      height: 52px;
+      width: auto;
     }
 
     /* ── Password screen ── */
@@ -227,24 +221,12 @@
       max-width: 300px;
     }
 
-    #new-chat-btn {
-      background: none;
-      border: none;
-      color: var(--sage);
-      font-size: 0.8rem;
-      cursor: pointer;
-      font-family: 'Josefin Sans', sans-serif;
-      letter-spacing: 0.04em;
-      padding: 2px 6px;
-    }
-    #new-chat-btn:hover { color: var(--cream); }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Whiskey Creek Beach NW</h1>
-  <span id="header-right">Website Assistant</span>
+  <img src="../images/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
 </header>
 
 <!-- Password screen -->
@@ -283,7 +265,6 @@
   const messagesEl    = document.getElementById('messages');
   const messageInput  = document.getElementById('message-input');
   const sendBtn       = document.getElementById('send-btn');
-  const headerRight   = document.getElementById('header-right');
 
   // ── Password ──────────────────────────────────────────────────────────────
   unlockBtn.addEventListener('click', attemptUnlock);
@@ -326,12 +307,12 @@
 
   // ── New chat button in header ─────────────────────────────────────────────
   function addNewChatButton() {
-    headerRight.innerHTML = '';
     const btn = document.createElement('button');
     btn.id = 'new-chat-btn';
     btn.textContent = 'New Chat';
+    btn.style.cssText = 'display:block;margin:8px auto 0;background:none;border:none;color:var(--sage);font-size:0.8rem;cursor:pointer;font-family:inherit;letter-spacing:0.04em;';
     btn.addEventListener('click', newChat);
-    headerRight.appendChild(btn);
+    document.querySelector('header').appendChild(btn);
   }
 
   async function newChat() {
