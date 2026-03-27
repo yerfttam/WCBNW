@@ -275,84 +275,92 @@ Located in `.github/workflows/sync-guesty.yml`
 
 ## Making Changes with Claude Code
 
-This project was built and is maintained using **Claude Code** — an AI-powered coding
-assistant that understands the entire codebase. If you have access to it, it's the
-fastest way to make changes safely.
+This project is maintained using **Claude Code** — an AI assistant that understands
+the entire codebase. You describe what you want in plain English, it reads the files,
+makes the changes, and publishes the update. No coding experience required.
 
-### What is Claude Code?
+---
 
-Claude Code is a CLI tool you run in your terminal inside the project directory.
-You describe what you want in plain English, and it reads the code, makes the changes,
-and can commit and push for you. Think of it as a very capable assistant who has read
-every file in the project.
+### Step 1 — Get the code onto your computer
 
-Install it via: https://docs.anthropic.com/en/docs/claude-code
+The website's files live on GitHub (a cloud service for storing code). You need a
+copy of them on your computer before you can work on anything.
 
-### Connecting Claude Code to This Project
+1. Download and install **GitHub Desktop**: https://desktop.github.com
+2. Sign in with the GitHub account credentials from the owner
+3. In GitHub Desktop: **File → Clone Repository**
+4. Find the WCBNW repository in the list and click **Clone**
+5. Choose a folder on your computer where you want to store it (e.g. your Documents folder)
 
-1. Clone the GitHub repo to your local machine
-2. `cd` into the project directory
-3. Run `claude` in your terminal
-4. That's it — Claude Code automatically reads `CLAUDE.md` on startup
+You now have a local copy of all the website files. GitHub Desktop keeps it in sync
+with the live version.
 
-### CLAUDE.md — The Key File
+---
 
-**`CLAUDE.md` in the repo root is the most important file for a new developer.**
-It is the project's instruction manual, written specifically for Claude Code but
-equally useful for any human developer. It covers:
+### Step 2 — Install Claude Code
 
-- Project structure and what each folder does
-- How deployment works
-- Every third-party service (credentials, endpoints, what they do)
-- Style conventions (colors, fonts, CSS patterns)
-- Mobile/responsive requirements
-- How to update the version number
-- Commit message format
-- Known quirks and things left undone
+Download the Claude Code desktop app: https://claude.ai/download
 
-**Read `CLAUDE.md` first, before touching anything.**
+Sign in with the Anthropic account credentials from the owner.
 
-### Typical Claude Code Workflow
+---
 
-```
-# Start a session
-$ claude
+### Step 3 — Open the project in Claude Code
 
-# Describe what you want
-> Update the contact page phone number to (555) 123-4567
+1. Open Claude Code
+2. Click **Open Folder** (or similar — it will ask you to point it at a project)
+3. Navigate to the folder where you cloned the repo in Step 1
+4. Select it and open it
 
-# Claude reads the relevant files, makes the change, shows you a diff
-# You approve, it commits and pushes
+Claude Code will read `CLAUDE.md` automatically — this is the file that tells it
+everything about the project. You don't need to do anything special to load it.
 
-# For bigger tasks
-> Add a new FAQ page with the same nav/footer pattern as the other pages
-```
+---
 
-### What Claude Code Knows About This Project
+### Step 4 — Make a change
 
-When you start a session, Claude Code has full context of:
-- Every HTML page and how they're structured
-- The shared nav/footer partial system
-- The Guesty sync pipeline
-- All third-party integrations
-- The version numbering convention
-- Render hosting and deploy flow
-- Mobile responsiveness requirements
+Just type what you want. Some examples:
 
-You can ask it things like:
-- *"What would break if I changed the nav partial?"*
-- *"Why does the accommodations page work the way it does?"*
-- *"Show me all the places that reference Guesty"*
-- *"Run a mobile preview of the about page"*
+> *"Update the phone number on the contact page to (555) 123-4567"*
 
-### Permissions / Secrets
+> *"The check-in time changed to 4pm — update the policies page"*
 
-Claude Code will need read/write access to the repo. It will **not** have access
-to GitHub Secrets (those live in GitHub's encrypted store) — but it knows what
-secrets exist and what they're for, from `CLAUDE.md`.
+> *"Add a sentence to the About page mentioning that we have kayak rentals available"*
 
-If you need to rotate a secret (e.g. Guesty API key), update it in:
-**GitHub → repo → Settings → Secrets and variables → Actions**
+Claude Code will find the right files, make the changes, and show you what it's about
+to do before it does it. Review it, approve it, and it will publish the update to the
+live site automatically (usually live within 2 minutes).
+
+---
+
+### CLAUDE.md — The Instruction Manual
+
+**Before asking Claude Code to do anything major, tell it to re-read `CLAUDE.md`.**
+This file lives in the root of the project and contains everything Claude needs to
+know: how the site is structured, all the third-party services, the rules for updating
+the version number, and known quirks. It's also a useful reference document for any
+human reading it.
+
+---
+
+### How do I know if my change went live?
+
+Every page on the site shows a version number in the footer (e.g. `v2.1.0`). When
+Claude Code publishes a change, it bumps that number. Reload the live site
+(www.whiskeycreekbeachnw.com) and check the footer — if the number changed, the
+update is live.
+
+---
+
+### What if something goes wrong?
+
+- **Check the Render dashboard** (render.com) — it shows whether the latest deploy
+  succeeded or failed, with logs if something broke
+- **Ask Claude Code** — describe what you're seeing and ask it to diagnose the problem.
+  It can read the codebase and usually figure out what went wrong.
+- **GitHub Secrets** — some integrations (Guesty, ntfy) use encrypted credentials
+  stored in GitHub. Claude Code knows these exist but cannot read them. To update them:
+  GitHub → the WCBNW repository → Settings → Secrets and variables → Actions
 
 ---
 
