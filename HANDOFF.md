@@ -18,7 +18,22 @@ frameworks, no Node.js, no database. If you can edit a text file, you can update
 
 ## Where the Code Lives
 
-**GitHub repository:** (check with owner for the repo URL)
+### GitHub — What It Is and Why It Matters
+
+**GitHub** is a website that stores the website's code in the cloud, similar to how
+Dropbox or Google Drive stores documents. Every file that makes up
+www.whiskeycreekbeachnw.com lives here.
+
+GitHub does two important things beyond just storing files:
+1. **Version history** — every change ever made is recorded, who made it, and when.
+   If something breaks, you can see exactly what changed and undo it.
+2. **Triggers deploys** — when a change is pushed to GitHub, the hosting service
+   (Render) automatically detects it and publishes the updated site within ~2 minutes.
+
+**GitHub repository:** https://github.com/yerfttam/WCBNW
+
+> You'll need to be added as a collaborator to make changes. The owner can do this
+> from GitHub → the WCBNW repo → Settings → Collaborators → Add people.
 
 ```
 WCBNW/
@@ -289,7 +304,7 @@ copy of them on your computer before you can work on anything.
 1. Download and install **GitHub Desktop**: https://desktop.github.com
 2. Sign in with the GitHub account credentials from the owner
 3. In GitHub Desktop: **File → Clone Repository**
-4. Find the WCBNW repository in the list and click **Clone**
+4. Find the **WCBNW** repository in the list (or paste `https://github.com/yerfttam/WCBNW`) and click **Clone**
 5. Choose a folder on your computer where you want to store it (e.g. your Documents folder)
 
 You now have a local copy of all the website files. GitHub Desktop keeps it in sync
