@@ -2,6 +2,10 @@
 
 Marketing website for a beach vacation rental property in Port Angeles, WA.
 
+## Keeping HANDOFF.md Current
+
+`HANDOFF.md` is the primary reference document for anyone maintaining this site. Keep it up to date as the project evolves. Any time you make a change that affects how the site works — new integrations, changed services, new pages, updated workflows, removed features — update `HANDOFF.md` to reflect the current state. When `HANDOFF.md` changes, also re-run `generate_pdf.py` to regenerate `WCBNW-Website-Guide.pdf`.
+
 ## Project Structure
 
 ```
