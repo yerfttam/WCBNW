@@ -1,6 +1,19 @@
 {
-  "generated": "2026-03-27T21:54:44Z",
+  "generated": "2026-03-27T21:56:43Z",
   "releases": [
+    {
+      "version": "v2.2.4",
+      "date": "2026-03-27",
+      "datetime": "2026-03-27T21:56:29Z",
+      "display_date": "March 27, 2026",
+      "display_time": "9:56 PM UTC",
+      "entries": [
+        {
+          "type": "style",
+          "description": "add texture background to policies content section"
+        }
+      ]
+    },
     {
       "version": "v2.2.1",
       "date": "2026-03-27",
