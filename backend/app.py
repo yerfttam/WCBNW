@@ -203,6 +203,20 @@ def serialize_content(content) -> list | str:
         return [serialize_block(b) for b in content]
     return content
 
+def trim_conversation(messages: list) -> list:
+    """Drop tool calls and tool results from history to save memory.
+    Keeps only user text messages and assistant text replies so Claude
+    retains conversational context without storing full file contents."""
+    trimmed = []
+    for msg in messages:
+        if msg['role'] == 'user' and isinstance(msg['content'], str):
+            trimmed.append(msg)
+        elif msg['role'] == 'assistant' and isinstance(msg['content'], list):
+            text_blocks = [b for b in msg['content'] if isinstance(b, dict) and b.get('type') == 'text']
+            if text_blocks:
+                trimmed.append({'role': 'assistant', 'content': text_blocks})
+    return trimmed
+
 
 # ── Chat endpoint ─────────────────────────────────────────────────────────────
 
@@ -258,6 +272,9 @@ def chat():
         reply = ' '.join(
             b.text for b in response.content if hasattr(b, 'type') and b.type == 'text'
         ).strip()
+
+        # Trim tool calls/results from history to stay within memory limits
+        conversation[:] = trim_conversation(conversation)
 
         return jsonify({'response': reply})
 
