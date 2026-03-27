@@ -235,10 +235,6 @@ WCBNW/
   HANDOFF.md             ← This file
 ```
 
-> **⚠ Important:** `OLD/`, `Website/`, and `Photos/` directories exist locally only
-> (gitignored). They are legacy/source material. Never reference them in code —
-> those paths will 404 in production.
-
 ### Pages
 
 | URL | File |
