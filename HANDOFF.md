@@ -185,9 +185,23 @@ v2.1.1 fix: correct typo on about page
 
 ### 3. ntfy.sh (Sync Notifications)
 - **URL:** [ntfy.sh](https://ntfy.sh) — free, no account needed
-- **What it does:** Sends push notifications to the owner's phone after each sync
+- **What it does:** Sends push notifications to the owner's phone after each Guesty sync
+
+**Why this matters:**
+
+The Guesty sync is not optional background housekeeping — it's how the website stays
+accurate. Property prices change frequently in Guesty, and when they do, the only way
+those changes show up on the website is via the daily sync. If the sync job silently
+fails and nobody notices, the website can show outdated pricing for days, which creates
+guest confusion and potential booking problems.
+
+ntfy was set up specifically so that doesn't happen. Every morning after the sync runs,
+the owner gets a push notification — green checkmark if it worked, high-priority alert
+if it didn't. A failure alert means: go to GitHub Actions, find out why it failed, and
+fix it before guests see stale data.
+
 - **Success:** ✅ "Listings synced successfully at [time]"
-- **Failure:** 🚨 High-priority alert to check GitHub Actions
+- **Failure:** 🚨 High-priority alert — check GitHub Actions immediately
 
 **Setup (if you need to receive these on a new phone):**
 1. Install the ntfy app (iOS or Android)
