@@ -197,8 +197,10 @@ def serialize_content(content) -> list | str:
 
 # ── Chat endpoint ─────────────────────────────────────────────────────────────
 
-@app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
+    if request.method == 'OPTIONS':
+        return '', 200
     global conversation
     data = request.json or {}
 
@@ -254,7 +256,7 @@ def chat():
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/reset', methods=['POST'])
+@app.route('/reset', methods=['POST', 'OPTIONS'])
 def reset():
     global conversation
     data = request.json or {}
