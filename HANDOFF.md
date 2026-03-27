@@ -180,6 +180,10 @@ Every page footer shows a version number (e.g. `v2.1.0`). Claude bumps this
 automatically with every change. Reload the live site and confirm the number updated —
 if it did, the change is live.
 
+**Clicking the version number** opens the changelog page, which shows a full history
+of every change ever made to the site — what changed, when, and which version it was.
+It's a quick way to confirm your latest change was recorded and deployed.
+
 ---
 
 ## Understanding the System
