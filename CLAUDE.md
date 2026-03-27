@@ -183,4 +183,4 @@ Do **not** use `bkgds/bkgd1-icon.jpg` — it has a crab illustration baked into 
 - **Address:** 1385 Whiskey Creek Beach Rd, Port Angeles, WA 98363
 - **Phone:** (844) 769-2322
 - **Email:** whiskeycreekbeachnw@gmail.com
-- **Booking platform:** reservenow.com (also Guesty widget on accommodations_guesty.html)
+- **Booking platform:** Guesty (app.guesty.com)
