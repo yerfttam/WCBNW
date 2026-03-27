@@ -277,21 +277,28 @@ How it works:
 
 ### Staging environment
 
-There are two Render sites:
+Think of the site as having two parallel versions running at all times:
 
-| Environment | URL | Branch |
-|-------------|-----|--------|
-| Production | https://www.whiskeycreekbeachnw.com | `main` |
-| Staging | https://wcbnw-staging.onrender.com | `staging` |
+| Environment | URL | Purpose |
+|-------------|-----|---------|
+| **Staging** | https://wcbnw-staging.onrender.com | Where changes are made and reviewed |
+| **Production** | https://www.whiskeycreekbeachnw.com | The live site guests actually visit |
 
-**Always make changes on the `staging` branch first.** Once you've verified the change looks correct at the staging URL, merge to `main` to push it live. This protects the live site from broken changes.
+**Why this matters:** Without a staging environment, every change goes straight to the live site — which means guests could land on a broken page while you're in the middle of fixing something. Staging is a safety net. It's a full running copy of the site that nobody visits except you, so you can make changes, review them, and only push to production when you're confident they're correct.
+
+Under the hood, this works through **branching** — a Git concept where the codebase can have multiple parallel versions. The `staging` branch is where all work happens. The `main` branch is what powers the live site. When you're happy with a change on staging, you "merge" staging into main — Git combines them and Render redeploys the live site automatically.
+
+**You don't need to manage any of this manually.** Claude Code handles it. Just describe what you want, and it will:
+- Make the change on the `staging` branch
+- Push it so staging auto-deploys (~2 minutes)
+- Wait for you to review it at the staging URL
+- Merge to `main` and push to production when you say the word
 
 **The workflow in plain English:**
-1. Tell Claude Code what you want to change — it works on the `staging` branch
-2. Wait ~2 minutes for staging to deploy
-3. Check https://wcbnw-staging.onrender.com — does it look right?
-4. Say "looks good, merge to main" — Claude handles the merge and push
-5. Production updates within ~2 minutes
+1. Tell Claude Code what you want to change
+2. Wait ~2 minutes, then check https://wcbnw-staging.onrender.com
+3. Does it look right? Say "looks good, push it live"
+4. Claude merges to `main` — production updates within ~2 minutes
 
 ---
 
