@@ -12,276 +12,8 @@ A marketing and booking website for a beach vacation rental property in Port Ang
 The live site is at **[www.whiskeycreekbeachnw.com](https://www.whiskeycreekbeachnw.com)**.
 
 **The site is intentionally simple** — pure HTML, CSS, and JavaScript. No build tools, no
-frameworks, no Node.js, no database. If you can edit a text file, you can update this site.
-
----
-
-## Where the Code Lives
-
-### GitHub — What It Is and Why It Matters
-
-**GitHub** is a website that stores the website's code in the cloud, similar to how
-Dropbox or Google Drive stores documents. Every file that makes up
-www.whiskeycreekbeachnw.com lives here.
-
-GitHub does two important things beyond just storing files:
-1. **Version history** — every change ever made is recorded, who made it, and when.
-   If something breaks, you can see exactly what changed and undo it.
-2. **Triggers deploys** — when a change is pushed to GitHub, the hosting service
-   (Render) automatically detects it and publishes the updated site within ~2 minutes.
-
-**GitHub repository:** https://github.com/yerfttam/WCBNW
-
-> You'll need to be added as a collaborator to make changes. Log in to GitHub using
-> the **`GitHub — WCBNW`** credentials from the 1Password vault, then go to the WCBNW
-> repo → Settings → Collaborators → Add people.
-
-```
-WCBNW/
-  NEW/                   ← THIS is what gets deployed — the entire website
-    *.html               ← One file per page
-    js/
-      nav-loader.js      ← Injects the shared nav into every page at runtime
-      footer-loader.js   ← Injects the shared footer into every page at runtime
-    partials/
-      nav.html           ← Shared navigation markup (desktop + mobile hamburger)
-      footer.html        ← Shared footer markup — also contains the version number
-    images/              ← Website assets (backgrounds, logos, property photos)
-      bkgds/             ← Texture backgrounds used in page sections
-      properties/        ← Property listing photos
-      about/             ← About page images
-    photos/              ← Photography from shoots
-      outdoor/           ← Beach and outdoor shots
-      codfish/           ← Codfish Cottage photos
-      halibut hole/      ← Halibut Hole photos
-      jasper/            ← Jasper Inn photos
-    data/
-      listings.json      ← Auto-generated from Guesty daily (DO NOT hand-edit)
-    property-map.txt     ← Owner-defined list of properties + Guesty IDs + booking URLs
-  scripts/
-    sync-guesty.py       ← Python script that pulls data from Guesty API
-  .github/workflows/
-    sync-guesty.yml      ← GitHub Actions job that runs sync-guesty.py every day
-  render.yaml            ← Render hosting config (one line: publish NEW/)
-  CLAUDE.md              ← AI assistant instructions (also useful reference for developers)
-  HANDOFF.md             ← This file
-```
-
-> **⚠ Important:** `OLD/`, `Website/`, and `Photos/` directories exist locally only
-> (gitignored). They are legacy/source material. Never reference them in code —
-> those paths will 404 in production.
-
----
-
-## How the Site Works
-
-### Pages
-
-| URL | File |
-|-----|------|
-| `/` | `index.html` |
-| `/accommodations` | `accommodations.html` |
-| `/about` | `about.html` |
-| `/contact` | `contact.html` |
-| `/policies` | `policies.html` |
-| `/other-properties` | `other-properties.html` |
-
-### Shared Nav & Footer
-
-Rather than copy/pasting the nav into every page, it lives in one place:
-`partials/nav.html`. Each page has a `<div id="site-nav-placeholder"></div>` and
-loads `js/nav-loader.js`, which fetches the partial and injects it at runtime.
-Same pattern for the footer via `js/footer-loader.js` + `partials/footer.html`.
-
-**To change the nav or footer, edit the partial — one file, all pages update.**
-
-### Styles
-
-No CSS framework. Each page has its own `<style>` block. The design uses:
-- **Fonts:** Josefin Sans (Google Fonts), Copperplate (system) for headings
-- **Colors:**
-  - `--navy: #293b4e`
-  - `--cream: #f6efe5`
-  - `--sage: #b5b8a3`
-  - `--brown: #6b452e`
-
-### Accommodations / Property Listings
-
-The accommodations page (`accommodations.html`) dynamically renders property cards
-from `NEW/data/listings.json`. That JSON file is generated every day by the Guesty
-sync job (see below) and committed back to the repo if anything changed.
-
-**The property catalog is controlled by `NEW/property-map.txt`** — this is the
-manually-maintained list of which properties exist, what category they belong to,
-and their Guesty IDs and booking URLs. If a property is added or removed from
-Guesty, update `property-map.txt` accordingly.
-
----
-
-## Hosting
-
-**Host:** [Render](https://render.com) — static site, free tier
-
-**How deploys work:**
-1. You push a commit to the `main` branch on GitHub
-2. Render detects the push and automatically redeploys within ~1-2 minutes
-3. No build step — Render just serves the `NEW/` directory as static files
-
-**Confirming a deploy worked:** Every page footer shows a version number (e.g. `v2.1.0`).
-After a push, reload the site and check that the version number updated.
-
-**Render config:** `render.yaml` in the repo root — it's three lines, just tells
-Render to serve the `NEW/` folder.
-
-**Render dashboard:** render.com — log in to see deploy history and logs if
-something goes wrong.
-
----
-
-## How to Update the Site
-
-All changes are made by having a conversation with Claude Code. You don't edit files
-manually — just describe what you want and Claude handles the rest, including
-versioning, committing, and pushing to the live site.
-
-### Making a simple change
-
-Open Claude Code with the project loaded and just ask:
-
-> *"Fix the typo on the about page — 'accomodations' should be 'accommodations'"*
-
-> *"Update the check-in time to 4pm on the policies page"*
-
-> *"Change the phone number on the contact page to (555) 123-4567"*
-
-Claude will find the right file, make the change, update the version number, and
-publish it. The site is usually live within 2 minutes.
-
-### Adding a new image
-
-Drop the image file into the `NEW/images/` or `NEW/photos/` folder on your computer,
-then tell Claude:
-
-> *"I've added a new photo called sunset.jpg to photos/outdoor — add it to the about page"*
-
-Claude will reference it correctly. Don't point it at any folder outside of `NEW/` —
-those paths don't exist on the live server.
-
-### Bigger changes
-
-Claude Code handles these the same way — just describe what you want:
-
-> *"Add a new FAQ page with the same look and feel as the other pages"*
-
-> *"The Jasper Inn is no longer available — remove it from the accommodations page"*
-
-For anything significant, it's worth asking Claude to explain what it's going to do
-before it does it, so you can review the plan first.
-
-### How do I know it went live?
-
-Every page footer shows a version number (e.g. `v2.1.0`). Claude bumps this
-automatically with every change. Reload the live site and confirm the number updated —
-if it did, the change is live.
-
----
-
-## Third-Party Services
-
-### 1. Render (Hosting)
-- **URL:** render.com
-- **Plan:** Free static site
-- **Auto-deploys:** Yes, on every push to `main`
-- **Action needed:** Log in to Render to see deploy status or troubleshoot errors
-
----
-
-### 2. Guesty (Property Management / Booking)
-- **URL:** [app.guesty.com](https://app.guesty.com)
-- **What it does:** Manages the property listings, availability, and bookings
-- **Open API Client ID:** `0oatpyo652QA9S4Av5d7`
-- **Client Secret:** Stored as GitHub secret `GUESTY_CLIENT_SECRET` (ask the previous website developer)
-- **Booking base URL:** `https://whiskeycreekbeachnw.guestybookings.com`
-
-**The sync flow:**
-1. GitHub Actions runs `scripts/sync-guesty.py` every day at 9am Pacific
-2. The script authenticates with Guesty's OAuth2 API, fetches all listings
-3. It combines Guesty data with owner categories from `property-map.txt`
-4. Writes the result to `NEW/data/listings.json`
-5. If the file changed, commits and pushes it — which triggers a Render redeploy
-
-**To run manually:** Go to GitHub → Actions → "Sync Guesty Listings" → "Run workflow"
-
-**To add/remove a property:** Edit `NEW/property-map.txt` — follow the existing format
-(category header, then `Name | GuestyID | BookingURL` lines)
-
----
-
-### 3. ntfy.sh (Sync Notifications)
-- **URL:** [ntfy.sh](https://ntfy.sh) — free, no account needed
-- **What it does:** Sends push notifications to the owner's phone after each Guesty sync
-
-**Why this matters:**
-
-The Guesty sync is not optional background housekeeping — it's how the website stays
-accurate. Property prices change frequently in Guesty, and when they do, the only way
-those changes show up on the website is via the daily sync. If the sync job silently
-fails and nobody notices, the website can show outdated pricing for days, which creates
-guest confusion and potential booking problems.
-
-ntfy was set up specifically so that doesn't happen. Every morning after the sync runs,
-the website developer gets a push notification — green checkmark if it worked, high-priority alert
-if it didn't. A failure alert means: go to GitHub Actions, find out why it failed, and
-fix it before guests see stale data.
-
-- **Success:** ✅ "Listings synced successfully at [time]"
-- **Failure:** 🚨 High-priority alert — check GitHub Actions immediately
-
-**Setup (if you need to receive these on a new phone):**
-1. Install the ntfy app (iOS or Android)
-2. Subscribe to the topic name stored in the GitHub secret `NTFY_TOPIC`
-3. Get the topic name from the previous website developer, or find it in GitHub → the WCBNW repo → Settings → Secrets → `NTFY_TOPIC`
-
-> **Treat `NTFY_TOPIC` like a password** — anyone who knows it can send notifications
-> to that phone. Don't hardcode it anywhere; keep it in GitHub Secrets only.
-
----
-
-### 4. Formspree (Contact Form)
-- **URL:** [formspree.io](https://formspree.io)
-- **Account login:** yerfttam@icloud.com
-- **Form endpoint:** `https://formspree.io/f/xkoqaqjr`
-- **Used on:** `contact.html`
-- **What it does:** Receives contact form submissions and emails them to `whiskeycreekbeachnw@gmail.com`
-- **Free tier:** 50 submissions/month — upgrade if volume increases
-
----
-
-### 5. Google Fonts
-- **What it does:** Loads Josefin Sans font on all pages
-- **No account needed** — referenced via `<link>` tag in each page's `<head>`
-- If Google Fonts goes down (rare), pages fall back to system sans-serif
-
----
-
-## GitHub Actions (Automation)
-
-Located in `.github/workflows/sync-guesty.yml`
-
-**Schedule:** Daily at 9am Pacific (17:00 UTC), and can be triggered manually
-
-**Required GitHub Secrets** (repo Settings → Secrets → Actions):
-
-| Secret | What it's for |
-|--------|--------------|
-| `GUESTY_CLIENT_ID` | Guesty API authentication |
-| `GUESTY_CLIENT_SECRET` | Guesty API authentication |
-| `NTFY_TOPIC` | ntfy.sh push notification topic name |
-
-**If the sync starts failing:**
-1. Check the GitHub Actions log (repo → Actions tab → click the failed run)
-2. Common causes: Guesty API credentials expired, Guesty API changed, network timeout
-3. You'll get a push notification via ntfy when it fails
+frameworks, no Node.js, no database. If you can describe what you want, Claude Code can
+update it.
 
 ---
 
@@ -294,16 +26,6 @@ Located in `.github/workflows/sync-guesty.yml`
 | Email | whiskeycreekbeachnw@gmail.com |
 | Booking platform | reservenow.com |
 | Live site | www.whiskeycreekbeachnw.com |
-
----
-
-## Things That Are Intentionally Left Undone
-
-- **`policies.html`** still has an inline nav (not using the shared partial). It works fine;
-  it just means nav changes need to be made there separately too. Migrate it when convenient.
-- **Newsletter section** — visible on all pages as a decorative visual band only.
-  No email form is wired up. If you want to add a newsletter, wire `.newsletter-left`
-  and `.newsletter-right` to Mailchimp or similar.
 
 ---
 
@@ -374,97 +96,303 @@ The following accounts are stored there:
 
 ---
 
-## Making Changes with Claude Code
+## Getting Set Up
 
-This project is maintained using **Claude Code** — an AI assistant that understands
-the entire codebase. You describe what you want in plain English, it reads the files,
-makes the changes, and publishes the update. No coding experience required.
+### Step 1 — Get added as a GitHub collaborator
+
+GitHub is where all the website code lives. You need access before you can make changes.
+
+1. Create a free account at github.com if you don't have one
+2. Log in using the **`GitHub — WCBNW`** credentials from the 1Password vault
+3. Go to the WCBNW repo → Settings → Collaborators → Add people
+4. Add your new GitHub username
 
 ---
 
-### Step 1 — Install Claude Code
+### Step 2 — Install Claude Code
 
 Download the Claude Code desktop app: https://claude.ai/download
 
-Sign in with the Anthropic account credentials from the previous website developer.
+Set up your own account at claude.ai — a paid plan (Claude Pro) is recommended.
 
 ---
 
-### Step 2 — Get the code onto your computer
+### Step 3 — Get the code onto your computer
 
-The website's files live on GitHub. You need a copy of them on your computer
-before you can work on anything. Claude Code can do this for you — no technical
-knowledge needed.
+The website's files live on GitHub at **https://github.com/yerfttam/WCBNW**.
+You need a local copy on your computer to work with them. Claude Code handles this for you.
 
 1. Open Claude Code
-2. When it asks you to open a project, choose a folder on your computer where you
-   want to store the website files (e.g. create a folder called `WCBNW` in your
-   Documents folder)
-3. Once it's open, type this:
+2. When it asks you to open a project, create a new folder on your computer
+   (e.g. a folder called `WCBNW` in your Documents)
+3. Open that folder in Claude Code, then type:
 
 > *"Clone the GitHub repository at https://github.com/yerfttam/WCBNW into this folder"*
 
-Claude Code will download all the files automatically.
-
-> **Note:** You'll need to be added as a GitHub collaborator first, otherwise the
-> clone will fail. The previous website developer can add you at:
-> GitHub → the WCBNW repo → Settings → Collaborators → Add people.
-> You'll need a free GitHub account at github.com.
+Claude Code will download everything automatically.
 
 ---
 
-### Step 3 — You're in
+### Step 4 — You're in
 
-Claude Code will read `CLAUDE.md` automatically — this is the file that tells it
-everything about the project. You don't need to do anything special to load it.
-
----
-
-### Step 4 — Make a change (it's just a conversation)
-
-Just type what you want. Some examples:
-
-> *"Update the phone number on the contact page to (555) 123-4567"*
-
-> *"The check-in time changed to 4pm — update the policies page"*
-
-> *"Add a sentence to the About page mentioning that we have kayak rentals available"*
-
-Claude Code will find the right files, make the changes, and show you what it's about
-to do before it does it. Review it, approve it, and it will publish the update to the
-live site automatically (usually live within 2 minutes).
+Once the files are downloaded, Claude Code reads `CLAUDE.md` automatically — a file
+that tells it everything about the project. You don't need to do anything special to
+load it.
 
 ---
 
-### CLAUDE.md — The Instruction Manual
+## Making Changes
 
-**Before asking Claude Code to do anything major, tell it to re-read `CLAUDE.md`.**
-This file lives in the root of the project and contains everything Claude needs to
-know: how the site is structured, all the third-party services, the rules for updating
-the version number, and known quirks. It's also a useful reference document for any
-human reading it.
+All changes are made by having a conversation with Claude Code. You don't edit files
+manually — just describe what you want and Claude handles the rest, including
+versioning, committing, and publishing to the live site.
+
+### Simple changes
+
+> *"Fix the typo on the about page — 'accomodations' should be 'accommodations'"*
+
+> *"Update the check-in time to 4pm on the policies page"*
+
+> *"Change the phone number on the contact page to (555) 123-4567"*
+
+Claude will find the right file, make the change, and publish it. The site is
+usually live within 2 minutes.
+
+### Adding a new image
+
+Drop the image file into the `NEW/images/` or `NEW/photos/` folder on your computer,
+then tell Claude:
+
+> *"I've added a new photo called sunset.jpg to photos/outdoor — add it to the about page"*
+
+### Bigger changes
+
+> *"Add a new FAQ page with the same look and feel as the other pages"*
+
+> *"The Jasper Inn is no longer available — remove it from the accommodations page"*
+
+For anything significant, ask Claude to explain what it's going to do before it does
+it, so you can review the plan first.
+
+### How do I know it went live?
+
+Every page footer shows a version number (e.g. `v2.1.0`). Claude bumps this
+automatically with every change. Reload the live site and confirm the number updated —
+if it did, the change is live.
 
 ---
 
-### How do I know if my change went live?
+## Understanding the System
 
-Every page on the site shows a version number in the footer (e.g. `v2.1.0`). When
-Claude Code publishes a change, it bumps that number. Reload the live site
-(www.whiskeycreekbeachnw.com) and check the footer — if the number changed, the
-update is live.
+### GitHub — What It Is and Why It Matters
+
+**GitHub** is a website that stores the website's code in the cloud, similar to how
+Dropbox or Google Drive stores documents. Every file that makes up
+www.whiskeycreekbeachnw.com lives here.
+
+GitHub does two important things beyond just storing files:
+1. **Version history** — every change ever made is recorded, who made it, and when.
+   If something breaks, you can see exactly what changed and undo it.
+2. **Triggers deploys** — when a change is pushed to GitHub, the hosting service
+   (Render) automatically detects it and publishes the updated site within ~2 minutes.
+
+**GitHub repository:** https://github.com/yerfttam/WCBNW
+
+### File Structure
+
+```
+WCBNW/
+  NEW/                   ← THIS is what gets deployed — the entire website
+    *.html               ← One file per page
+    js/
+      nav-loader.js      ← Injects the shared nav into every page at runtime
+      footer-loader.js   ← Injects the shared footer into every page at runtime
+    partials/
+      nav.html           ← Shared navigation markup (desktop + mobile hamburger)
+      footer.html        ← Shared footer markup — also contains the version number
+    images/              ← Website assets (backgrounds, logos, property photos)
+      bkgds/             ← Texture backgrounds used in page sections
+      properties/        ← Property listing photos
+      about/             ← About page images
+    photos/              ← Photography from shoots
+      outdoor/           ← Beach and outdoor shots
+      codfish/           ← Codfish Cottage photos
+      halibut hole/      ← Halibut Hole photos
+      jasper/            ← Jasper Inn photos
+    data/
+      listings.json      ← Auto-generated from Guesty daily (DO NOT hand-edit)
+    property-map.txt     ← Manually-maintained list of properties + Guesty IDs + booking URLs
+  scripts/
+    sync-guesty.py       ← Python script that pulls data from Guesty API
+  .github/workflows/
+    sync-guesty.yml      ← GitHub Actions job that runs sync-guesty.py every day
+  render.yaml            ← Render hosting config (one line: publish NEW/)
+  CLAUDE.md              ← AI assistant instructions (also useful reference for developers)
+  HANDOFF.md             ← This file
+```
+
+> **⚠ Important:** `OLD/`, `Website/`, and `Photos/` directories exist locally only
+> (gitignored). They are legacy/source material. Never reference them in code —
+> those paths will 404 in production.
+
+### Pages
+
+| URL | File |
+|-----|------|
+| `/` | `index.html` |
+| `/accommodations` | `accommodations.html` |
+| `/about` | `about.html` |
+| `/contact` | `contact.html` |
+| `/policies` | `policies.html` |
+| `/other-properties` | `other-properties.html` |
+
+### Shared Nav & Footer
+
+Rather than copy/pasting the nav into every page, it lives in one place:
+`partials/nav.html`. Each page loads it automatically at runtime.
+Same pattern for the footer via `partials/footer.html`.
+
+**To change the nav or footer, edit the partial — one file, all pages update.**
+
+### Styles
+
+No CSS framework. Each page has its own `<style>` block. The design uses:
+- **Fonts:** Josefin Sans (Google Fonts), Copperplate (system) for headings
+- **Colors:**
+  - `--navy: #293b4e`
+  - `--cream: #f6efe5`
+  - `--sage: #b5b8a3`
+  - `--brown: #6b452e`
+
+### Accommodations / Property Listings
+
+The accommodations page dynamically renders property cards from `NEW/data/listings.json`.
+That file is generated every day by the Guesty sync job and committed back to the repo
+if anything changed.
+
+**The property catalog is controlled by `NEW/property-map.txt`** — the manually-maintained
+list of which properties exist, their categories, Guesty IDs, and booking URLs. If a
+property is added or removed from Guesty, update this file accordingly.
+
+### Hosting
+
+**Host:** [Render](https://render.com) — static site, free tier
+
+How it works:
+1. A change is pushed to the `main` branch on GitHub
+2. Render detects it and automatically redeploys within ~1-2 minutes
+3. No build step — Render just serves the `NEW/` directory as static files
+
+**Render dashboard:** render.com — log in to see deploy history and logs.
 
 ---
 
-### What if something goes wrong?
+## Third-Party Services
 
-- **Check the Render dashboard** (render.com) — it shows whether the latest deploy
-  succeeded or failed, with logs if something broke
-- **Ask Claude Code** — describe what you're seeing and ask it to diagnose the problem.
-  It can read the codebase and usually figure out what went wrong.
-- **GitHub Secrets** — some integrations (Guesty, ntfy) use encrypted credentials
-  stored in GitHub. Claude Code knows these exist but cannot read them. To update them,
-  go to: GitHub → the WCBNW repository → Settings → Secrets and variables → Actions.
-  Ask the previous website developer for the actual secret values.
+### 1. Render (Hosting)
+- **URL:** render.com
+- **Plan:** Free static site
+- **Auto-deploys:** Yes, on every push to `main`
+- **Action needed:** Log in to Render to see deploy status or troubleshoot errors
+
+---
+
+### 2. Guesty (Property Management / Booking)
+- **URL:** [app.guesty.com](https://app.guesty.com)
+- **What it does:** Manages the property listings, availability, and bookings
+- **Open API Client ID:** `0oatpyo652QA9S4Av5d7`
+- **Client Secret:** Stored as GitHub secret `GUESTY_CLIENT_SECRET` — value in 1Password under `Guesty API — Client ID & Secret`
+- **Booking base URL:** `https://whiskeycreekbeachnw.guestybookings.com`
+
+**The sync flow:**
+1. GitHub Actions runs `scripts/sync-guesty.py` every day at 9am Pacific
+2. The script authenticates with Guesty's OAuth2 API, fetches all listings
+3. It combines Guesty data with categories from `property-map.txt`
+4. Writes the result to `NEW/data/listings.json`
+5. If the file changed, commits and pushes it — which triggers a Render redeploy
+
+**To run manually:** Go to GitHub → Actions → "Sync Guesty Listings" → "Run workflow"
+
+**To add/remove a property:** Edit `NEW/property-map.txt` — follow the existing format
+(category header, then `Name | GuestyID | BookingURL` lines)
+
+---
+
+### 3. ntfy.sh (Sync Notifications)
+- **URL:** [ntfy.sh](https://ntfy.sh) — free, no account needed
+- **What it does:** Sends push notifications to the website developer's phone after each Guesty sync
+
+**Why this matters:**
+
+The Guesty sync is not optional background housekeeping — it's how the website stays
+accurate. Property prices change frequently in Guesty, and when they do, the only way
+those changes show up on the website is via the daily sync. If the sync job silently
+fails and nobody notices, the website can show outdated pricing for days, which creates
+guest confusion and potential booking problems.
+
+ntfy was set up specifically so that doesn't happen. Every morning after the sync runs,
+the website developer gets a push notification — green checkmark if it worked, high-priority
+alert if it didn't. A failure alert means: go to GitHub Actions, find out why it failed,
+and fix it before guests see stale data.
+
+- **Success:** ✅ "Listings synced successfully at [time]"
+- **Failure:** 🚨 High-priority alert — check GitHub Actions immediately
+
+**Setup on a new phone:**
+1. Install the ntfy app (iOS or Android)
+2. Get the topic name from 1Password: `ntfy — WCBNW sync topic`
+3. Subscribe to that topic in the ntfy app
+
+> **Treat the topic name like a password** — anyone who knows it can send notifications
+> to that phone. Don't hardcode it anywhere; keep it in 1Password and GitHub Secrets only.
+
+---
+
+### 4. Formspree (Contact Form)
+- **URL:** [formspree.io](https://formspree.io)
+- **Account:** `Formspree — WCBNW` in 1Password
+- **Form endpoint:** `https://formspree.io/f/xkoqaqjr`
+- **Used on:** `contact.html`
+- **What it does:** Receives contact form submissions and emails them to `whiskeycreekbeachnw@gmail.com`
+- **Free tier:** 50 submissions/month — upgrade if volume increases
+
+---
+
+### 5. Google Fonts
+- **What it does:** Loads Josefin Sans font on all pages
+- **No account needed** — referenced via `<link>` tag in each page's `<head>`
+- If Google Fonts goes down (rare), pages fall back to system sans-serif
+
+---
+
+## GitHub Actions (Automation)
+
+Located in `.github/workflows/sync-guesty.yml`
+
+**Schedule:** Daily at 9am Pacific (17:00 UTC), and can be triggered manually
+
+**Required GitHub Secrets** (repo Settings → Secrets → Actions):
+
+| Secret | What it's for | Where to get the value |
+|--------|--------------|----------------------|
+| `GUESTY_CLIENT_ID` | Guesty API authentication | 1Password: `Guesty API — Client ID & Secret` |
+| `GUESTY_CLIENT_SECRET` | Guesty API authentication | 1Password: `Guesty API — Client ID & Secret` |
+| `NTFY_TOPIC` | ntfy.sh push notification topic name | 1Password: `ntfy — WCBNW sync topic` |
+
+**If the sync starts failing:**
+1. You'll get a high-priority push notification via ntfy
+2. Go to GitHub → Actions tab → click the failed run to see what went wrong
+3. Common causes: Guesty API credentials expired, Guesty API changed, network timeout
+
+---
+
+## Things That Are Intentionally Left Undone
+
+- **`policies.html`** still has an inline nav (not using the shared partial). It works fine;
+  it just means nav changes need to be made there separately too. Migrate it when convenient.
+- **Newsletter section** — visible on all pages as a decorative visual band only.
+  No email form is wired up. If you want to add a newsletter, wire `.newsletter-left`
+  and `.newsletter-right` to Mailchimp or similar.
 
 ---
 
@@ -476,8 +404,11 @@ update is live.
 | Version didn't update after push | Deploy failed or still running | Render deploy logs |
 | Properties missing from accommodations page | Sync failed or `property-map.txt` out of sync | GitHub Actions log, check `listings.json` |
 | Contact form not delivering | Formspree issue | formspree.io dashboard |
-| No sync notifications | `NTFY_TOPIC` secret wrong, or ntfy topic changed | GitHub Secrets, ntfy app subscription |
-| Nav/footer not showing | `nav-loader.js` or `footer-loader.js` failed to fetch partial | Browser console errors |
+| No sync notifications | `NTFY_TOPIC` secret wrong, or ntfy topic changed | 1Password, GitHub Secrets, ntfy app subscription |
+| Nav/footer not showing | Loader script failed to fetch partial | Browser console errors |
+
+When in doubt, open Claude Code and describe what you're seeing — it can read the
+codebase and usually diagnose the problem.
 
 ---
 
