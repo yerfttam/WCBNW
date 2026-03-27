@@ -386,7 +386,6 @@ Located in `.github/workflows/sync-guesty.yml`
 
 ## Things That Are Intentionally Left Undone
 
-- All pages now use the shared nav partial — including `policies.html`, migrated in v2.2.1.
 - **Newsletter section** — visible on all pages as a decorative visual band only.
   No email form is wired up. If you want to add a newsletter, wire `.newsletter-left`
   and `.newsletter-right` to Mailchimp or similar.
