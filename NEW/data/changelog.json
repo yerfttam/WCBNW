@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-27T19:36:36Z",
+  "generated": "2026-03-27T20:09:35Z",
   "releases": [
     {
       "version": "v2.2.1",
@@ -8,6 +8,10 @@
       "display_date": "March 27, 2026",
       "display_time": "5:29 PM UTC",
       "entries": [
+        {
+          "type": "docs",
+          "description": "clean up HANDOFF.md title"
+        },
         {
           "type": "docs",
           "description": "clean up HANDOFF.md title"
