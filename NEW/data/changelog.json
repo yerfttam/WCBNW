@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-27T16:01:02Z",
+  "generated": "2026-03-27T16:55:24Z",
   "releases": [
     {
       "version": "v2.2.0",
@@ -125,10 +125,14 @@
     {
       "version": "v2.1.0",
       "date": "2026-03-27",
-      "datetime": "2026-03-27T16:00:45Z",
+      "datetime": "2026-03-27T16:55:06Z",
       "display_date": "March 27, 2026",
-      "display_time": "4:00 PM UTC",
+      "display_time": "4:55 PM UTC",
       "entries": [
+        {
+          "type": "docs",
+          "description": "add changelog page note to HANDOFF.md"
+        },
         {
           "type": "docs",
           "description": "reorganize HANDOFF.md into logical sequence orientation \u2192 access \u2192 setup \u2192 changes \u2192 reference \u2192 troubleshoot"
