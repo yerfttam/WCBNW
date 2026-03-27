@@ -31,7 +31,7 @@ update it.
 ## Credentials — 1Password
 
 All usernames, passwords, and secret keys for this project are stored in the
-**WCBNW shared vault in 1Password**. If you've been given access to the project,
+**Shared NSM vault in 1Password**. If you've been given access to the project,
 you should have been invited to this vault. If you don't have access, contact
 one of the other vault members.
 
@@ -42,8 +42,8 @@ The following accounts are stored there:
 ### GitHub
 - **URL:** github.com
 - **What it's for:** Stores all the website code. You need this to be added as a
-  collaborator and to access the repository settings (including GitHub Secrets).
-- **1Password entry:** `GitHub — WCBNW`
+  collaborator before you can make any changes.
+- **1Password entry:** `GitHub - WCBNW`
 
 ---
 
@@ -59,7 +59,8 @@ The following accounts are stored there:
 - **URL:** render.com
 - **What it's for:** The hosting platform. Log in here to see deploy history and
   troubleshoot if the site goes down.
-- **1Password entry:** `Render — WCBNW`
+- **1Password entry:** `Render - WCBNW` — note that Render signs in with GitHub,
+  so use the `GitHub - WCBNW` credentials to log in.
 
 ---
 
@@ -67,15 +68,7 @@ The following accounts are stored there:
 - **URL:** app.guesty.com
 - **What it's for:** Property management system — the source of truth for listings,
   pricing, and availability. Changes made here flow to the website via the daily sync.
-- **1Password entry:** `Guesty — Whiskey Creek Beach NW`
-
----
-
-### Guesty API Credentials
-- **What it's for:** The daily sync job uses these to authenticate with Guesty's API.
-  They are also stored as GitHub Secrets (`GUESTY_CLIENT_ID` and `GUESTY_CLIENT_SECRET`).
-  If those secrets ever need to be rotated, get the values from here.
-- **1Password entry:** `Guesty API — Client ID & Secret` (stored as a secure note)
+- **1Password entry:** `Guesty - WCBNW`
 
 ---
 
@@ -83,15 +76,14 @@ The following accounts are stored there:
 - **URL:** formspree.io
 - **What it's for:** Handles the contact form on the website. Submissions get emailed
   to the Whiskey Creek Beach NW Gmail account.
-- **1Password entry:** `Formspree — WCBNW`
+- **1Password entry:** `Formspree - WCBNW`
 
 ---
 
 ### ntfy Topic
 - **What it's for:** The private topic name used for push notifications when the
-  Guesty sync runs. Also stored as a GitHub Secret (`NTFY_TOPIC`). Treat it like a
-  password — don't share it publicly.
-- **1Password entry:** `ntfy — WCBNW sync topic` (stored as a secure note)
+  Guesty sync runs. Treat it like a password — don't share it publicly.
+- **1Password entry:** `ntfy - WCBNW`
 
 ---
 
@@ -102,7 +94,7 @@ The following accounts are stored there:
 GitHub is where all the website code lives. You need access before you can make changes.
 
 1. Create a free account at github.com if you don't have one
-2. Log in using the **`GitHub — WCBNW`** credentials from the 1Password vault
+2. Log in using the **`GitHub - WCBNW`** credentials from the **Shared NSM** vault in 1Password
 3. Go to the WCBNW repo → Settings → Collaborators → Add people
 4. Add your new GitHub username
 
@@ -317,8 +309,6 @@ There are two Render sites:
 ### 2. Guesty (Property Management / Booking)
 - **URL:** [app.guesty.com](https://app.guesty.com)
 - **What it does:** Manages the property listings, availability, and bookings
-- **Open API Client ID:** `0oatpyo652QA9S4Av5d7`
-- **Client Secret:** Stored as GitHub secret `GUESTY_CLIENT_SECRET` — value in 1Password under `Guesty API — Client ID & Secret`
 - **Booking base URL:** `https://whiskeycreekbeachnw.guestybookings.com`
 
 **The sync flow:**
@@ -357,11 +347,11 @@ and fix it before guests see stale data.
 
 **Setup on a new phone:**
 1. Install the ntfy app (iOS or Android)
-2. Get the topic name from 1Password: `ntfy — WCBNW sync topic`
+2. Get the topic name from the **`ntfy - WCBNW`** entry in the Shared NSM vault in 1Password
 3. Subscribe to that topic in the ntfy app
 
 > **Treat the topic name like a password** — anyone who knows it can send notifications
-> to that phone. Don't hardcode it anywhere; keep it in 1Password and GitHub Secrets only.
+> to that phone. Keep it in 1Password only.
 
 ---
 
@@ -386,15 +376,7 @@ and fix it before guests see stale data.
 
 Located in `.github/workflows/sync-guesty.yml`
 
-**Schedule:** Daily at 9am Pacific (17:00 UTC), and can be triggered manually
-
-**Required GitHub Secrets** (repo Settings → Secrets → Actions):
-
-| Secret | What it's for | Where to get the value |
-|--------|--------------|----------------------|
-| `GUESTY_CLIENT_ID` | Guesty API authentication | 1Password: `Guesty API — Client ID & Secret` |
-| `GUESTY_CLIENT_SECRET` | Guesty API authentication | 1Password: `Guesty API — Client ID & Secret` |
-| `NTFY_TOPIC` | ntfy.sh push notification topic name | 1Password: `ntfy — WCBNW sync topic` |
+**Schedule:** Daily at 9am Pacific, and can be triggered manually
 
 **If the sync starts failing:**
 1. You'll get a high-priority push notification via ntfy
@@ -420,7 +402,7 @@ Located in `.github/workflows/sync-guesty.yml`
 | Version didn't update after push | Deploy failed or still running | Render deploy logs |
 | Properties missing from accommodations page | Sync failed or `property-map.txt` out of sync | GitHub Actions log, check `listings.json` |
 | Contact form not delivering | Formspree issue | formspree.io dashboard |
-| No sync notifications | `NTFY_TOPIC` secret wrong, or ntfy topic changed | 1Password, GitHub Secrets, ntfy app subscription |
+| No sync notifications | ntfy topic changed or app not subscribed | Check `ntfy - WCBNW` in 1Password, re-subscribe in ntfy app |
 | Nav/footer not showing | Loader script failed to fetch partial | Browser console errors |
 
 When in doubt, open Claude Code and describe what you're seeing — it can read the
