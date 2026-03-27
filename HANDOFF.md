@@ -140,31 +140,49 @@ something goes wrong.
 
 ## How to Update the Site
 
-### Making a simple change (e.g. edit text, fix a typo)
+All changes are made by having a conversation with Claude Code. You don't edit files
+manually — just describe what you want and Claude handles the rest, including
+versioning, committing, and pushing to the live site.
 
-1. Edit the relevant `.html` file in `NEW/`
-2. Bump the version number in `NEW/partials/footer.html` (patch version, e.g. `v2.1.0` → `v2.1.1`)
-3. Commit and push to `main`
-4. Wait ~2 minutes, reload the site, confirm the new version number appears
+### Making a simple change
+
+Open Claude Code with the project loaded and just ask:
+
+> *"Fix the typo on the about page — 'accomodations' should be 'accommodations'"*
+
+> *"Update the check-in time to 4pm on the policies page"*
+
+> *"Change the phone number on the contact page to (555) 123-4567"*
+
+Claude will find the right file, make the change, update the version number, and
+publish it. The site is usually live within 2 minutes.
 
 ### Adding a new image
 
-1. Copy the image into `NEW/images/` or `NEW/photos/` (appropriate subfolder)
-2. Reference it in HTML with a path like `photos/outdoor/myimage.jpg`
-3. **Never** reference `../Website/` or `../Photos/` — those paths only exist locally
+Drop the image file into the `NEW/images/` or `NEW/photos/` folder on your computer,
+then tell Claude:
 
-### Commit message format
+> *"I've added a new photo called sunset.jpg to photos/outdoor — add it to the about page"*
 
-Always start with the version number — it shows up on the Render dashboard:
-```
-v2.1.1 fix: correct typo on about page
-```
+Claude will reference it correctly. Don't point it at any folder outside of `NEW/` —
+those paths don't exist on the live server.
 
-### Version numbering
+### Bigger changes
 
-- **Patch** (third number): routine edits, typo fixes, content updates
-- **Minor** (second number): new features, new pages, significant redesigns
-- Update version in **one place only:** `NEW/partials/footer.html`
+Claude Code handles these the same way — just describe what you want:
+
+> *"Add a new FAQ page with the same look and feel as the other pages"*
+
+> *"The Jasper Inn is no longer available — remove it from the accommodations page"*
+
+For anything significant, it's worth asking Claude to explain what it's going to do
+before it does it, so you can review the plan first.
+
+### How do I know it went live?
+
+Every page footer shows a version number (e.g. `v2.1.0`). Claude bumps this
+automatically with every change. Reload the live site and confirm the number updated —
+if it did, the change is live.
 
 ---
 
