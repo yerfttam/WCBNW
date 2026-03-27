@@ -281,7 +281,7 @@ Think of the site as having two parallel versions running at all times:
 
 | Environment | URL | Purpose |
 |-------------|-----|---------|
-| **Staging** | https://wcbnw-staging.onrender.com | Where changes are made and reviewed |
+| **Staging** | https://wcbnw-stage.onrender.com | Where changes are made and reviewed |
 | **Production** | https://www.whiskeycreekbeachnw.com | The live site guests actually visit |
 
 **Why this matters:** Without a staging environment, every change goes straight to the live site — which means guests could land on a broken page while you're in the middle of fixing something. Staging is a safety net. It's a full running copy of the site that nobody visits except you, so you can make changes, review them, and only push to production when you're confident they're correct.
@@ -296,7 +296,7 @@ Under the hood, this works through **branching** — a Git concept where the cod
 
 **The workflow in plain English:**
 1. Tell Claude Code what you want to change
-2. Wait ~2 minutes, then check https://wcbnw-staging.onrender.com
+2. Wait ~2 minutes, then check https://wcbnw-stage.onrender.com
 3. Does it look right? Say "looks good, push it live"
 4. Claude merges to `main` — production updates within ~2 minutes
 
