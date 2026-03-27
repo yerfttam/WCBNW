@@ -1,5 +1,4 @@
-# "If I Get Hit by a Beer Truck"
-## Technical Handoff — Whiskey Creek Beach NW (WCBNW)
+# Technical Handoff — Whiskey Creek Beach NW (WCBNW)
 
 > This document is for the person who inherits technical ownership of this website.
 > It covers everything you need to understand, maintain, and update the site.
