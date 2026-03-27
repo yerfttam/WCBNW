@@ -1,17 +1,26 @@
 import os
 import base64
+import traceback
 import requests
 from flask import Flask, request, jsonify
 import anthropic
 
 app = Flask(__name__)
 
-@app.after_request
-def add_cors_headers(response):
+def cors(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
     return response
+
+@app.after_request
+def add_cors_headers(response):
+    return cors(response)
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    print(f"UNHANDLED EXCEPTION: {traceback.format_exc()}")
+    return cors(jsonify({'error': str(e)})), 500
 
 # Environment variables (set these in Render dashboard)
 ADMIN_PASSWORD   = os.environ.get('ADMIN_PASSWORD', 'changeme')
