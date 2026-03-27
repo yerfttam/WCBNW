@@ -32,8 +32,9 @@ GitHub does two important things beyond just storing files:
 
 **GitHub repository:** https://github.com/yerfttam/WCBNW
 
-> You'll need to be added as a collaborator to make changes. The previous website
-> developer can do this from GitHub → the WCBNW repo → Settings → Collaborators → Add people.
+> You'll need to be added as a collaborator to make changes. Log in to GitHub using
+> the **`GitHub — WCBNW`** credentials from the 1Password vault, then go to the WCBNW
+> repo → Settings → Collaborators → Add people.
 
 ```
 WCBNW/
