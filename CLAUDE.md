@@ -43,12 +43,12 @@ All changes should be made on the `staging` branch first, then merged to `main` 
 | Branch | Render URL | Purpose |
 |--------|-----------|---------|
 | `main` | https://wcbnw.onrender.com (also www.whiskeycreekbeachnw.com) | Production — live site |
-| `staging` | https://wcbnw-staging.onrender.com | Staging — verify before going live |
+| `staging` | https://wcbnw-stage.onrender.com | Staging — verify before going live |
 
 **Workflow:**
 1. Make sure you're on the `staging` branch before making changes
 2. Push changes to `staging` — Render auto-deploys to the staging URL within ~2 minutes
-3. Review at https://wcbnw-staging.onrender.com
+3. Review at https://wcbnw-stage.onrender.com
 4. When satisfied, merge `staging` → `main` and push — production updates automatically
 
 **To merge staging to main:**
