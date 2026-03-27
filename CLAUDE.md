@@ -32,6 +32,29 @@ Photos/               ← full photo library (local only, gitignored)
 - **Build command:** none (pure HTML/CSS/JS, no build step)
 - Config: `render.yaml` in repo root
 
+## Branching & Staging
+
+All changes should be made on the `staging` branch first, then merged to `main` when verified.
+
+| Branch | Render URL | Purpose |
+|--------|-----------|---------|
+| `main` | https://wcbnw.onrender.com (also www.whiskeycreekbeachnw.com) | Production — live site |
+| `staging` | https://wcbnw-staging.onrender.com | Staging — verify before going live |
+
+**Workflow:**
+1. Make sure you're on the `staging` branch before making changes
+2. Push changes to `staging` — Render auto-deploys to the staging URL within ~2 minutes
+3. Review at https://wcbnw-staging.onrender.com
+4. When satisfied, merge `staging` → `main` and push — production updates automatically
+
+**To merge staging to main:**
+```
+git checkout main
+git merge staging
+git push
+git checkout staging
+```
+
 ## Pages
 
 | File | Page |
@@ -53,7 +76,7 @@ The nav is a shared partial at `partials/nav.html`, injected at runtime by `js/n
 <script src="js/nav-loader.js" defer></script>
 ```
 
-**Note:** `policies.html` currently has an inline nav (not using the partial) — it should be migrated to the partial pattern when convenient.
+All pages now use the shared nav partial, including `policies.html` (migrated v2.2.1).
 
 ## Styles
 
@@ -87,7 +110,7 @@ Every page footer displays a version string (e.g. `v1.0.4`) below the copyright 
 
 **Update this with every push.** It is the primary way to confirm a Render deployment completed successfully. Bump the patch number (third digit) for routine changes, minor for larger changes.
 
-Current version: **v2.1.0**
+Current version: **v2.2.1**
 
 **The footer is now a shared partial.** To update the version, edit ONE file only:
 ```

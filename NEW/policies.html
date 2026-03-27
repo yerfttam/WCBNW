@@ -126,9 +126,6 @@
       .footer-contact { grid-column: 2; grid-row: 2; }
     }
     @media (max-width: 768px) {
-      nav { padding: 0 1.25rem; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
       .newsletter-section { grid-template-columns: 1fr; }
       .newsletter-right { min-height: 160px; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -141,45 +138,8 @@
 </head>
 <body>
 
-  <nav>
-    <a class="nav-logo" href="index.html">
-      <img class="nav-logo-img" src="images/WCB-Logo-Navy.png" alt="Whiskey Creek Beach NW" />
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li class="dropdown">
-        <a href="accommodations.html">Accommodations ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="accommodations.html#cottages">Cottages</a></li>
-          <li><a href="accommodations.html#aframes">A-Frames</a></li>
-          <li><a href="accommodations.html#tent">Tent Sites</a></li>
-          <li><a href="accommodations.html#rv">RV Sites</a></li>
-        </ul>
-      </li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-      <li><a href="policies.html" class="active">Policies</a></li>
-      <li><a href="other-properties.html">Other Properties</a></li>
-      <li><a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="nav-book-btn">Book Now</a></li>
-    </ul>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="accommodations.html">Accommodations</a>
-    <div class="sub-links">
-      <a href="accommodations.html#tent">Tent Sites</a>
-      <a href="accommodations.html#rv">RV Sites</a>
-    </div>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact Us</a>
-    <a href="policies.html">Policies</a>
-    <a href="other-properties.html">Other Properties</a>
-    <a href="https://whiskeycreekbeachnw.guestybookings.com/en/properties?city=Port+Angeles&country=United+States&minOccupancy=1" target="_blank" class="mob-book">Book Now</a>
-  </div>
+  <div id="site-nav-placeholder"></div>
+  <script src="js/nav-loader.js" defer></script>
 
   <!-- HERO -->
   <div class="page-hero">
@@ -294,11 +254,5 @@
   <div id="site-footer-placeholder"></div>
   <script src="js/footer-loader.js" defer></script>
 
-  <script>
-    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
-    document.querySelectorAll('.mobile-menu a').forEach(a => {
-      a.addEventListener('click', () => { document.getElementById('mobileMenu').classList.remove('open'); });
-    });
-  </script>
 </body>
 </html>
