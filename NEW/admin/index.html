@@ -12,13 +12,14 @@
       --cream: #f6efe5;
       --sage:  #b5b8a3;
       --brown: #6b452e;
+      --grey:  #f0f0f0;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Josefin Sans', sans-serif;
-      background: var(--cream);
+      background: var(--grey);
       color: var(--navy);
       height: 100dvh;
       display: flex;
@@ -185,7 +186,7 @@
       line-height: 1.4;
       max-height: 120px;
       overflow-y: auto;
-      background: var(--cream);
+      background: white;
       color: var(--navy);
     }
     #message-input:focus { border-color: var(--navy); }
@@ -309,7 +310,7 @@
   function addNewChatButton() {
     const btn = document.createElement('button');
     btn.id = 'new-chat-btn';
-    btn.textContent = 'New Chat';
+    btn.textContent = 'Website Assistant Chat';
     btn.style.cssText = 'display:block;margin:8px auto 0;background:none;border:none;color:var(--sage);font-size:0.8rem;cursor:pointer;font-family:inherit;letter-spacing:0.04em;';
     btn.addEventListener('click', newChat);
     document.querySelector('header').appendChild(btn);
