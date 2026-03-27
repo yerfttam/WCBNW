@@ -1,13 +1,17 @@
 {
-  "generated": "2026-03-27T17:15:18Z",
+  "generated": "2026-03-27T17:30:19Z",
   "releases": [
     {
       "version": "v2.2.1",
       "date": "2026-03-27",
-      "datetime": "2026-03-27T17:14:59Z",
+      "datetime": "2026-03-27T17:29:57Z",
       "display_date": "March 27, 2026",
-      "display_time": "5:14 PM UTC",
+      "display_time": "5:29 PM UTC",
       "entries": [
+        {
+          "type": "docs",
+          "description": "clean up HANDOFF.md title"
+        },
         {
           "type": "refactor",
           "description": "migrate policies.html to shared nav; add staging workflow docs"
