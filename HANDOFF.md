@@ -310,7 +310,8 @@ The following accounts are stored there:
 ### Claude Code (Anthropic)
 - **URL:** claude.ai
 - **What it's for:** Signing in to the Claude Code desktop app to make website changes.
-- **1Password entry:** `Claude Code — Anthropic`
+- **Note:** Set up your own account at claude.ai — this is not a shared login.
+  A paid plan (Claude Pro) is recommended for regular use.
 
 ---
 
@@ -343,14 +344,6 @@ The following accounts are stored there:
 - **What it's for:** Handles the contact form on the website. Submissions get emailed
   to the Whiskey Creek Beach NW Gmail account.
 - **1Password entry:** `Formspree — WCBNW`
-
----
-
-### Whiskey Creek Beach NW Gmail
-- **Address:** whiskeycreekbeachnw@gmail.com
-- **What it's for:** Receives contact form submissions. Also used for various service
-  account registrations related to the property.
-- **1Password entry:** `Gmail — whiskeycreekbeachnw`
 
 ---
 
