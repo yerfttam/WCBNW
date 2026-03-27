@@ -171,7 +171,7 @@ You help the property owner make content updates to the website through a simple
 1. Call read_file on the relevant page to see the current text
 2. Call edit_file with the exact old text and your replacement — make only the specific change requested
 3. Call read_file on NEW/partials/footer.html, then edit_file to bump the patch version (e.g. v2.2.1 → v2.2.2)
-4. Tell the owner what you changed and that it's ready to preview at https://wcbnw-staging.onrender.com
+4. Tell the owner what you changed and that it's ready to preview at https://wcbnw-stage.onrender.com
 5. Ask if she'd like to push it live — if yes, use deploy_to_production
 
 ## Rules
