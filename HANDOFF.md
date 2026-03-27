@@ -32,8 +32,8 @@ GitHub does two important things beyond just storing files:
 
 **GitHub repository:** https://github.com/yerfttam/WCBNW
 
-> You'll need to be added as a collaborator to make changes. The owner can do this
-> from GitHub → the WCBNW repo → Settings → Collaborators → Add people.
+> You'll need to be added as a collaborator to make changes. The previous website
+> developer can do this from GitHub → the WCBNW repo → Settings → Collaborators → Add people.
 
 ```
 WCBNW/
@@ -111,7 +111,7 @@ from `NEW/data/listings.json`. That JSON file is generated every day by the Gues
 sync job (see below) and committed back to the repo if anything changed.
 
 **The property catalog is controlled by `NEW/property-map.txt`** — this is the
-owner-maintained list of which properties exist, what category they belong to,
+manually-maintained list of which properties exist, what category they belong to,
 and their Guesty IDs and booking URLs. If a property is added or removed from
 Guesty, update `property-map.txt` accordingly.
 
@@ -181,7 +181,7 @@ v2.1.1 fix: correct typo on about page
 - **URL:** [app.guesty.com](https://app.guesty.com)
 - **What it does:** Manages the property listings, availability, and bookings
 - **Open API Client ID:** `0oatpyo652QA9S4Av5d7`
-- **Client Secret:** Stored as GitHub secret `GUESTY_CLIENT_SECRET` (ask owner)
+- **Client Secret:** Stored as GitHub secret `GUESTY_CLIENT_SECRET` (ask the previous website developer)
 - **Booking base URL:** `https://whiskeycreekbeachnw.guestybookings.com`
 
 **The sync flow:**
@@ -211,7 +211,7 @@ fails and nobody notices, the website can show outdated pricing for days, which 
 guest confusion and potential booking problems.
 
 ntfy was set up specifically so that doesn't happen. Every morning after the sync runs,
-the owner gets a push notification — green checkmark if it worked, high-priority alert
+the website developer gets a push notification — green checkmark if it worked, high-priority alert
 if it didn't. A failure alert means: go to GitHub Actions, find out why it failed, and
 fix it before guests see stale data.
 
@@ -221,7 +221,7 @@ fix it before guests see stale data.
 **Setup (if you need to receive these on a new phone):**
 1. Install the ntfy app (iOS or Android)
 2. Subscribe to the topic name stored in the GitHub secret `NTFY_TOPIC`
-3. Get the topic name from the repo owner or GitHub → Settings → Secrets → `NTFY_TOPIC`
+3. Get the topic name from the previous website developer, or find it in GitHub → the WCBNW repo → Settings → Secrets → `NTFY_TOPIC`
 
 > **Treat `NTFY_TOPIC` like a password** — anyone who knows it can send notifications
 > to that phone. Don't hardcode it anywhere; keep it in GitHub Secrets only.
@@ -296,43 +296,45 @@ makes the changes, and publishes the update. No coding experience required.
 
 ---
 
-### Step 1 — Get the code onto your computer
-
-The website's files live on GitHub (a cloud service for storing code). You need a
-copy of them on your computer before you can work on anything.
-
-1. Download and install **GitHub Desktop**: https://desktop.github.com
-2. Sign in with the GitHub account credentials from the owner
-3. In GitHub Desktop: **File → Clone Repository**
-4. Find the **WCBNW** repository in the list (or paste `https://github.com/yerfttam/WCBNW`) and click **Clone**
-5. Choose a folder on your computer where you want to store it (e.g. your Documents folder)
-
-You now have a local copy of all the website files. GitHub Desktop keeps it in sync
-with the live version.
-
----
-
-### Step 2 — Install Claude Code
+### Step 1 — Install Claude Code
 
 Download the Claude Code desktop app: https://claude.ai/download
 
-Sign in with the Anthropic account credentials from the owner.
+Sign in with the Anthropic account credentials from the previous website developer.
 
 ---
 
-### Step 3 — Open the project in Claude Code
+### Step 2 — Get the code onto your computer
+
+The website's files live on GitHub. You need a copy of them on your computer
+before you can work on anything. Claude Code can do this for you — no technical
+knowledge needed.
 
 1. Open Claude Code
-2. Click **Open Folder** (or similar — it will ask you to point it at a project)
-3. Navigate to the folder where you cloned the repo in Step 1
-4. Select it and open it
+2. When it asks you to open a project, choose a folder on your computer where you
+   want to store the website files (e.g. create a folder called `WCBNW` in your
+   Documents folder)
+3. Once it's open, type this:
+
+> *"Clone the GitHub repository at https://github.com/yerfttam/WCBNW into this folder"*
+
+Claude Code will download all the files automatically.
+
+> **Note:** You'll need to be added as a GitHub collaborator first, otherwise the
+> clone will fail. The previous website developer can add you at:
+> GitHub → the WCBNW repo → Settings → Collaborators → Add people.
+> You'll need a free GitHub account at github.com.
+
+---
+
+### Step 3 — You're in
 
 Claude Code will read `CLAUDE.md` automatically — this is the file that tells it
 everything about the project. You don't need to do anything special to load it.
 
 ---
 
-### Step 4 — Make a change
+### Step 4 — Make a change (it's just a conversation)
 
 Just type what you want. Some examples:
 
@@ -374,8 +376,9 @@ update is live.
 - **Ask Claude Code** — describe what you're seeing and ask it to diagnose the problem.
   It can read the codebase and usually figure out what went wrong.
 - **GitHub Secrets** — some integrations (Guesty, ntfy) use encrypted credentials
-  stored in GitHub. Claude Code knows these exist but cannot read them. To update them:
-  GitHub → the WCBNW repository → Settings → Secrets and variables → Actions
+  stored in GitHub. Claude Code knows these exist but cannot read them. To update them,
+  go to: GitHub → the WCBNW repository → Settings → Secrets and variables → Actions.
+  Ask the previous website developer for the actual secret values.
 
 ---
 
