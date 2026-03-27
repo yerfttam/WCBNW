@@ -288,6 +288,80 @@ Located in `.github/workflows/sync-guesty.yml`
 
 ---
 
+## Credentials — 1Password
+
+All usernames, passwords, and secret keys for this project are stored in the
+**WCBNW shared vault in 1Password**. If you've been given access to the project,
+you should have been invited to this vault. If you don't have access, contact
+one of the other vault members.
+
+The following accounts are stored there:
+
+---
+
+### GitHub
+- **URL:** github.com
+- **What it's for:** Stores all the website code. You need this to be added as a
+  collaborator and to access the repository settings (including GitHub Secrets).
+- **1Password entry:** `GitHub — WCBNW`
+
+---
+
+### Claude Code (Anthropic)
+- **URL:** claude.ai
+- **What it's for:** Signing in to the Claude Code desktop app to make website changes.
+- **1Password entry:** `Claude Code — Anthropic`
+
+---
+
+### Render
+- **URL:** render.com
+- **What it's for:** The hosting platform. Log in here to see deploy history and
+  troubleshoot if the site goes down.
+- **1Password entry:** `Render — WCBNW`
+
+---
+
+### Guesty
+- **URL:** app.guesty.com
+- **What it's for:** Property management system — the source of truth for listings,
+  pricing, and availability. Changes made here flow to the website via the daily sync.
+- **1Password entry:** `Guesty — Whiskey Creek Beach NW`
+
+---
+
+### Guesty API Credentials
+- **What it's for:** The daily sync job uses these to authenticate with Guesty's API.
+  They are also stored as GitHub Secrets (`GUESTY_CLIENT_ID` and `GUESTY_CLIENT_SECRET`).
+  If those secrets ever need to be rotated, get the values from here.
+- **1Password entry:** `Guesty API — Client ID & Secret` (stored as a secure note)
+
+---
+
+### Formspree
+- **URL:** formspree.io
+- **What it's for:** Handles the contact form on the website. Submissions get emailed
+  to the Whiskey Creek Beach NW Gmail account.
+- **1Password entry:** `Formspree — WCBNW`
+
+---
+
+### Whiskey Creek Beach NW Gmail
+- **Address:** whiskeycreekbeachnw@gmail.com
+- **What it's for:** Receives contact form submissions. Also used for various service
+  account registrations related to the property.
+- **1Password entry:** `Gmail — whiskeycreekbeachnw`
+
+---
+
+### ntfy Topic
+- **What it's for:** The private topic name used for push notifications when the
+  Guesty sync runs. Also stored as a GitHub Secret (`NTFY_TOPIC`). Treat it like a
+  password — don't share it publicly.
+- **1Password entry:** `ntfy — WCBNW sync topic` (stored as a secure note)
+
+---
+
 ## Making Changes with Claude Code
 
 This project is maintained using **Claude Code** — an AI assistant that understands
