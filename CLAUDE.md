@@ -114,7 +114,7 @@ Every page footer displays a version string (e.g. `v1.0.4`) below the copyright 
 
 **Update this with every push.** It is the primary way to confirm a Render deployment completed successfully. Bump the patch number (third digit) for routine changes, minor for larger changes.
 
-Current version: **v2.2.3**
+Current version: **v2.2.4**
 
 **The footer is now a shared partial.** To update the version, edit ONE file only:
 ```
