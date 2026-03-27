@@ -1,6 +1,19 @@
 {
-  "generated": "2026-03-27T16:56:58Z",
+  "generated": "2026-03-27T17:15:18Z",
   "releases": [
+    {
+      "version": "v2.2.1",
+      "date": "2026-03-27",
+      "datetime": "2026-03-27T17:14:59Z",
+      "display_date": "March 27, 2026",
+      "display_time": "5:14 PM UTC",
+      "entries": [
+        {
+          "type": "refactor",
+          "description": "migrate policies.html to shared nav; add staging workflow docs"
+        }
+      ]
+    },
     {
       "version": "v2.2.0",
       "date": "2026-03-24",
@@ -125,10 +138,18 @@
     {
       "version": "v2.1.0",
       "date": "2026-03-27",
-      "datetime": "2026-03-27T16:56:41Z",
+      "datetime": "2026-03-27T17:06:19Z",
       "display_date": "March 27, 2026",
-      "display_time": "4:56 PM UTC",
+      "display_time": "5:06 PM UTC",
       "entries": [
+        {
+          "type": "fix",
+          "description": "restore nav CSS to policies.html after partial migration"
+        },
+        {
+          "type": "refactor",
+          "description": "migrate policies.html to shared nav partial"
+        },
         {
           "type": "docs",
           "description": "remove note about local-only legacy directories"
