@@ -24,6 +24,29 @@
     img { max-width: 100%; display: block; }
     .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
 
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--navy); padding: 0 2.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; box-shadow: 0 2px 16px rgba(0,0,0,0.25); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .nav-logo-img { height: 44px; width: auto; filter: brightness(0) invert(1); opacity: 0.95; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+    .nav-links a { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); opacity: 0.85; transition: opacity 0.2s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+    .nav-links .dropdown { position: relative; }
+    .nav-links .dropdown-menu { display: none; position: absolute; top: calc(100%); left: 50%; transform: translateX(-50%); background: var(--navy); min-width: 220px; border-top: 2px solid var(--brown); list-style: none; padding: 0.5rem 0; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .nav-links .dropdown:hover .dropdown-menu { display: block; }
+    .nav-links .dropdown-menu li a { display: block; padding: 0.5rem 1.25rem; font-size: 0.7rem; opacity: 0.8; }
+    .nav-links .dropdown-menu li a:hover { background: rgba(255,255,255,0.08); opacity: 1; }
+    .nav-book-btn { background: var(--white) !important; color: var(--brown) !important; border: none !important; padding: 0.45rem 1.1rem !important; opacity: 1 !important; transition: background 0.2s !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; }
+    .nav-book-btn:hover { background: rgba(255,255,255,0.85) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); transition: all 0.3s; }
+    .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); z-index: 999; padding: 1.5rem 2rem; flex-direction: column; gap: 0.75rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-weight: 700; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); opacity: 0.85; }
+    .mobile-menu .sub-links { padding-left: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .mobile-menu .sub-links a { font-size: 0.75rem; opacity: 0.65; border-bottom: none; }
+    .mobile-menu .mob-book { margin-top: 0.5rem; border: 1px solid rgba(246,239,229,0.6) !important; text-align: center; padding: 0.6rem !important; border-bottom: 1px solid rgba(246,239,229,0.6) !important; }
+
     /* PAGE HERO */
     .page-hero { position: relative; height: 35vh; min-height: 240px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
     .page-hero-bg { position: absolute; inset: 0; background: url('photos/outdoor/DSC_0020.JPG') center 60%/cover no-repeat; }
@@ -32,7 +55,7 @@
     .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--cream); letter-spacing: 0.05em; line-height: 1.2; }
     .page-hero-sub { margin-top: 0.75rem; font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
 
-    /* MAIN SECTION */
+    /* LOOKUP SECTION */
     .lookup-section {
       background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
       padding: 5rem 2rem 6rem;
@@ -77,35 +100,58 @@
     /* RESULT */
     .result { margin-top: 1.5rem; display: none; }
     .result.visible { display: block; }
-
     .result-success { background: #f0f7f0; border-left: 3px solid #4a8c4a; padding: 1.5rem; }
     .result-success-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4a8c4a; margin-bottom: 0.5rem; }
     .result-property { font-size: 0.8rem; color: var(--text-body); margin-bottom: 1.25rem; }
-
     .code-display { background: var(--navy); padding: 1.25rem 1.5rem; margin-bottom: 0.75rem; }
     .code-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.4rem; }
     .code-value { font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: 700; color: var(--cream); letter-spacing: 0.15em; }
     .code-backup { font-size: 0.75rem; color: rgba(246,239,229,0.6); margin-top: 0.25rem; }
-
     .result-note { font-size: 0.78rem; color: var(--text-body); line-height: 1.65; margin-top: 1rem; opacity: 0.75; }
-
     .result-nocode { background: #fff8f0; border-left: 3px solid var(--brown); padding: 1.5rem; }
     .result-nocode-title { font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; font-size: 0.9rem; }
     .result-nocode p { font-size: 0.88rem; line-height: 1.7; color: var(--text-body); }
     .result-nocode a { color: var(--brown); }
-
     .result-error { background: #fff0f0; border-left: 3px solid #c0392b; padding: 1.5rem; }
     .result-error p { font-size: 0.88rem; line-height: 1.7; color: var(--text-body); }
     .result-error a { color: var(--brown); }
 
-    /* FOOTER NOTE */
     .help-note { text-align: center; margin-top: 2rem; font-size: 0.82rem; color: var(--text-body); opacity: 0.7; line-height: 1.7; }
     .help-note a { color: var(--brown); opacity: 1; }
 
+    /* FOOTER */
+    footer { background: var(--navy); padding: 4rem 2.5rem 2rem; color: rgba(246,239,229,0.65); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 4rem; align-items: start; margin-bottom: 3rem; }
+    .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .footer-logo-img { height: 80px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-brand-name { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: 0.78rem; color: var(--cream); text-align: center; line-height: 1.5; letter-spacing: 0.05em; }
+    .footer-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.55rem; }
+    .footer-col ul li a { font-size: 0.8rem; color: rgba(246,239,229,0.55); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-contact { min-width: 180px; }
+    .footer-contact h4 { font-family: 'Josefin Sans', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cream); margin-bottom: 1rem; }
+    .footer-contact p { font-size: 0.82rem; color: rgba(246,239,229,0.6); line-height: 1.7; }
+    .footer-contact a { color: rgba(246,239,229,0.6); transition: color 0.2s; }
+    .footer-contact a:hover { color: var(--cream); }
+    .footer-bottom { max-width: 1160px; margin: 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(181,184,163,0.2); text-align: center; font-size: 0.75rem; color: rgba(246,239,229,0.35); }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
       .lookup-section { padding: 3rem 1.25rem 4rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-brand { display: none; }
+      .footer-nav { gap: 1rem 2rem; }
     }
+    @media (max-width: 1024px) {
+      .footer-inner { grid-template-columns: auto 1fr; grid-template-rows: auto auto; }
+      .footer-contact { grid-column: 2; grid-row: 2; }
+    }
+    .site-version { font-size: 0.55rem; opacity: 0.4; margin-top: 0.3rem; display: block; color: inherit; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -178,10 +224,10 @@
 
     document.getElementById('lookup-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const btn      = document.getElementById('lookup-btn');
-      const result   = document.getElementById('result');
-      const lastName  = document.getElementById('last-name').value.trim();
-      const phone4    = document.getElementById('phone-last4').value.trim();
+      const btn     = document.getElementById('lookup-btn');
+      const result  = document.getElementById('result');
+      const lastName = document.getElementById('last-name').value.trim();
+      const phone4   = document.getElementById('phone-last4').value.trim();
 
       btn.textContent = 'Looking up…';
       btn.disabled    = true;
@@ -199,10 +245,7 @@
         if (data.error) {
           result.innerHTML = `<div class="result-error"><p>${data.error}</p></div>`;
         } else if (!data.found) {
-          result.innerHTML = `
-            <div class="result-error">
-              <p>${data.message}</p>
-            </div>`;
+          result.innerHTML = `<div class="result-error"><p>${data.message}</p></div>`;
         } else if (!data.has_code) {
           result.innerHTML = `
             <div class="result-nocode">
@@ -210,9 +253,8 @@
               <p>Your property uses a different check-in process. Please call or text us at <a href="tel:8447692322">(844) 769-2322</a> and we'll get you sorted out right away.</p>
             </div>`;
         } else {
-          const checkIn  = formatDate(data.check_in);
-          const checkOut = formatDate(data.check_out);
-          const backup   = data.backup_code
+          const checkIn = formatDate(data.check_in);
+          const backup  = data.backup_code
             ? `<div class="code-display" style="margin-top:0.75rem;">
                 <p class="code-label">Backup Code</p>
                 <p class="code-value">${data.backup_code}</p>
