@@ -1,7 +1,10 @@
 import os
+import re
+import json
 import base64
 import traceback
 import requests
+from datetime import datetime, timezone, date as date_type
 from flask import Flask, request, jsonify
 import anthropic
 
@@ -15,11 +18,14 @@ def add_cors_headers(response):
     return response
 
 # Environment variables (set these in Render dashboard)
-ADMIN_PASSWORD    = os.environ.get('ADMIN_PASSWORD', 'changeme')
-ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY')
-GITHUB_TOKEN      = os.environ.get('GITHUB_TOKEN')
-REPO              = 'yerfttam/WCBNW'
-STAGING_BRANCH    = 'staging'
+ADMIN_PASSWORD      = os.environ.get('ADMIN_PASSWORD', 'changeme')
+ANTHROPIC_API_KEY   = os.environ.get('ANTHROPIC_API_KEY')
+GITHUB_TOKEN        = os.environ.get('GITHUB_TOKEN')
+REPO                = 'yerfttam/WCBNW'
+STAGING_BRANCH      = 'staging'
+GUESTY_CLIENT_ID    = os.environ.get('GUESTY_CLIENT_ID', '0oatpyo652QA9S4Av5d7')
+GUESTY_CLIENT_SECRET = os.environ.get('GUESTY_CLIENT_SECRET')
+GUESTY_TOKEN_URL    = 'https://open-api.guesty.com/oauth2/token'
 
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
@@ -350,6 +356,130 @@ def reset():
         return jsonify({'error': 'Invalid password'}), 401
     conversation = []
     return jsonify({'status': 'ok'})
+
+
+# ── Guesty guest lookup ────────────────────────────────────────────────────────
+
+def get_guesty_token():
+    """Fetch a fresh Guesty OAuth2 bearer token."""
+    r = requests.post(GUESTY_TOKEN_URL, data={
+        'grant_type': 'client_credentials',
+        'scope': 'open-api',
+        'client_id': GUESTY_CLIENT_ID,
+        'client_secret': GUESTY_CLIENT_SECRET,
+    })
+    if r.status_code == 200:
+        return r.json().get('access_token')
+    print(f"Guesty token error: {r.status_code} {r.text[:200]}")
+    return None
+
+
+@app.route('/guest-lookup', methods=['POST', 'OPTIONS'])
+def guest_lookup():
+    if request.method == 'OPTIONS':
+        return '', 200
+
+    data = request.json or {}
+    last_name   = (data.get('last_name') or '').strip()
+    phone_last4 = (data.get('phone_last4') or '').strip()
+
+    if not last_name or not phone_last4:
+        return jsonify({'error': 'Please provide your last name and last 4 digits of your phone number.'}), 400
+    if len(phone_last4) != 4 or not phone_last4.isdigit():
+        return jsonify({'error': 'Phone digits must be exactly 4 numbers.'}), 400
+
+    token = get_guesty_token()
+    if not token:
+        return jsonify({'error': 'Service temporarily unavailable. Please call (844) 769-2322.'}), 503
+
+    headers = {'Authorization': f'Bearer {token}', 'Accept': 'application/json'}
+
+    # Fetch confirmed/active reservations with a future checkout
+    now_str = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+    params = {
+        'filters': json.dumps([
+            {'field': 'checkOut', 'operator': '$gt', 'value': now_str},
+            {'field': 'status', 'operator': '$in', 'value': ['confirmed', 'checked_in']},
+        ]),
+        'fields': '_id guest checkIn checkOut listing status',
+        'limit': 200,
+    }
+    r = requests.get('https://open-api.guesty.com/v1/reservations', headers=headers, params=params)
+    if r.status_code != 200:
+        print(f"Guesty reservations error: {r.status_code} {r.text[:300]}")
+        return jsonify({'error': 'Service temporarily unavailable. Please call (844) 769-2322.'}), 503
+
+    reservations = r.json().get('results', [])
+    print(f"GUEST LOOKUP: searching {len(reservations)} reservations for '{last_name}' / ***{phone_last4}")
+
+    # Match on last name (case-insensitive) + phone last 4
+    match = None
+    for res in reservations:
+        guest = res.get('guest', {})
+        res_last  = (guest.get('lastName') or '').strip().lower()
+        res_phone = re.sub(r'\D', '', guest.get('phone') or '')
+        if res_last == last_name.lower() and res_phone.endswith(phone_last4):
+            match = res
+            break
+
+    if not match:
+        return jsonify({
+            'found': False,
+            'message': "We couldn't find a reservation matching that information. Double-check the last name and phone number you used when booking, or call us at (844) 769-2322.",
+        })
+
+    res_id       = match['_id']
+    listing      = match.get('listing') or {}
+    listing_name = listing.get('nickname') or listing.get('title') or 'your property'
+    check_in     = match.get('checkIn', '')
+    check_out    = match.get('checkOut', '')
+
+    # Fetch lock codes
+    codes_r = requests.get(
+        f'https://open-api.guesty.com/v1/reservations/{res_id}/locks-and-codes',
+        headers=headers,
+    )
+
+    if codes_r.status_code != 200:
+        # Property has no lock integration (tent sites, A-frames)
+        return jsonify({'found': True, 'has_code': False, 'listing': listing_name, 'check_in': check_in})
+
+    locks = codes_r.json()
+    if isinstance(locks, dict):
+        locks = locks.get('locks', [])
+
+    guest_code  = None
+    backup_code = None
+
+    # Only show backup code on/after check-in day
+    try:
+        check_in_date      = datetime.fromisoformat(check_in.replace('Z', '+00:00')).date()
+        is_checkin_or_after = date_type.today() >= check_in_date
+    except Exception:
+        is_checkin_or_after = False
+
+    for lock in locks:
+        for entry in lock.get('accessCodes', []):
+            purpose = entry.get('purpose', '')
+            code    = entry.get('code') or entry.get('pin')
+            if purpose == 'GUEST' and code and not guest_code:
+                guest_code = code
+            elif purpose == 'GUEST_BACKUP' and code and is_checkin_or_after and not backup_code:
+                backup_code = code
+
+    if not guest_code:
+        return jsonify({'found': True, 'has_code': False, 'listing': listing_name, 'check_in': check_in})
+
+    print(f"GUEST LOOKUP: code found for '{listing_name}'")
+    return jsonify({
+        'found':       True,
+        'has_code':    True,
+        'listing':     listing_name,
+        'check_in':    check_in,
+        'check_out':   check_out,
+        'guest_code':  guest_code,
+        'backup_code': backup_code,
+    })
 
 
 @app.route('/health', methods=['GET'])

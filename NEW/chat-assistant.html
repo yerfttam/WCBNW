@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Door Code Lookup — Whiskey Creek Beach NW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:      #293b4e;
+      --cream:     #f6efe5;
+      --sage:      #b5b8a3;
+      --brown:     #6b452e;
+      --white:     #ffffff;
+      --navy-dark: #1e2c3a;
+      --text-body: #4a4a4a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Josefin Sans', sans-serif; font-weight: 400; font-size: 16px; background: var(--cream); color: var(--text-body); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .copperplate { font-family: Copperplate, 'Copperplate Gothic Light', 'Copperplate Gothic Bold', fantasy; }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 35vh; min-height: 240px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-top: 68px; }
+    .page-hero-bg { position: absolute; inset: 0; background: url('photos/outdoor/DSC_0020.JPG') center 60%/cover no-repeat; }
+    .page-hero-overlay { position: absolute; inset: 0; background: rgba(30,44,58,0.5); }
+    .page-hero-content { position: relative; z-index: 2; text-align: center; padding: 0 1.5rem; }
+    .page-hero-title { font-family: Copperplate, 'Copperplate Gothic Light', fantasy; font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--cream); letter-spacing: 0.05em; line-height: 1.2; }
+    .page-hero-sub { margin-top: 0.75rem; font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,239,229,0.75); }
+
+    /* MAIN SECTION */
+    .lookup-section {
+      background: url('images/bkgds/bkgd1.jpg') center/cover no-repeat;
+      padding: 5rem 2rem 6rem;
+      min-height: 60vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .lookup-wrap { width: 100%; max-width: 520px; }
+
+    .lookup-intro { text-align: center; margin-bottom: 2.5rem; }
+    .lookup-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brown); margin-bottom: 0.5rem; }
+    .lookup-title { font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--navy); margin-bottom: 0.75rem; }
+    .lookup-desc { font-size: 0.88rem; color: var(--text-body); line-height: 1.7; }
+
+    /* FORM CARD */
+    .lookup-card { background: var(--white); border: 1px solid rgba(41,59,78,0.1); }
+    .lookup-card-header { background: var(--navy); padding: 1.1rem 1.5rem; }
+    .lookup-card-title { color: var(--cream); font-size: 0.95rem; letter-spacing: 0.04em; }
+    .lookup-card-body { padding: 1.75rem 1.5rem; }
+
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy); margin-bottom: 0.45rem; }
+    .form-group input {
+      width: 100%; background: var(--cream); border: 1px solid rgba(41,59,78,0.15);
+      padding: 0.75rem 0.9rem; font-family: 'Josefin Sans', sans-serif; font-size: 1rem;
+      color: var(--text-body); outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus { border-color: var(--brown); background: var(--white); }
+    .form-hint { font-size: 0.75rem; color: rgba(74,74,74,0.6); margin-top: 0.3rem; }
+
+    .btn-lookup {
+      width: 100%; background: var(--navy); color: var(--cream);
+      font-family: 'Josefin Sans', sans-serif; font-weight: 700;
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.95rem; border: none; cursor: pointer;
+      transition: background 0.2s; margin-top: 0.5rem;
+    }
+    .btn-lookup:hover:not(:disabled) { background: var(--navy-dark); }
+    .btn-lookup:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* RESULT */
+    .result { margin-top: 1.5rem; display: none; }
+    .result.visible { display: block; }
+
+    .result-success { background: #f0f7f0; border-left: 3px solid #4a8c4a; padding: 1.5rem; }
+    .result-success-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4a8c4a; margin-bottom: 0.5rem; }
+    .result-property { font-size: 0.8rem; color: var(--text-body); margin-bottom: 1.25rem; }
+
+    .code-display { background: var(--navy); padding: 1.25rem 1.5rem; margin-bottom: 0.75rem; }
+    .code-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.4rem; }
+    .code-value { font-family: 'Courier New', monospace; font-size: 2.2rem; font-weight: 700; color: var(--cream); letter-spacing: 0.15em; }
+    .code-backup { font-size: 0.75rem; color: rgba(246,239,229,0.6); margin-top: 0.25rem; }
+
+    .result-note { font-size: 0.78rem; color: var(--text-body); line-height: 1.65; margin-top: 1rem; opacity: 0.75; }
+
+    .result-nocode { background: #fff8f0; border-left: 3px solid var(--brown); padding: 1.5rem; }
+    .result-nocode-title { font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .result-nocode p { font-size: 0.88rem; line-height: 1.7; color: var(--text-body); }
+    .result-nocode a { color: var(--brown); }
+
+    .result-error { background: #fff0f0; border-left: 3px solid #c0392b; padding: 1.5rem; }
+    .result-error p { font-size: 0.88rem; line-height: 1.7; color: var(--text-body); }
+    .result-error a { color: var(--brown); }
+
+    /* FOOTER NOTE */
+    .help-note { text-align: center; margin-top: 2rem; font-size: 0.82rem; color: var(--text-body); opacity: 0.7; line-height: 1.7; }
+    .help-note a { color: var(--brown); opacity: 1; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .lookup-section { padding: 3rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="site-nav-placeholder"></div>
+  <script src="js/nav-loader.js" defer></script>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title copperplate">Find Your Door Code</h1>
+      <p class="page-hero-sub">Quick self-service lookup</p>
+    </div>
+  </div>
+
+  <!-- LOOKUP -->
+  <section class="lookup-section">
+    <div class="lookup-wrap">
+
+      <div class="lookup-intro">
+        <p class="lookup-label">Guest Services</p>
+        <h2 class="lookup-title copperplate">Can't Find Your Code?</h2>
+        <p class="lookup-desc">Enter your last name and the last 4 digits of the phone number you used when booking. We'll pull up your door code right away.</p>
+      </div>
+
+      <div class="lookup-card">
+        <div class="lookup-card-header">
+          <p class="lookup-card-title copperplate">Reservation Lookup</p>
+        </div>
+        <div class="lookup-card-body">
+          <form id="lookup-form">
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" id="last-name" placeholder="Smith" autocomplete="family-name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone-last4">Last 4 Digits of Phone</label>
+              <input type="tel" id="phone-last4" placeholder="4567" maxlength="4" pattern="[0-9]{4}" inputmode="numeric" required />
+              <p class="form-hint">Use the number you provided when booking</p>
+            </div>
+            <button type="submit" class="btn-lookup" id="lookup-btn">Look Up My Code</button>
+          </form>
+
+          <div class="result" id="result"></div>
+        </div>
+      </div>
+
+      <p class="help-note">
+        Need help? Call or text us anytime at <a href="tel:8447692322">(844) 769-2322</a><br>
+        or email <a href="mailto:whiskeycreekbeachnw@gmail.com">whiskeycreekbeachnw@gmail.com</a>
+      </p>
+
+    </div>
+  </section>
+
+  <div id="site-footer-placeholder"></div>
+  <script src="js/footer-loader.js" defer></script>
+
+  <script>
+    const API_URL = 'https://wcbnw-admin-api-2khf.onrender.com/guest-lookup';
+
+    function formatDate(iso) {
+      if (!iso) return '';
+      try {
+        return new Date(iso).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      } catch(e) { return iso; }
+    }
+
+    document.getElementById('lookup-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn      = document.getElementById('lookup-btn');
+      const result   = document.getElementById('result');
+      const lastName  = document.getElementById('last-name').value.trim();
+      const phone4    = document.getElementById('phone-last4').value.trim();
+
+      btn.textContent = 'Looking up…';
+      btn.disabled    = true;
+      result.className = 'result';
+      result.innerHTML = '';
+
+      try {
+        const res  = await fetch(API_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ last_name: lastName, phone_last4: phone4 }),
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          result.innerHTML = `<div class="result-error"><p>${data.error}</p></div>`;
+        } else if (!data.found) {
+          result.innerHTML = `
+            <div class="result-error">
+              <p>${data.message}</p>
+            </div>`;
+        } else if (!data.has_code) {
+          result.innerHTML = `
+            <div class="result-nocode">
+              <p class="result-nocode-title">Reservation Found — ${data.listing || 'Your Property'}</p>
+              <p>Your property uses a different check-in process. Please call or text us at <a href="tel:8447692322">(844) 769-2322</a> and we'll get you sorted out right away.</p>
+            </div>`;
+        } else {
+          const checkIn  = formatDate(data.check_in);
+          const checkOut = formatDate(data.check_out);
+          const backup   = data.backup_code
+            ? `<div class="code-display" style="margin-top:0.75rem;">
+                <p class="code-label">Backup Code</p>
+                <p class="code-value">${data.backup_code}</p>
+                <p class="code-backup">Use if the primary code doesn't work</p>
+               </div>`
+            : '';
+          result.innerHTML = `
+            <div class="result-success">
+              <p class="result-success-label">✓ Reservation Found</p>
+              <p class="result-property">${data.listing}${checkIn ? ' &nbsp;·&nbsp; Check-in ' + checkIn : ''}</p>
+              <div class="code-display">
+                <p class="code-label">Your Door Code</p>
+                <p class="code-value">${data.guest_code}</p>
+              </div>
+              ${backup}
+              <p class="result-note">Check-in is at 3:00 PM · Check-out is at 11:00 AM<br>Questions? Call us at <a href="tel:8447692322" style="color:var(--brown)">(844) 769-2322</a></p>
+            </div>`;
+        }
+      } catch(err) {
+        result.innerHTML = `
+          <div class="result-error">
+            <p>Something went wrong. Please call us at <a href="tel:8447692322">(844) 769-2322</a> and we'll get you your code immediately.</p>
+          </div>`;
+      }
+
+      result.classList.add('visible');
+      btn.textContent = 'Look Up My Code';
+      btn.disabled    = false;
+    });
+  </script>
+
+</body>
+</html>
