@@ -1,6 +1,32 @@
 {
-  "generated": "2026-03-28T01:01:30Z",
+  "generated": "2026-05-21T16:20:42Z",
   "releases": [
+    {
+      "version": "v2.2.6",
+      "date": "2026-03-28",
+      "datetime": "2026-03-28T00:54:50Z",
+      "display_date": "March 28, 2026",
+      "display_time": "12:54 AM UTC",
+      "entries": [
+        {
+          "type": "fix",
+          "description": "rename chat-assistant to door-code, add full nav/footer CSS"
+        }
+      ]
+    },
+    {
+      "version": "v2.2.5",
+      "date": "2026-03-28",
+      "datetime": "2026-03-28T00:48:45Z",
+      "display_date": "March 28, 2026",
+      "display_time": "12:48 AM UTC",
+      "entries": [
+        {
+          "type": "feat",
+          "description": "add guest door code lookup (chat-assistant page + /guest-lookup API)"
+        }
+      ]
+    },
     {
       "version": "v2.2.4",
       "date": "2026-03-27",
