@@ -56,11 +56,6 @@ const CARD_CLASS = {
   'rv-sites':   'prop-card--site',
 };
 
-function renderPrice(price, slug) {
-  if (!price || !price.base) return '';
-  if (slug === 'a-frames') return '';
-  return `From $${price.base}/night`;
-}
 
 // Short card description (4 lines max, ~440 chars)
 function getListingDesc(listing) {
@@ -83,7 +78,6 @@ function renderCard(listing, slug) {
   const photos   = (listing.photos && listing.photos.length) ? listing.photos : [{ original: 'images/bkgds/bkgd1.jpg' }];
   const firstSrc = photos[0].original;
   const cardMod  = CARD_CLASS[slug] || '';
-  const price    = renderPrice(listing.price, slug);
   const guests   = listing.accommodates ? `${listing.accommodates} guests` : '';
   const meta     = [guests].filter(Boolean).join(' &middot; ');
 
@@ -114,7 +108,6 @@ function renderCard(listing, slug) {
         <div class="prop-card-dots">${dots}</div>
         <div class="prop-card-name copperplate">${listing.name}</div>
         <div class="prop-card-desc">${getListingDesc(listing)}</div>
-        ${price ? `<div class="prop-card-price">${price}</div>` : ''}
         ${meta  ? `<div class="prop-card-meta">${meta}</div>`   : ''}
         <a href="${listing.bookingUrl}" target="_blank" rel="noopener" class="prop-card-book">
           Book Now &rarr;
@@ -175,7 +168,6 @@ function buildModal() {
             <p class="modal-meta"></p>
           </div>
           <div class="modal-price-wrap">
-            <p class="modal-price"></p>
             <a class="modal-book" href="#" target="_blank" rel="noopener">Book Now</a>
           </div>
         </div>
@@ -195,8 +187,6 @@ function openModal(listing) {
   modalPhotos     = (listing.photos || []).map(p => p.original);
   modalPhotoIndex = 0;
 
-  // Hide price for A-frames
-  const price  = renderPrice(listing.price, listing.categorySlug);
   const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
   const meta   = [guests].filter(Boolean).join(' · ');
   const descParas = getFullDesc(listing);
@@ -205,7 +195,6 @@ function openModal(listing) {
   modal.querySelector('.modal-img').src           = modalPhotos[0] || '';
   modal.querySelector('.modal-img').alt           = listing.name;
   modal.querySelector('.modal-name').textContent  = listing.name;
-  modal.querySelector('.modal-price').textContent = price;
   modal.querySelector('.modal-meta').textContent  = meta;
   modal.querySelector('.modal-desc').innerHTML    = descParas.map(p => `<p>${p}</p>`).join('');
   modal.querySelector('.modal-book').href         = listing.bookingUrl;
