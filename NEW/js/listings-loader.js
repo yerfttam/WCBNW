@@ -197,7 +197,7 @@ function openModal(listing) {
 
   // Determine if listing is an A-frame by checking its category in the registry
   const isAFrame = listing.name && listing.name.includes('A-Frame');
-  const price  = isAFrame ? '' : renderPrice(listing.price);
+  const price  = isAFrame ? '' : renderPrice(listing.price, null);
   const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
   const meta   = [guests].filter(Boolean).join(' · ');
   const descParas = getFullDesc(listing);
