@@ -286,9 +286,12 @@ async function loadListings() {
 
     const categories = data.categories.filter(c => c.slug !== 'other-properties');
 
-    // Register all listings by id
+    // Register all listings by id with their category slug
     categories.forEach(cat =>
-      cat.listings.forEach(l => listingRegistry.set(l.id, l))
+      cat.listings.forEach(l => {
+        l.categorySlug = cat.slug;
+        listingRegistry.set(l.id, l);
+      })
     );
 
     navEl.innerHTML      = renderCatNav(categories);
