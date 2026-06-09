@@ -83,7 +83,7 @@ function renderCard(listing, slug) {
   const photos   = (listing.photos && listing.photos.length) ? listing.photos : [{ original: 'images/bkgds/bkgd1.jpg' }];
   const firstSrc = photos[0].original;
   const cardMod  = CARD_CLASS[slug] || '';
-  const price    = (slug === 'a-frames') ? '' : renderPrice(listing.price);
+  const price    = renderPrice(listing.price, slug);
   const guests   = listing.accommodates ? `${listing.accommodates} guests` : '';
   const meta     = [guests].filter(Boolean).join(' &middot; ');
 
