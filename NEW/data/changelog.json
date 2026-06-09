@@ -1,6 +1,19 @@
 {
-  "generated": "2026-05-21T16:28:01Z",
+  "generated": "2026-06-09T18:08:10Z",
   "releases": [
+    {
+      "version": "v2.2.14",
+      "date": "2026-06-09",
+      "datetime": "2026-06-09T18:03:06Z",
+      "display_date": "June 9, 2026",
+      "display_time": "6:03 PM UTC",
+      "entries": [
+        {
+          "type": "feat",
+          "description": "remove nightly price from all property cards and modals"
+        }
+      ]
+    },
     {
       "version": "v2.2.6",
       "date": "2026-03-28",
