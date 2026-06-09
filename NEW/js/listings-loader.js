@@ -56,8 +56,9 @@ const CARD_CLASS = {
   'rv-sites':   'prop-card--site',
 };
 
-function renderPrice(price) {
+function renderPrice(price, slug) {
   if (!price || !price.base) return '';
+  if (slug === 'a-frames') return '';
   return `From $${price.base}/night`;
 }
 
