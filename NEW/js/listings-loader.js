@@ -195,9 +195,8 @@ function openModal(listing) {
   modalPhotos     = (listing.photos || []).map(p => p.original);
   modalPhotoIndex = 0;
 
-  // Determine if listing is an A-frame by checking its category in the registry
-  const isAFrame = listing.name && listing.name.includes('A-Frame');
-  const price  = isAFrame ? '' : renderPrice(listing.price, null);
+  // Hide price for A-frames
+  const price  = renderPrice(listing.price, listing.categorySlug);
   const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
   const meta   = [guests].filter(Boolean).join(' · ');
   const descParas = getFullDesc(listing);
