@@ -24,11 +24,6 @@ function pickFeatures(amenities, n = 4) {
   return picked.slice(0, n);
 }
 
-function renderPrice(price) {
-  if (!price || !price.base) return '';
-  return `From $${price.base}/night`;
-}
-
 // Full modal description — first 2 meaningful paragraphs
 function getFullDesc(listing) {
   if (!listing.description) return listing.summary ? [listing.summary] : [];
@@ -52,10 +47,6 @@ function renderCard(listing, index) {
   const arrows = photos.length > 1 ? `
     <button class="lc-btn lc-btn--prev" aria-label="Previous photo">&#8249;</button>
     <button class="lc-btn lc-btn--next" aria-label="Next photo">&#8250;</button>` : '';
-
-  const price = listing.price && listing.price.base
-    ? `From $${listing.price.base}/night`
-    : '';
 
   const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
   const beds   = listing.bedrooms     ? `${listing.bedrooms} bed${listing.bedrooms > 1 ? 's' : ''}` : '';
@@ -81,7 +72,6 @@ function renderCard(listing, index) {
       <div class="listing-card-info">
         <p class="listing-card-label">Other Properties</p>
         <h2 class="listing-card-name copperplate">${listing.title || listing.name}</h2>
-        ${price ? `<p class="listing-card-price">${price}</p>` : ''}
         ${listing.summary ? `<p class="listing-card-desc">${listing.summary}</p>` : ''}
         ${meta ? `<p class="listing-card-meta">${meta}</p>` : ''}
         ${featureHtml ? `<ul class="listing-card-features">${featureHtml}</ul>` : ''}
@@ -115,7 +105,6 @@ function buildModal() {
             <p class="modal-meta"></p>
           </div>
           <div class="modal-price-wrap">
-            <p class="modal-price"></p>
             <a class="modal-book" href="#" target="_blank" rel="noopener">Book Now</a>
           </div>
         </div>
@@ -135,7 +124,6 @@ function openModal(listing) {
   modalPhotos     = (listing.photos || []).map(p => p.original);
   modalPhotoIndex = 0;
 
-  const price  = renderPrice(listing.price);
   const guests = listing.accommodates ? `${listing.accommodates} guests` : '';
   const beds   = listing.bedrooms     ? `${listing.bedrooms} bed`        : '';
   const baths  = listing.bathrooms    ? `${listing.bathrooms} bath`      : '';
@@ -146,7 +134,6 @@ function openModal(listing) {
   modal.querySelector('.modal-img').src           = modalPhotos[0] || '';
   modal.querySelector('.modal-img').alt           = listing.name;
   modal.querySelector('.modal-name').textContent  = listing.title || listing.name;
-  modal.querySelector('.modal-price').textContent = price;
   modal.querySelector('.modal-meta').textContent  = meta;
   modal.querySelector('.modal-desc').innerHTML    = descParas.map(p => `<p>${p}</p>`).join('');
   modal.querySelector('.modal-book').href         = listing.bookingUrl;
