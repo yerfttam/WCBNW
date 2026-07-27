@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-26T18:02:13.050597+00:00",
+  "generated": "2026-07-27T18:24:50.582437+00:00",
   "account": "whiskeycreekbeachnw",
   "total": 32,
   "categories": [
@@ -1703,27 +1703,26 @@
           "id": "678ffac69af81b0010935039",
           "name": "Tent Site T14",
           "title": "Beachfront Campsite at T14",
-          "summary": "Beachfront Camping Shelter",
-          "description": "Whiskey Creek Beach NW has exquisite views of the Straight of Juan De Fuca. This unique primitive camp site is situated right over the beautiful pebble beach with unobstructed views of the Canadian Cascades. *note: You are able to drive up approx. 55-60yrds from this site to unload, and parking for beach shelter sites(T9-14) are up a hill. No parking at the site. Also, there are about 30 steps up a hillside to this site. We also have additional waterfront cabins, full hookup RV spaces and tent sites.\n\nThere is also a small table and a fire-pit BBQ as well as access to fresh water and nearby outhouse. The large windows offer beautiful views all day (and night) of the water, Canadian Cascades, stars and wildlife. You will never forget this place!\n\nLocated just 25 minutes outside Port Angeles, our guests can enjoy the serenity and beauty of the Olympic Peninsula with easy access to town and some of the best hiking, hunting, fishing and exploring you will ever find. There is so much to do in and around the Olympic National Forest, so take your time and enjoy your stay!\n\nNearby Olympic National Park entrances like the Sol Duc, Hurricane Ridge, Hoh Rain Forest, Cape Flattery make this location an excellent \"base camp\" from which you can explore the Olympic Peninsula and towns like Forks, Neah Bay and beaches like Shi Shi Beach and Hobuck Beach. Explore the parks, walk the rivers (Dungeness, Elwha and many more), kayak on Lake Crescent or drop right in the Strait from our private boat ramp. During the Winter and Fall, enjoy the true nature of the Pacific Northwest: observe the high tides, storm surges and occasional dense marine fog from the comfort of your cozy cabin. You are going to love this place!",
+          "summary": "Beachfront Camp Site",
+          "description": "Whiskey Creek Beach NW has exquisite views of the Straight of Juan De Fuca. This unique primitive camp site is situated right over the beautiful pebble beach with unobstructed views of the Canadian Cascades. *note: You are able to drive up approx. 55-60yrds from this site to unload, and parking for beach shelter sites(T9-14) are up a hill. No parking at the site. Also, there are about 30 steps up a hillside to this site. We also have additional waterfront cabins, full hookup RV spaces and tent sites.\n\nBeautiful views all day (and night) of the water, Canadian Cascades, stars and wildlife. You will never forget this place!\n\nLocated just 25 minutes outside Port Angeles, our guests can enjoy the serenity and beauty of the Olympic Peninsula with easy access to town and some of the best hiking, hunting, fishing and exploring you will ever find. There is so much to do in and around the Olympic National Forest, so take your time and enjoy your stay!\n\nNearby Olympic National Park entrances like the Sol Duc, Hurricane Ridge, Hoh Rain Forest, Cape Flattery make this location an excellent \"base camp\" from which you can explore the Olympic Peninsula and towns like Forks, Neah Bay and beaches like Shi Shi Beach and Hobuck Beach. Explore the parks, walk the rivers (Dungeness, Elwha and many more), kayak on Lake Crescent or drop right in the Strait from our private boat ramp. During the Winter and Fall, enjoy the true nature of the Pacific Northwest: observe the high tides, storm surges and occasional dense marine fog from the comfort of your cozy cabin. You are going to love this place!",
           "price": {
             "base": 55,
             "cleaning": null,
             "currency": "USD"
           },
           "accommodates": 2,
-          "bedrooms": 1,
+          "bedrooms": 0,
           "bathrooms": 1,
           "amenities": [
+            "Beach access",
+            "Garage",
+            "Patio or balcony",
             "Pets allowed",
+            "Shampoo",
             "Suitable for children (2-12 years)",
             "Suitable for infants (under 2 years)",
-            "Garage",
-            "Wireless Internet",
-            "Board games",
             "Waterfront",
-            "Patio or balcony",
-            "Shampoo",
-            "Beach access"
+            "Wireless Internet"
           ],
           "photos": [
             {
