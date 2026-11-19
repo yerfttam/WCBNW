@@ -37,8 +37,8 @@ function renderCard(listing, index) {
   const photos    = (listing.photos && listing.photos.length)
     ? listing.photos
     : [{ original: 'images/bkgds/bkgd1.jpg' }];
-  const firstSrc  = photos[0].original;
-  const photoData = JSON.stringify(photos.map(p => p.original));
+  const firstSrc  = photos[0].thumbnail || photos[0].original;
+  const photoData = JSON.stringify(photos.map(p => p.thumbnail || p.original));
 
   const dots = photos.map((_, i) =>
     `<span class="lc-dot${i === 0 ? ' active' : ''}"></span>`
