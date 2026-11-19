@@ -76,13 +76,13 @@ function getFullDesc(listing) {
 
 function renderCard(listing, slug) {
   const photos   = (listing.photos && listing.photos.length) ? listing.photos : [{ original: 'images/bkgds/bkgd1.jpg' }];
-  const firstSrc = photos[0].thumbnail || photos[0].original;
+  const firstSrc = photos[0].original;
   const cardMod  = CARD_CLASS[slug] || '';
   const guests   = listing.accommodates ? `${listing.accommodates} guests` : '';
   const meta     = [guests].filter(Boolean).join(' &middot; ');
 
   // Encode photo URLs as a data attribute for the carousel JS
-  const photoData = JSON.stringify(photos.map(p => p.thumbnail || p.original));
+  const photoData = JSON.stringify(photos.map(p => p.original));
 
   // Dots — one per photo
   const dots = photos.map((_, i) =>
